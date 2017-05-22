@@ -1,6 +1,6 @@
 ﻿namespace PAD_Money
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,12 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnBudgetMois = new System.Windows.Forms.Button();
+            this.btnBudgetPrevi = new System.Windows.Forms.Button();
+            this.btnAide = new System.Windows.Forms.Button();
+            this.btnOuvrirBase = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnBudgetMois
+            // 
+            this.btnBudgetMois.Location = new System.Drawing.Point(83, 39);
+            this.btnBudgetMois.Name = "btnBudgetMois";
+            this.btnBudgetMois.Size = new System.Drawing.Size(75, 23);
+            this.btnBudgetMois.TabIndex = 0;
+            this.btnBudgetMois.UseVisualStyleBackColor = true;
+            this.btnBudgetMois.Click += new System.EventHandler(this.btnBudgetMois_Click);
+            // 
+            // btnBudgetPrevi
+            // 
+            this.btnBudgetPrevi.Location = new System.Drawing.Point(83, 99);
+            this.btnBudgetPrevi.Name = "btnBudgetPrevi";
+            this.btnBudgetPrevi.Size = new System.Drawing.Size(75, 23);
+            this.btnBudgetPrevi.TabIndex = 1;
+            this.btnBudgetPrevi.Text = "button2";
+            this.btnBudgetPrevi.UseVisualStyleBackColor = true;
+            this.btnBudgetPrevi.Click += new System.EventHandler(this.btnBudgetPrevi_Click);
+            // 
+            // btnAide
+            // 
+            this.btnAide.Location = new System.Drawing.Point(83, 220);
+            this.btnAide.Name = "btnAide";
+            this.btnAide.Size = new System.Drawing.Size(75, 23);
+            this.btnAide.TabIndex = 2;
+            this.btnAide.Text = "button3";
+            this.btnAide.UseVisualStyleBackColor = true;
+            // 
+            // btnOuvrirBase
+            // 
+            this.btnOuvrirBase.Location = new System.Drawing.Point(83, 161);
+            this.btnOuvrirBase.Name = "btnOuvrirBase";
+            this.btnOuvrirBase.Size = new System.Drawing.Size(75, 23);
+            this.btnOuvrirBase.TabIndex = 3;
+            this.btnOuvrirBase.Text = "Ouvrir";
+            this.btnOuvrirBase.UseVisualStyleBackColor = true;
+            this.btnOuvrirBase.Click += new System.EventHandler(this.btnOuvrirBase_Click);
+            // 
+            // frmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(910, 431);
+            this.Controls.Add(this.btnOuvrirBase);
+            this.Controls.Add(this.btnAide);
+            this.Controls.Add(this.btnBudgetPrevi);
+            this.Controls.Add(this.btnBudgetMois);
+            this.Name = "frmMain";
+            this.Text = "PAD_Money";
+            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnBudgetMois;
+        private System.Windows.Forms.Button btnBudgetPrevi;
+        private System.Windows.Forms.Button btnAide;
+        private System.Windows.Forms.Button btnOuvrirBase;
     }
 }
 
