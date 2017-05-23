@@ -56,22 +56,36 @@ namespace PAD_Money
         private void txtMontantPF_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool virgule = false;
-
-            if(char.IsDigit(e.KeyChar) || e.KeyChar =='.' || e.KeyChar ==',' || e.KeyChar == Keys.Control)
+            if(txtMontantPF.Text.Contains('.'))
             {
-                if((e.KeyChar == '.' || e.KeyChar == ',') && virgule)
+                virgule = true;
+            }
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '.' || e.KeyChar == ',' ||  char.IsControl(e.KeyChar))
+            {
+                if ((e.KeyChar == '.' || e.KeyChar == ',') && virgule)
                 {
                     e.Handled = true;
                 }
-                else if ((e.KeyChar == '.' || e.KeyChar == ',') && !virgule)
+                if(e.KeyChar == ',' && !virgule)
                 {
-                    virgule = true;
-                }
+                    e.Handled = true;
+                    txtMontantPF.Text += '.';
+                }               
             }
             else
             {
                 e.Handled = true;
             }
+        }
+
+        private void btnValiderPF_Click(object sender, EventArgs e)
+        {
+            DataRow row = ds.Tables["PostePeriodique"].NewRow();
+            row["codePoste"] = int.Parse(cbbPoste.ValueMember);
+            row["montant"] = txtMontantPF.Text;
+            row["typePer"] = cbbPoste.ValueMember;
+            row["jourDuMois"] = dtpPF.Value.Day;
+            ds.Tables["PostePeriodique"].Rows.Add(row);
         }
     }
 }
