@@ -127,6 +127,7 @@ namespace PAD_Money
                 menu.MenuItems.Add(item);
                 notification.ContextMenu = menu;
             }
+            FrmMenu.showBaloonTip("Vous avez activé l'aide !");
         }
 
         public static void showBaloonTip(String message){
