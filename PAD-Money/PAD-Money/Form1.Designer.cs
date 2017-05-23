@@ -1,6 +1,6 @@
 ﻿namespace PAD_Money
 {
-    partial class frmMain
+    partial class FrmMenu
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -42,6 +42,7 @@
             this.btnBudgetMois.TabIndex = 0;
             this.btnBudgetMois.Text = "Budget du mois";
             this.btnBudgetMois.UseVisualStyleBackColor = true;
+            this.btnAide.Enabled = false;
             this.btnBudgetMois.Click += new System.EventHandler(this.btnBudgetMois_Click);
             // 
             // btnBudgetPrevi
@@ -52,6 +53,7 @@
             this.btnBudgetPrevi.TabIndex = 1;
             this.btnBudgetPrevi.Text = "Budget Previsionnel";
             this.btnBudgetPrevi.UseVisualStyleBackColor = true;
+            this.btnAide.Enabled = false;
             this.btnBudgetPrevi.Click += new System.EventHandler(this.btnBudgetPrevi_Click);
             // 
             // btnAide
@@ -60,9 +62,10 @@
             this.btnAide.Name = "btnAide";
             this.btnAide.Size = new System.Drawing.Size(75, 23);
             this.btnAide.TabIndex = 2;
-            this.btnAide.Text = "Aide (NYI WIP)";
+            this.btnAide.Text = "Aide";
             this.btnAide.Enabled = false;
             this.btnAide.UseVisualStyleBackColor = true;
+            this.btnAide.Click += new System.EventHandler(this.btnAide_Click);
             // 
             // btnOuvrirBase
             // 
