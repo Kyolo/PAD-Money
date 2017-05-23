@@ -1,6 +1,6 @@
 ﻿namespace PAD_Money
 {
-    partial class frmMain
+    partial class FrmMenu
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -36,39 +36,44 @@
             // 
             // btnBudgetMois
             // 
-            this.btnBudgetMois.Location = new System.Drawing.Point(83, 39);
+            this.btnBudgetMois.Location = new System.Drawing.Point(20, 20);
             this.btnBudgetMois.Name = "btnBudgetMois";
             this.btnBudgetMois.Size = new System.Drawing.Size(75, 23);
             this.btnBudgetMois.TabIndex = 0;
+            this.btnBudgetMois.Text = "Budget du mois";
             this.btnBudgetMois.UseVisualStyleBackColor = true;
+            this.btnAide.Enabled = false;
             this.btnBudgetMois.Click += new System.EventHandler(this.btnBudgetMois_Click);
             // 
             // btnBudgetPrevi
             // 
-            this.btnBudgetPrevi.Location = new System.Drawing.Point(83, 99);
+            this.btnBudgetPrevi.Location = new System.Drawing.Point(105, 20);
             this.btnBudgetPrevi.Name = "btnBudgetPrevi";
             this.btnBudgetPrevi.Size = new System.Drawing.Size(75, 23);
             this.btnBudgetPrevi.TabIndex = 1;
-            this.btnBudgetPrevi.Text = "button2";
+            this.btnBudgetPrevi.Text = "Budget Previsionnel";
             this.btnBudgetPrevi.UseVisualStyleBackColor = true;
+            this.btnAide.Enabled = false;
             this.btnBudgetPrevi.Click += new System.EventHandler(this.btnBudgetPrevi_Click);
             // 
             // btnAide
             // 
-            this.btnAide.Location = new System.Drawing.Point(83, 220);
+            this.btnAide.Location = new System.Drawing.Point(68, 106);
             this.btnAide.Name = "btnAide";
             this.btnAide.Size = new System.Drawing.Size(75, 23);
             this.btnAide.TabIndex = 2;
-            this.btnAide.Text = "button3";
+            this.btnAide.Text = "Aide";
+            this.btnAide.Enabled = false;
             this.btnAide.UseVisualStyleBackColor = true;
+            this.btnAide.Click += new System.EventHandler(this.btnAide_Click);
             // 
             // btnOuvrirBase
             // 
-            this.btnOuvrirBase.Location = new System.Drawing.Point(83, 161);
+            this.btnOuvrirBase.Location = new System.Drawing.Point(68, 63);
             this.btnOuvrirBase.Name = "btnOuvrirBase";
             this.btnOuvrirBase.Size = new System.Drawing.Size(75, 23);
             this.btnOuvrirBase.TabIndex = 3;
-            this.btnOuvrirBase.Text = "Ouvrir";
+            this.btnOuvrirBase.Text = "Ouvrir la base de donnée";
             this.btnOuvrirBase.UseVisualStyleBackColor = true;
             this.btnOuvrirBase.Click += new System.EventHandler(this.btnOuvrirBase_Click);
             // 
@@ -76,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(910, 431);
+            this.ClientSize = new System.Drawing.Size(210, 149);
             this.Controls.Add(this.btnOuvrirBase);
             this.Controls.Add(this.btnAide);
             this.Controls.Add(this.btnBudgetPrevi);
