@@ -66,6 +66,8 @@ namespace PAD_Money
                         da.Fill(ds, schema.Rows[i].ItemArray[2].ToString());
 
                     }
+                    this.btnBudgetMois.Enabled = true;
+                    this.btnBudgetPrevi.Enabled = true;
                 }
                 catch(Exception erreur) {
                     MessageBox.Show("Erreur en remplissant la table :\n"+erreur.Message);

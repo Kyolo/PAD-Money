@@ -42,6 +42,7 @@
             this.btnBudgetMois.TabIndex = 0;
             this.btnBudgetMois.Text = "Budget du mois";
             this.btnBudgetMois.UseVisualStyleBackColor = true;
+            this.btnAide.Enabled = false;
             this.btnBudgetMois.Click += new System.EventHandler(this.btnBudgetMois_Click);
             // 
             // btnBudgetPrevi
@@ -52,6 +53,7 @@
             this.btnBudgetPrevi.TabIndex = 1;
             this.btnBudgetPrevi.Text = "Budget Previsionnel";
             this.btnBudgetPrevi.UseVisualStyleBackColor = true;
+            this.btnAide.Enabled = false;
             this.btnBudgetPrevi.Click += new System.EventHandler(this.btnBudgetPrevi_Click);
             // 
             // btnAide
