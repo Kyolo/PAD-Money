@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data;
+using System.Data.OleDb;
+using System.Collections.Generic;
 using System.IO;
 using System.Drawing.Printing;
 
@@ -10,7 +12,7 @@ namespace PAD_Money
 {
 
     //Récupéré de StackOverflow puis modifié par Alexandre Meyer
-    public partial class Printer// : Form
+    public class Printer// : Form
     {
         ///Le texte à afficher
         private string textToDisplay;
@@ -120,19 +122,62 @@ namespace PAD_Money
         }
 
 
-        public static Printer createReport(String mois, DataColumn[] transactions, Font ft){
+        public static Printer createReport(String mois, DataRow[] transactions, Font ft){
             
+            float depenses = 0, recettes = 0, aPercevoir = 0, sommeTotale = 0;
+            int nbtransac;
+            
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Récapitulatif du mois : ").Append(mois)
             .Append("\n\n_____________________________________________\n\n")
-            .Append("Dépenses : \n\n\n");
+            .Append("Dépenses : \n\n\n")//En-tête du tableau
+            .Append("┌─────────────┬───────────────────────────┬────────────┬────────────┬────────────┬─────────────────┐\n")
+            .Append("│ Date de la  │ Description               │ Montant    │ Recette ?  │ Perçu ?    │ Type de dépense │\n")
+            .Append("│ transaction │                           │            │            │            │                 │\n");
             
-            //Here goes the transaction
-            builder.Append("\n\n_____________________________________________\n\n")
-            .Append("Recette :").Append("\n\n\n");
+            //       │ dd/mm/yyyy  │ ddddddddddddddddddddddddd │ bbbbbbbbbb │ bbbbbbbbbb │ ccccccccccccccc │
+            
+            //taille de ligne totale = 82;
 
-            return null;
+            for(nbtransac = 0;  nbtransac < transactions.Length; nbtransac++){
+                DataRow row = transactions[nbtransac];
+                if(!(bool)row["recetteON"]){
+                    depenses += (float)row["montant"];
+                } else if((bool)row["percuON"]){
+                    recettes += (float)row["montant"];
+                } else {
+                    aPercevoir += (float)row["montant"];
+                }
+
+                //séparateur + ligne d'information
+                builder.Append("├─────────────┼───────────────────────────┼────────────┼────────────┼────────────┼─────────────────┤\n")
+                .Append(String.Format("│ {0,2}/{1,2}/{3,4}  │ {4,25} │ {5,10} │ {6,10} │ {7,10} │ {8,15} │\n"));
+
+            }
+
+            sommeTotale = recettes - depenses;
+            //pied du tableau
+            builder.Append("└─────────────┴───────────────────────────┴────────────┴────────────┴────────────┴─────────────────┘\n");
+
+            
+            builder
+            .Append("\n\n_____________________________________________\n\n")
+            .Append("Recette : ").Append(recettes.ToString()).Append("\n\n\n")
+            .Append("\n\n_____________________________________________\n\n")
+            .Append("Dépenses : ").Append(depenses.ToString()).Append("\n\n\n")
+            .Append("\n\n_____________________________________________\n\n")
+            .Append("Reste à percevoir : ").Append(aPercevoir.ToString()).Append("\n\n\n")
+            .Append("\n\n_____________________________________________\n\n")
+            .Append("Somme totale dépensée : ").Append(sommeTotale.ToString()).Append("\n\n\n")
+            .Append("\n\n_____________________________________________\n\n")
+            .Append("Nombre de transaction : ").Append(nbtransac.ToString()).Append("\n\n\n")
+            .Append("\n\n_____________________________________________\n\n");
+
+            return new Printer(builder.ToString(), ft);
         }
+
+        
 
 
     }
