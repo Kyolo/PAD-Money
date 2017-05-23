@@ -20,6 +20,8 @@ namespace PAD_Money
             this.connec = connec;
             this.ds = ds;
             InitializeComponent();
+            generationdyna();
+            type();
         }
 
         private void btnAjouter_Click(object sender, EventArgs e)
@@ -35,6 +37,17 @@ namespace PAD_Money
             }
 
         }
+
+        private void type()
+        {
+            DataTable type = new DataTable();
+            type = ds.Tables["TypeTransaction"];
+            cbbType.DataSource = type;
+            cbbType.DisplayMember = "libType";
+            cbbType.ValueMember = "codeType";
+        }
+
+
         private void generationdyna()
         {
             int x = 623;
@@ -43,13 +56,13 @@ namespace PAD_Money
             personne = ds.Tables["Personne"];
             foreach (DataRow row in personne.Rows)
             {
-                ComboBox nom = new ComboBox();
+                CheckBox nom = new CheckBox();
                 nom.AutoSize = true;
                 nom.Location = new System.Drawing.Point(x, y);
                 nom.Size = new System.Drawing.Size(98, 21);
-                nom.TabIndex = 14;
-                nom.Text =row["nomPersonne"].ToString();
-                y += 10;
+                nom.Text =row["nomPersonne"].ToString() + " " + row["pnPersonne"].ToString();
+                flpPersonne.Controls.Add(nom);
+                y += 20;
             }
         }
     }
