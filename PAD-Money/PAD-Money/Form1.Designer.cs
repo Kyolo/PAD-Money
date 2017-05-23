@@ -1,6 +1,6 @@
 ﻿namespace PAD_Money
 {
-    partial class frmMain
+    partial class FrmMenu
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -62,9 +62,10 @@
             this.btnAide.Name = "btnAide";
             this.btnAide.Size = new System.Drawing.Size(75, 23);
             this.btnAide.TabIndex = 2;
-            this.btnAide.Text = "Aide (NYI WIP)";
+            this.btnAide.Text = "Aide";
             this.btnAide.Enabled = false;
             this.btnAide.UseVisualStyleBackColor = true;
+            this.btnAide.Click += new System.EventHandler(this.btnAide_Click);
             // 
             // btnOuvrirBase
             // 
