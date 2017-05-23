@@ -57,7 +57,7 @@ namespace PAD_Money
         {
             bool virgule = false;
 
-            if(char.IsDigit(e.KeyChar) || e.KeyChar =='.' || e.KeyChar ==',')
+            if(char.IsDigit(e.KeyChar) || e.KeyChar =='.' || e.KeyChar ==',' || e.KeyChar == Keys.Control)
             {
                 if((e.KeyChar == '.' || e.KeyChar == ',') && virgule)
                 {
@@ -67,6 +67,10 @@ namespace PAD_Money
                 {
                     virgule = true;
                 }
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
     }
