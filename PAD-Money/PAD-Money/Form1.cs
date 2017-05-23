@@ -29,7 +29,7 @@ namespace PAD_Money
 
         private void btnBudgetMois_Click(object sender, EventArgs e)
         {
-            FrmBudgetMois frm = new FrmBudgetMois(connec);
+            FrmBudgetMois frm = new FrmBudgetMois(connec, ds);
             frm.ShowDialog();
         }
 
