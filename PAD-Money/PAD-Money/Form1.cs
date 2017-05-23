@@ -64,8 +64,10 @@ namespace PAD_Money
             if(ofd.ShowDialog() == DialogResult.OK) {
                 connec = new OleDbConnection(CH_CON + ofd.FileName);
                 try {
+
                     connec.Open();
                     ds = new DataSet();
+                    //On récupère le schéma de la bdd
                     DataTable schema = connec.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
                     OleDbDataAdapter da = new OleDbDataAdapter();
                     //import de la base de donnée en local
@@ -74,16 +76,21 @@ namespace PAD_Money
                         String requete = "SELECT * FROM [" + schema.Rows[i].ItemArray[2]+"]";
                         OleDbCommand com = new OleDbCommand(requete, connec);
                         da.SelectCommand = com;
+                        //On remplit le DataSet via le DataAdapter
                         da.Fill(ds, schema.Rows[i].ItemArray[2].ToString());
 
                     }
+                    
+                    //On active les boutons pour accéders aux budgets
                     this.btnBudgetMois.Enabled = true;
                     this.btnBudgetPrevi.Enabled = true;
-                }
-                catch(Exception erreur) {
+
+                    //On supprime les Form qu'on a stocker pour qu'ils se mettent à jour
+                    this.budgetMois = null;
+                    this.budgetprevi = null;
+                } catch(Exception erreur) {
                     MessageBox.Show("Erreur en remplissant la table :\n"+erreur.Message);
-                }
-                finally {
+                } finally {
                     if(connec.State == ConnectionState.Open) {
                         connec.Close();
                     }
