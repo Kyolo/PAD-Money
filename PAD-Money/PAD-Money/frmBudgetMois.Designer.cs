@@ -266,9 +266,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 526);
-            this.Controls.Add(this.TabAjout);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmBudgetMois";
             this.Text = "frmBudgetMois";
             this.TabAjout.ResumeLayout(false);
