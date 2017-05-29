@@ -38,6 +38,9 @@ namespace PAD_Money
             this.Controls.Add(lblEcheance);
             this.Controls.Add(dtp);
             this.Controls.Add(txtValeur);
+            Size oldSize = this.Size;
+            oldSize.Width = 250;
+            this.Size = oldSize;
         }
 
         public DateTime DateEcheance {
