@@ -123,7 +123,7 @@ namespace PAD_Money
                 };
                 //On rajoute un context menu pour pouvoir facilement enlever l'icone de notification
                 ContextMenu menu = new ContextMenu();
-                MenuItem item = new MenuItem("Enlever", new EventHandler(btnKillToast_Click));
+                MenuItem item = new MenuItem("Enlever l'aide", new EventHandler(btnKillToast_Click));
                 menu.MenuItems.Add(item);
                 notification.ContextMenu = menu;
             }
