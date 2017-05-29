@@ -56,8 +56,6 @@ namespace PAD_Money
         private void txtMontantPF_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool virgule = false;
-
-            if(char.IsDigit(e.KeyChar) || e.KeyChar =='.' || e.KeyChar ==',' )
             if(txtMontantPF.Text.Contains('.'))
             {
                 virgule = true;
