@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabBudgetPrevi = new System.Windows.Forms.TabControl();
             this.tbpPF = new System.Windows.Forms.TabPage();
             this.lblTitrePF = new System.Windows.Forms.Label();
@@ -46,15 +47,15 @@
             this.txtIntitul = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.txtMontantPP = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblNbPrelevPP = new System.Windows.Forms.Label();
             this.grbEcheance = new System.Windows.Forms.GroupBox();
             this.flpEcheance = new System.Windows.Forms.FlowLayoutPanel();
             this.txtDatePP = new System.Windows.Forms.TextBox();
             this.txtCom = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblEuro = new System.Windows.Forms.Label();
+            this.lblDescripPP = new System.Windows.Forms.Label();
+            this.lblMontantPP = new System.Windows.Forms.Label();
+            this.lblIntitulePP = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -66,12 +67,14 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.epIntitulPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.grbEcheance.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).BeginInit();
             this.SuspendLayout();
             // 
             // tabBudgetPrevi
@@ -220,14 +223,14 @@
             this.tabPage2.Controls.Add(this.txtIntitul);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.txtMontantPP);
-            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.lblNbPrelevPP);
             this.tabPage2.Controls.Add(this.grbEcheance);
             this.tabPage2.Controls.Add(this.txtDatePP);
             this.tabPage2.Controls.Add(this.txtCom);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.lblEuro);
+            this.tabPage2.Controls.Add(this.lblDescripPP);
+            this.tabPage2.Controls.Add(this.lblMontantPP);
+            this.tabPage2.Controls.Add(this.lblIntitulePP);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -238,9 +241,9 @@
             // 
             // txtIntitul
             // 
-            this.txtIntitul.Location = new System.Drawing.Point(156, 26);
+            this.txtIntitul.Location = new System.Drawing.Point(279, 26);
             this.txtIntitul.Name = "txtIntitul";
-            this.txtIntitul.Size = new System.Drawing.Size(116, 20);
+            this.txtIntitul.Size = new System.Drawing.Size(248, 20);
             this.txtIntitul.TabIndex = 24;
             // 
             // button3
@@ -254,19 +257,20 @@
             // 
             // txtMontantPP
             // 
-            this.txtMontantPP.Location = new System.Drawing.Point(156, 138);
+            this.txtMontantPP.Location = new System.Drawing.Point(279, 138);
             this.txtMontantPP.Name = "txtMontantPP";
             this.txtMontantPP.Size = new System.Drawing.Size(60, 20);
             this.txtMontantPP.TabIndex = 22;
+            this.txtMontantPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress);
             // 
-            // label9
+            // lblNbPrelevPP
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(71, 141);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 13);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "label9";
+            this.lblNbPrelevPP.AutoSize = true;
+            this.lblNbPrelevPP.Location = new System.Drawing.Point(71, 141);
+            this.lblNbPrelevPP.Name = "lblNbPrelevPP";
+            this.lblNbPrelevPP.Size = new System.Drawing.Size(149, 13);
+            this.lblNbPrelevPP.TabIndex = 21;
+            this.lblNbPrelevPP.Text = "Nombre de prélèvement :";
             // 
             // grbEcheance
             // 
@@ -276,10 +280,11 @@
             this.grbEcheance.Size = new System.Drawing.Size(579, 146);
             this.grbEcheance.TabIndex = 20;
             this.grbEcheance.TabStop = false;
-            this.grbEcheance.Text = "groupBox1";
+            this.grbEcheance.Text = "Echéances prévues";
             // 
             // flpEcheance
             // 
+            this.flpEcheance.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpEcheance.Location = new System.Drawing.Point(7, 19);
             this.flpEcheance.Name = "flpEcheance";
             this.flpEcheance.Size = new System.Drawing.Size(565, 121);
@@ -287,53 +292,53 @@
             // 
             // txtDatePP
             // 
-            this.txtDatePP.Location = new System.Drawing.Point(156, 102);
+            this.txtDatePP.Location = new System.Drawing.Point(279, 102);
             this.txtDatePP.Name = "txtDatePP";
             this.txtDatePP.Size = new System.Drawing.Size(60, 20);
             this.txtDatePP.TabIndex = 18;
             // 
             // txtCom
             // 
-            this.txtCom.Location = new System.Drawing.Point(156, 65);
+            this.txtCom.Location = new System.Drawing.Point(279, 65);
             this.txtCom.Name = "txtCom";
-            this.txtCom.Size = new System.Drawing.Size(116, 20);
+            this.txtCom.Size = new System.Drawing.Size(248, 20);
             this.txtCom.TabIndex = 17;
             // 
-            // label6
+            // lblEuro
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(227, 105);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 13);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "label6";
+            this.lblEuro.AutoSize = true;
+            this.lblEuro.Location = new System.Drawing.Point(345, 105);
+            this.lblEuro.Name = "lblEuro";
+            this.lblEuro.Size = new System.Drawing.Size(14, 13);
+            this.lblEuro.TabIndex = 16;
+            this.lblEuro.Text = "€";
             // 
-            // label7
+            // lblDescripPP
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(70, 68);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "label7";
+            this.lblDescripPP.AutoSize = true;
+            this.lblDescripPP.Location = new System.Drawing.Point(70, 68);
+            this.lblDescripPP.Name = "lblDescripPP";
+            this.lblDescripPP.Size = new System.Drawing.Size(79, 13);
+            this.lblDescripPP.TabIndex = 15;
+            this.lblDescripPP.Text = "Description :";
             // 
-            // label8
+            // lblMontantPP
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(70, 105);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 13);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "label8";
+            this.lblMontantPP.AutoSize = true;
+            this.lblMontantPP.Location = new System.Drawing.Point(70, 105);
+            this.lblMontantPP.Name = "lblMontantPP";
+            this.lblMontantPP.Size = new System.Drawing.Size(53, 13);
+            this.lblMontantPP.TabIndex = 14;
+            this.lblMontantPP.Text = "Montant";
             // 
-            // label10
+            // lblIntitulePP
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(70, 29);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 13);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "label10";
+            this.lblIntitulePP.AutoSize = true;
+            this.lblIntitulePP.Location = new System.Drawing.Point(70, 29);
+            this.lblIntitulePP.Name = "lblIntitulePP";
+            this.lblIntitulePP.Size = new System.Drawing.Size(107, 13);
+            this.lblIntitulePP.TabIndex = 12;
+            this.lblIntitulePP.Text = "Intitulé du poste :";
             // 
             // tabPage3
             // 
@@ -438,6 +443,10 @@
             this.comboBox3.Size = new System.Drawing.Size(140, 21);
             this.comboBox3.TabIndex = 23;
             // 
+            // epIntitulPP
+            // 
+            this.epIntitulPP.ContainerControl = this;
+            // 
             // FrmBudgetPrevi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -458,6 +467,7 @@
             this.grbEcheance.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -475,14 +485,14 @@
         private System.Windows.Forms.ComboBox cbbPoste;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox txtMontantPP;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblNbPrelevPP;
         private System.Windows.Forms.GroupBox grbEcheance;
         private System.Windows.Forms.TextBox txtDatePP;
         private System.Windows.Forms.TextBox txtCom;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblEuro;
+        private System.Windows.Forms.Label lblDescripPP;
+        private System.Windows.Forms.Label lblMontantPP;
+        private System.Windows.Forms.Label lblIntitulePP;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label11;
@@ -502,5 +512,6 @@
         private System.Windows.Forms.GroupBox grbMontantPF;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblTitrePF;
+        private System.Windows.Forms.ErrorProvider epIntitulPP;
     }
 }

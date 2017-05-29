@@ -81,11 +81,17 @@ namespace PAD_Money
         private void btnValiderPF_Click(object sender, EventArgs e)
         {
             DataRow row = ds.Tables["PostePeriodique"].NewRow();
-            row["codePoste"] = int.Parse(cbbPoste.ValueMember);
+            row["codePoste"] = cbbPoste.SelectedValue;
             row["montant"] = txtMontantPF.Text;
-            row["typePer"] = cbbPoste.ValueMember;
+            row["typePer"] = cbbPeriode.SelectedValue;
             row["jourDuMois"] = dtpPF.Value.Day;
             ds.Tables["PostePeriodique"].Rows.Add(row);
+        }
+
+        private void txtMontantPP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PrelevementControl ctrl = new PrelevementControl(DateTime.Now, 1, 132);
+            flpEcheance.Controls.Add(ctrl);
         }
     }
 }
