@@ -27,7 +27,7 @@ namespace PAD_Money
 
             dtp = new DateTimePicker();
             dtp.Value = dt;
-            dtp.Size = new Size(50,23);
+            dtp.Size = new Size(150,23);
 
             txtValeur = new TextBox();
             txtValeur.Text = moneydef.ToString();
@@ -38,9 +38,7 @@ namespace PAD_Money
             this.Controls.Add(lblEcheance);
             this.Controls.Add(dtp);
             this.Controls.Add(txtValeur);
-            Size oldSize = this.Size;
-            oldSize.Width = 250;
-            this.Size = oldSize;
+            this.Size = new Size(350, 50);
         }
 
         public DateTime DateEcheance {
