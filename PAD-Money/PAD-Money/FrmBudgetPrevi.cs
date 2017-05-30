@@ -37,6 +37,7 @@ namespace PAD_Money
             cbbPoste.DataSource = table;
             cbbPoste.DisplayMember = "libPoste";
             cbbPoste.ValueMember = "codePoste";
+            
         }
 
         private void remplirCbbPeriode()
@@ -85,13 +86,101 @@ namespace PAD_Money
             row["montant"] = txtMontantPF.Text;
             row["typePer"] = cbbPeriode.SelectedValue;
             row["jourDuMois"] = dtpPF.Value.Day;
-            ds.Tables["PostePeriodique"].Rows.Add(row);
+            BDDUtil.addLine("PostePeriodique", row);
         }
 
         private void txtMontantPP_KeyPress(object sender, KeyPressEventArgs e)
+        {           
+            bool virgule = false;
+            if (txtMontantPF.Text.Contains('.'))
+            {
+                virgule = true;
+            }
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '.' || e.KeyChar == ',' || char.IsControl(e.KeyChar))
+            {
+                if ((e.KeyChar == '.' || e.KeyChar == ',') && virgule)
+                {
+                    e.Handled = true;
+                }
+                if (e.KeyChar == ',' && !virgule)
+                {
+                    e.Handled = true;
+                    txtMontantPF.Text += '.';
+                }
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                if (verifPP())
+                {
+                    afficherPP();
+                }
+            }
+        }
+
+        private bool verifPP()
         {
-            PrelevementControl ctrl = new PrelevementControl(DateTime.Now, 1, 132);
-            flpEcheance.Controls.Add(ctrl);
+            bool res = false;
+            bool verif = false;
+            Control[] tab = {txtIntitul,txtPrelevPP,txtMontantPP};
+            foreach(Control c in tab)
+            {
+                if(((TextBox)c).Text == string.Empty)
+                {
+                    verif = true;
+                    epIntitulPP.SetError(c, "Champ obligatoire");
+                }
+                else
+                {
+                    epIntitulPP.SetError(c, string.Empty);
+                }
+            }
+            if(!verif)
+            {
+                res = true;
+            }
+            return res;
+        } // verifie si les champs necessaires sont utilisables
+
+        private void afficherPP()
+        {
+            flpEcheance.Controls.Clear();
+            int nombreEcheance = int.Parse(txtPrelevPP.Text);
+            float montant = (float)Math.Round(float.Parse(txtMontantPP.Text) / nombreEcheance,2);
+            for (int i = 0; i < int.Parse(txtPrelevPP.Text); i++)
+            {
+                if (i == nombreEcheance - 1)
+                {
+                    // ajustement du dernier montant en fonction des arrondissements
+                    montant += (float)Math.Round(float.Parse(txtMontantPP.Text) - (montant * nombreEcheance),2); 
+                    PrelevementControl ctrl = new PrelevementControl(DateTime.Now.AddMonths(i), i + 1, montant);
+                    flpEcheance.Controls.Add(ctrl);
+                }
+                else
+                {
+                    // ajout d'un DateTimePicker à la date d'aujourd'hui plus i mois, d'un Label indiquant le numero
+                    // d'echeance et d'une TextBox comportant le montant a payer chaque mois
+                    PrelevementControl ctrl = new PrelevementControl(DateTime.Now.AddMonths(i), i + 1, montant);
+                    flpEcheance.Controls.Add(ctrl);
+                }
+            }
+        }
+
+        private void btnCalculPP_Click(object sender, EventArgs e)
+        {
+            if (verifPP())
+            {
+                afficherPP();
+            }
+        }
+
+        private void btnValiderPP_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -46,15 +46,12 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtIntitul = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.txtMontantPP = new System.Windows.Forms.TextBox();
+            this.txtPrelevPP = new System.Windows.Forms.TextBox();
             this.lblNbPrelevPP = new System.Windows.Forms.Label();
             this.grbEcheance = new System.Windows.Forms.GroupBox();
             this.flpEcheance = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtDatePP = new System.Windows.Forms.TextBox();
             this.txtCom = new System.Windows.Forms.TextBox();
-            this.lblEuro = new System.Windows.Forms.Label();
             this.lblDescripPP = new System.Windows.Forms.Label();
-            this.lblMontantPP = new System.Windows.Forms.Label();
             this.lblIntitulePP = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
@@ -68,6 +65,11 @@
             this.label15 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.epIntitulPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnCalculPP = new System.Windows.Forms.Button();
+            this.btnValiderPP = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtMontantPP = new System.Windows.Forms.TextBox();
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
@@ -75,6 +77,7 @@
             this.grbEcheance.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabBudgetPrevi
@@ -156,9 +159,9 @@
             // 
             // btnValiderPF
             // 
-            this.btnValiderPF.Location = new System.Drawing.Point(627, 355);
+            this.btnValiderPF.Location = new System.Drawing.Point(624, 355);
             this.btnValiderPF.Name = "btnValiderPF";
-            this.btnValiderPF.Size = new System.Drawing.Size(117, 30);
+            this.btnValiderPF.Size = new System.Drawing.Size(120, 30);
             this.btnValiderPF.TabIndex = 10;
             this.btnValiderPF.Text = "Valider";
             this.btnValiderPF.UseVisualStyleBackColor = true;
@@ -220,16 +223,16 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.btnValiderPP);
+            this.tabPage2.Controls.Add(this.btnCalculPP);
             this.tabPage2.Controls.Add(this.txtIntitul);
             this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.txtMontantPP);
+            this.tabPage2.Controls.Add(this.txtPrelevPP);
             this.tabPage2.Controls.Add(this.lblNbPrelevPP);
             this.tabPage2.Controls.Add(this.grbEcheance);
-            this.tabPage2.Controls.Add(this.txtDatePP);
             this.tabPage2.Controls.Add(this.txtCom);
-            this.tabPage2.Controls.Add(this.lblEuro);
             this.tabPage2.Controls.Add(this.lblDescripPP);
-            this.tabPage2.Controls.Add(this.lblMontantPP);
             this.tabPage2.Controls.Add(this.lblIntitulePP);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -241,9 +244,9 @@
             // 
             // txtIntitul
             // 
-            this.txtIntitul.Location = new System.Drawing.Point(279, 26);
+            this.txtIntitul.Location = new System.Drawing.Point(240, 26);
             this.txtIntitul.Name = "txtIntitul";
-            this.txtIntitul.Size = new System.Drawing.Size(248, 20);
+            this.txtIntitul.Size = new System.Drawing.Size(183, 20);
             this.txtIntitul.TabIndex = 24;
             // 
             // button3
@@ -255,18 +258,18 @@
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // txtMontantPP
+            // txtPrelevPP
             // 
-            this.txtMontantPP.Location = new System.Drawing.Point(279, 138);
-            this.txtMontantPP.Name = "txtMontantPP";
-            this.txtMontantPP.Size = new System.Drawing.Size(60, 20);
-            this.txtMontantPP.TabIndex = 22;
-            this.txtMontantPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress);
+            this.txtPrelevPP.Location = new System.Drawing.Point(240, 100);
+            this.txtPrelevPP.Name = "txtPrelevPP";
+            this.txtPrelevPP.Size = new System.Drawing.Size(60, 20);
+            this.txtPrelevPP.TabIndex = 22;
+            this.txtPrelevPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress);
             // 
             // lblNbPrelevPP
             // 
             this.lblNbPrelevPP.AutoSize = true;
-            this.lblNbPrelevPP.Location = new System.Drawing.Point(71, 141);
+            this.lblNbPrelevPP.Location = new System.Drawing.Point(84, 103);
             this.lblNbPrelevPP.Name = "lblNbPrelevPP";
             this.lblNbPrelevPP.Size = new System.Drawing.Size(149, 13);
             this.lblNbPrelevPP.TabIndex = 21;
@@ -275,66 +278,41 @@
             // grbEcheance
             // 
             this.grbEcheance.Controls.Add(this.flpEcheance);
-            this.grbEcheance.Location = new System.Drawing.Point(73, 194);
+            this.grbEcheance.Location = new System.Drawing.Point(445, 26);
             this.grbEcheance.Name = "grbEcheance";
-            this.grbEcheance.Size = new System.Drawing.Size(579, 146);
+            this.grbEcheance.Size = new System.Drawing.Size(299, 323);
             this.grbEcheance.TabIndex = 20;
             this.grbEcheance.TabStop = false;
             this.grbEcheance.Text = "Echéances prévues";
             // 
             // flpEcheance
             // 
-            this.flpEcheance.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpEcheance.Location = new System.Drawing.Point(7, 19);
+            this.flpEcheance.AutoScroll = true;
+            this.flpEcheance.Location = new System.Drawing.Point(8, 19);
             this.flpEcheance.Name = "flpEcheance";
-            this.flpEcheance.Size = new System.Drawing.Size(565, 121);
+            this.flpEcheance.Size = new System.Drawing.Size(285, 298);
             this.flpEcheance.TabIndex = 24;
-            // 
-            // txtDatePP
-            // 
-            this.txtDatePP.Location = new System.Drawing.Point(279, 102);
-            this.txtDatePP.Name = "txtDatePP";
-            this.txtDatePP.Size = new System.Drawing.Size(60, 20);
-            this.txtDatePP.TabIndex = 18;
             // 
             // txtCom
             // 
-            this.txtCom.Location = new System.Drawing.Point(279, 65);
+            this.txtCom.Location = new System.Drawing.Point(240, 65);
             this.txtCom.Name = "txtCom";
-            this.txtCom.Size = new System.Drawing.Size(248, 20);
+            this.txtCom.Size = new System.Drawing.Size(183, 20);
             this.txtCom.TabIndex = 17;
-            // 
-            // lblEuro
-            // 
-            this.lblEuro.AutoSize = true;
-            this.lblEuro.Location = new System.Drawing.Point(345, 105);
-            this.lblEuro.Name = "lblEuro";
-            this.lblEuro.Size = new System.Drawing.Size(14, 13);
-            this.lblEuro.TabIndex = 16;
-            this.lblEuro.Text = "€";
             // 
             // lblDescripPP
             // 
             this.lblDescripPP.AutoSize = true;
-            this.lblDescripPP.Location = new System.Drawing.Point(70, 68);
+            this.lblDescripPP.Location = new System.Drawing.Point(84, 68);
             this.lblDescripPP.Name = "lblDescripPP";
             this.lblDescripPP.Size = new System.Drawing.Size(79, 13);
             this.lblDescripPP.TabIndex = 15;
             this.lblDescripPP.Text = "Description :";
             // 
-            // lblMontantPP
-            // 
-            this.lblMontantPP.AutoSize = true;
-            this.lblMontantPP.Location = new System.Drawing.Point(70, 105);
-            this.lblMontantPP.Name = "lblMontantPP";
-            this.lblMontantPP.Size = new System.Drawing.Size(53, 13);
-            this.lblMontantPP.TabIndex = 14;
-            this.lblMontantPP.Text = "Montant";
-            // 
             // lblIntitulePP
             // 
             this.lblIntitulePP.AutoSize = true;
-            this.lblIntitulePP.Location = new System.Drawing.Point(70, 29);
+            this.lblIntitulePP.Location = new System.Drawing.Point(84, 29);
             this.lblIntitulePP.Name = "lblIntitulePP";
             this.lblIntitulePP.Size = new System.Drawing.Size(107, 13);
             this.lblIntitulePP.TabIndex = 12;
@@ -447,6 +425,54 @@
             // 
             this.epIntitulPP.ContainerControl = this;
             // 
+            // btnCalculPP
+            // 
+            this.btnCalculPP.Location = new System.Drawing.Point(87, 214);
+            this.btnCalculPP.Name = "btnCalculPP";
+            this.btnCalculPP.Size = new System.Drawing.Size(147, 23);
+            this.btnCalculPP.TabIndex = 25;
+            this.btnCalculPP.Text = "Calculer les échéances";
+            this.btnCalculPP.UseVisualStyleBackColor = true;
+            this.btnCalculPP.Click += new System.EventHandler(this.btnCalculPP_Click);
+            // 
+            // btnValiderPP
+            // 
+            this.btnValiderPP.Location = new System.Drawing.Point(624, 355);
+            this.btnValiderPP.Name = "btnValiderPP";
+            this.btnValiderPP.Size = new System.Drawing.Size(120, 30);
+            this.btnValiderPP.TabIndex = 26;
+            this.btnValiderPP.Text = "Valider";
+            this.btnValiderPP.UseVisualStyleBackColor = true;
+            this.btnValiderPP.Click += new System.EventHandler(this.btnValiderPP_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtMontantPP);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(87, 265);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(233, 100);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Montant";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(133, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 63);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "€";
+            // 
+            // txtMontantPP
+            // 
+            this.txtMontantPP.Location = new System.Drawing.Point(37, 48);
+            this.txtMontantPP.Name = "txtMontantPP";
+            this.txtMontantPP.Size = new System.Drawing.Size(72, 20);
+            this.txtMontantPP.TabIndex = 14;
+            // 
             // FrmBudgetPrevi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -468,6 +494,8 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -484,14 +512,11 @@
         private System.Windows.Forms.ComboBox cbbPeriode;
         private System.Windows.Forms.ComboBox cbbPoste;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox txtMontantPP;
+        private System.Windows.Forms.TextBox txtPrelevPP;
         private System.Windows.Forms.Label lblNbPrelevPP;
         private System.Windows.Forms.GroupBox grbEcheance;
-        private System.Windows.Forms.TextBox txtDatePP;
         private System.Windows.Forms.TextBox txtCom;
-        private System.Windows.Forms.Label lblEuro;
         private System.Windows.Forms.Label lblDescripPP;
-        private System.Windows.Forms.Label lblMontantPP;
         private System.Windows.Forms.Label lblIntitulePP;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox textBox6;
@@ -513,5 +538,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblTitrePF;
         private System.Windows.Forms.ErrorProvider epIntitulPP;
+        private System.Windows.Forms.Button btnValiderPP;
+        private System.Windows.Forms.Button btnCalculPP;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtMontantPP;
     }
 }
