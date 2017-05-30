@@ -95,6 +95,8 @@ namespace PAD_Money
                         connec.Close();
                     }
                 }
+
+                BDDUtil.init(connec, ds);
             }
         }
 
