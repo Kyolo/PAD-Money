@@ -13,13 +13,14 @@ namespace PAD_Money
 {
     public class BDDUtil {
 
-        public const int LOCAL_ERROR =     0b000001;//Erreur de l'ajout en local
-        public const int LOCAL_SUCCES =    0b000010;//Réussite lors de l'ajout en local
+        //Les << sont utilisé puisque que C# ne supporte pas d'utiliser 0b...
+        public const int LOCAL_ERROR =      1;//Erreur de l'ajout en local
+        public const int LOCAL_SUCCES =     1 << 1;//Réussite lors de l'ajout en local
 
-        public const int REMOTE_ERROR =    0b000100;//Erreur générique lors de l'ajout à distance
-        public const int REMOTE_SUCCES =   0b001000;//Réussite lors de l'ajout à distance
-        public const int REMOTE_CONN_ERROR=0b010100;//Problème de connexion à distance
-        public const int REMOTE_SQL_ERROR =0b100100;//Problème avec la requète à distance
+        public const int REMOTE_ERROR =     1 << 2;//Erreur générique lors de l'ajout à distance
+        public const int REMOTE_SUCCES =    1 << 3;//Réussite lors de l'ajout à distance
+        public const int REMOTE_CONN_ERROR= 1 << 4 | REMOTE_ERROR;//Problème de connexion à distance
+        public const int REMOTE_SQL_ERROR = 1 << 5 | REMOTE_ERROR;//Problème avec la requète à distance
 
         private BDDUtil(){}//Classe utilitaire : on ne veut pas qu'elle puisse être instanciée
 
@@ -103,7 +104,10 @@ namespace PAD_Money
                     String name = "["+col[i].ColumnName+"], ";
                     String d = "";
                     //On gère des types particuliers
-                    if(rawdata[i].GetType().Equals(typeof(DateTime))){
+                    if(rawdata[i] == null){
+                        //Si la valeur est nulle, on le met comme tel
+                        d = "NULL";
+                    } else if(rawdata[i].GetType().Equals(typeof(DateTime))){
                         //La date parce qu'il faut rajouter des # avant et après
                         DateTime time = (DateTime)rawdata[i];
                         d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
