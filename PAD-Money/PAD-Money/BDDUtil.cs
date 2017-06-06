@@ -156,7 +156,7 @@ namespace PAD_Money
         }
 
 
-        public static int ajouterTransactionlong(DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
+        public static int ajouterTransaction(DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
             return ajouterTransaction(ds.Tables["Transaction"].Rows.Count+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
         }
 
