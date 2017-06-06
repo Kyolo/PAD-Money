@@ -179,6 +179,10 @@ namespace PAD_Money
             return retval;
         }
 
+        public static int ajouterTypeTransaction(String libelle){
+            return addLine("TypeTransaction",ds.Tables["TypeTransaction"].Rows.Count+1, libelle);
+        }
+
     }
 
 }
