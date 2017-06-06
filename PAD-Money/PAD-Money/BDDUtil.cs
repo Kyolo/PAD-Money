@@ -156,6 +156,29 @@ namespace PAD_Money
         }
 
 
+        public static int ajouterTransactionlong(DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
+            return ajouterTransaction(ds.Tables["Transaction"].Rows.Count+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
+        }
+
+        public static int ajouterTransaction(long codeTransaction, DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
+
+            int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
+            
+            int retAddBenef = 0;
+            foreach(long codeBenef in codeBeneficiaires){
+                retAddBenef |= addLine("Beneficiaires", codeTransaction, codeBenef);
+            }
+
+            if((retAddBenef & LOCAL_ERROR) == LOCAL_ERROR ){
+                retval |= LOCAL_ERROR;
+            }
+            if((retAddBenef & REMOTE_ERROR) == REMOTE_ERROR) {
+                retval |= REMOTE_ERROR;
+            }
+
+            return retval;
+        }
+
     }
 
 }
