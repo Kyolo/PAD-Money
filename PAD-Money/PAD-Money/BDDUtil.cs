@@ -227,7 +227,7 @@ namespace PAD_Money
 
             foreach(DataRow dr in ds.Tables["Personne"].Rows){
                 foreach(String nmpm in nomPrenom){
-                    if((dr[1].ToString() + dr[2].ToString()).Equals(nmpm)){
+                    if((dr[1].ToString() + " " + dr[2].ToString()).Equals(nmpm)){
                         lg.Add((long)dr[0]);
                     }
                 }
