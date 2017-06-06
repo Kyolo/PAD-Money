@@ -184,7 +184,17 @@ namespace PAD_Money
         }
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
-            return 0;
+            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+
+            int retAddPoste = addLine("Poste", codePoste, libelle);
+            int retAddPostePonct = addLine("PostePonctuel", codePoste, commentaire);
+
+            int retAddEch = 0;
+            foreach(PrelevementControl ctrl in echeances){
+                retAddEch |= addLine("Echeances", codePoste, ctrl.DateEcheance, ctrl.SommePrelevee);
+            }
+            
+            return retAddPoste | retAddPostePonct | retAddEch;
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, String libellePeriodicite){
