@@ -213,8 +213,12 @@ namespace PAD_Money
         }
 
         public static int ajouterPosteRevenu(String libelle, float montant, long personne){
+            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
             
-            return 0;
+            int retAddPoste = addLine("Poste", codePoste, libelle);
+            int retAddPosteRev = addLine("PostePeriodique", codePoste, montant, personne);
+
+            return retAddPoste | retAddPosteRev;
         }
 
         public static int ajouterPersonne(String nomPersonne, String pmPersonne){
