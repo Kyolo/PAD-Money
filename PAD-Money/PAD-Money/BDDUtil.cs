@@ -163,14 +163,14 @@ namespace PAD_Money
         }
 
         public static int ajouterTransaction(long codeTransaction, DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
-
+            //On ajoute la ligne de la transaction
             int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
             
             int retAddBenef = 0;
-            foreach(long codeBenef in codeBeneficiaires){
+            foreach(long codeBenef in codeBeneficiaires){//On ajoute les bénéficiares
                 retAddBenef |= addLine("Beneficiaires", codeTransaction, codeBenef);
             }
-
+            //Si on a une erreur, on marque tout comme erreur pour les bénéficiaires
             if((retAddBenef & LOCAL_ERROR) == LOCAL_ERROR ){
                 retval |= LOCAL_ERROR;
             }
@@ -187,16 +187,25 @@ namespace PAD_Money
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
             int codePoste = ds.Tables["Poste"].Rows.Count + 1;
-
+            //On ajoute le poste
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPostePonct = addLine("PostePonctuel", codePoste, commentaire);
-
+            //On ajoute le poste ponctuel et les échéances
             int retAddEch = 0;
             foreach(PrelevementControl ctrl in echeances){
                 retAddEch |= addLine("Echeances", codePoste, ctrl.DateEcheance, ctrl.SommePrelevee);
             }
+
+            int retval = 0;
+            //Si on a une erreur, on marque tout comme erreur pour les échéances
+            if((retAddEch & LOCAL_ERROR) == LOCAL_ERROR ){
+                retval |= LOCAL_ERROR;
+            }
+            if((retAddEch & REMOTE_ERROR) == REMOTE_ERROR) {
+                retval |= REMOTE_ERROR;
+            }
             
-            return retAddPoste | retAddPostePonct | retAddEch;
+            return retAddPoste | retAddPostePonct | retval;
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode){
@@ -222,8 +231,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPersonne(String nomPersonne, String pmPersonne){
-            
-            return 0;
+            return addLine("Personne", ds.Tables["Personne"].Rows.Count + 1 ,nomPersonne, pmPersonne);
         }
 
         public static long[] getCodeFromNames(String[] nomPrenom){
