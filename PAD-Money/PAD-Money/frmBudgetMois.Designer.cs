@@ -46,15 +46,15 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.cbbType = new System.Windows.Forms.ComboBox();
             this.tabSuppression = new System.Windows.Forms.TabPage();
-            this.TabModif = new System.Windows.Forms.TabPage();
-            this.TabRecapitulatif = new System.Windows.Forms.TabPage();
-            this.cbbTransactionExistantes = new System.Windows.Forms.ComboBox();
-            this.btnSupp = new System.Windows.Forms.Button();
-            this.lblDate2 = new System.Windows.Forms.Label();
-            this.lblDescription2 = new System.Windows.Forms.Label();
-            this.lblMontant2 = new System.Windows.Forms.Label();
-            this.lblType2 = new System.Windows.Forms.Label();
             this.lblRorP = new System.Windows.Forms.Label();
+            this.lblType2 = new System.Windows.Forms.Label();
+            this.lblMontant2 = new System.Windows.Forms.Label();
+            this.lblDescription2 = new System.Windows.Forms.Label();
+            this.lblDate2 = new System.Windows.Forms.Label();
+            this.btnSupp = new System.Windows.Forms.Button();
+            this.cbbTransactionExistantes = new System.Windows.Forms.ComboBox();
+            this.TabModif = new System.Windows.Forms.TabPage();
+            this.cbbChoixtransacModif = new System.Windows.Forms.ComboBox();
             this.btnAjouterInModif = new System.Windows.Forms.Button();
             this.flpListePersonneInModif = new System.Windows.Forms.FlowLayoutPanel();
             this.lblTyp = new System.Windows.Forms.Label();
@@ -67,15 +67,17 @@
             this.lblDesc = new System.Windows.Forms.Label();
             this.lblDatedep = new System.Windows.Forms.Label();
             this.cbbTypeModif = new System.Windows.Forms.ComboBox();
-            this.cbbChoixtransacModif = new System.Windows.Forms.ComboBox();
-            this.rdbRecetteModif = new System.Windows.Forms.RadioButton();
-            this.rdbPercuModif = new System.Windows.Forms.RadioButton();
-            this.rdbRecette = new System.Windows.Forms.RadioButton();
-            this.rdbPercu = new System.Windows.Forms.RadioButton();
+            this.TabRecapitulatif = new System.Windows.Forms.TabPage();
+            this.cbRecuModif = new System.Windows.Forms.CheckBox();
+            this.cbPercuModif = new System.Windows.Forms.CheckBox();
+            this.btnPDF = new System.Windows.Forms.Button();
+            this.cbbChoixPeriode = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.TabAjout.SuspendLayout();
             this.TabTransac.SuspendLayout();
             this.tabSuppression.SuspendLayout();
             this.TabModif.SuspendLayout();
+            this.TabRecapitulatif.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabAjout
@@ -108,8 +110,6 @@
             // TabTransac
             // 
             this.TabTransac.BackColor = System.Drawing.Color.DarkGreen;
-            this.TabTransac.Controls.Add(this.rdbPercu);
-            this.TabTransac.Controls.Add(this.rdbRecette);
             this.TabTransac.Controls.Add(this.btnAjouterType);
             this.TabTransac.Controls.Add(this.flpPersonne);
             this.TabTransac.Controls.Add(this.lblType);
@@ -285,10 +285,73 @@
             this.tabSuppression.Text = "Suppression d\'une transaction";
             this.tabSuppression.UseVisualStyleBackColor = true;
             // 
+            // lblRorP
+            // 
+            this.lblRorP.AutoSize = true;
+            this.lblRorP.Location = new System.Drawing.Point(132, 357);
+            this.lblRorP.Name = "lblRorP";
+            this.lblRorP.Size = new System.Drawing.Size(46, 17);
+            this.lblRorP.TabIndex = 6;
+            this.lblRorP.Text = "label1";
+            // 
+            // lblType2
+            // 
+            this.lblType2.AutoSize = true;
+            this.lblType2.Location = new System.Drawing.Point(132, 302);
+            this.lblType2.Name = "lblType2";
+            this.lblType2.Size = new System.Drawing.Size(46, 17);
+            this.lblType2.TabIndex = 5;
+            this.lblType2.Text = "label4";
+            // 
+            // lblMontant2
+            // 
+            this.lblMontant2.AutoSize = true;
+            this.lblMontant2.Location = new System.Drawing.Point(132, 256);
+            this.lblMontant2.Name = "lblMontant2";
+            this.lblMontant2.Size = new System.Drawing.Size(46, 17);
+            this.lblMontant2.TabIndex = 4;
+            this.lblMontant2.Text = "label3";
+            // 
+            // lblDescription2
+            // 
+            this.lblDescription2.AutoSize = true;
+            this.lblDescription2.Location = new System.Drawing.Point(132, 206);
+            this.lblDescription2.Name = "lblDescription2";
+            this.lblDescription2.Size = new System.Drawing.Size(46, 17);
+            this.lblDescription2.TabIndex = 3;
+            this.lblDescription2.Text = "label2";
+            // 
+            // lblDate2
+            // 
+            this.lblDate2.AutoSize = true;
+            this.lblDate2.Location = new System.Drawing.Point(132, 162);
+            this.lblDate2.Name = "lblDate2";
+            this.lblDate2.Size = new System.Drawing.Size(46, 17);
+            this.lblDate2.TabIndex = 2;
+            this.lblDate2.Text = "label1";
+            this.lblDate2.Click += new System.EventHandler(this.lblDate2_Click);
+            // 
+            // btnSupp
+            // 
+            this.btnSupp.Location = new System.Drawing.Point(566, 410);
+            this.btnSupp.Name = "btnSupp";
+            this.btnSupp.Size = new System.Drawing.Size(109, 52);
+            this.btnSupp.TabIndex = 1;
+            this.btnSupp.Text = "Supprimer";
+            this.btnSupp.UseVisualStyleBackColor = true;
+            // 
+            // cbbTransactionExistantes
+            // 
+            this.cbbTransactionExistantes.FormattingEnabled = true;
+            this.cbbTransactionExistantes.Location = new System.Drawing.Point(135, 73);
+            this.cbbTransactionExistantes.Name = "cbbTransactionExistantes";
+            this.cbbTransactionExistantes.Size = new System.Drawing.Size(208, 24);
+            this.cbbTransactionExistantes.TabIndex = 0;
+            // 
             // TabModif
             // 
-            this.TabModif.Controls.Add(this.rdbPercuModif);
-            this.TabModif.Controls.Add(this.rdbRecetteModif);
+            this.TabModif.Controls.Add(this.cbPercuModif);
+            this.TabModif.Controls.Add(this.cbRecuModif);
             this.TabModif.Controls.Add(this.cbbChoixtransacModif);
             this.TabModif.Controls.Add(this.btnAjouterInModif);
             this.TabModif.Controls.Add(this.flpListePersonneInModif);
@@ -311,79 +374,14 @@
             this.TabModif.Text = "Modification d\'une transaction";
             this.TabModif.UseVisualStyleBackColor = true;
             // 
-            // TabRecapitulatif
+            // cbbChoixtransacModif
             // 
-            this.TabRecapitulatif.Location = new System.Drawing.Point(4, 28);
-            this.TabRecapitulatif.Margin = new System.Windows.Forms.Padding(4);
-            this.TabRecapitulatif.Name = "TabRecapitulatif";
-            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(4);
-            this.TabRecapitulatif.Size = new System.Drawing.Size(1569, 600);
-            this.TabRecapitulatif.TabIndex = 4;
-            this.TabRecapitulatif.Text = "Récapitulatif";
-            this.TabRecapitulatif.UseVisualStyleBackColor = true;
-            // 
-            // cbbTransactionExistantes
-            // 
-            this.cbbTransactionExistantes.FormattingEnabled = true;
-            this.cbbTransactionExistantes.Location = new System.Drawing.Point(135, 73);
-            this.cbbTransactionExistantes.Name = "cbbTransactionExistantes";
-            this.cbbTransactionExistantes.Size = new System.Drawing.Size(208, 24);
-            this.cbbTransactionExistantes.TabIndex = 0;
-            // 
-            // btnSupp
-            // 
-            this.btnSupp.Location = new System.Drawing.Point(566, 410);
-            this.btnSupp.Name = "btnSupp";
-            this.btnSupp.Size = new System.Drawing.Size(109, 52);
-            this.btnSupp.TabIndex = 1;
-            this.btnSupp.Text = "Supprimer";
-            this.btnSupp.UseVisualStyleBackColor = true;
-            // 
-            // lblDate2
-            // 
-            this.lblDate2.AutoSize = true;
-            this.lblDate2.Location = new System.Drawing.Point(132, 162);
-            this.lblDate2.Name = "lblDate2";
-            this.lblDate2.Size = new System.Drawing.Size(46, 17);
-            this.lblDate2.TabIndex = 2;
-            this.lblDate2.Text = "label1";
-            this.lblDate2.Click += new System.EventHandler(this.lblDate2_Click);
-            // 
-            // lblDescription2
-            // 
-            this.lblDescription2.AutoSize = true;
-            this.lblDescription2.Location = new System.Drawing.Point(132, 206);
-            this.lblDescription2.Name = "lblDescription2";
-            this.lblDescription2.Size = new System.Drawing.Size(46, 17);
-            this.lblDescription2.TabIndex = 3;
-            this.lblDescription2.Text = "label2";
-            // 
-            // lblMontant2
-            // 
-            this.lblMontant2.AutoSize = true;
-            this.lblMontant2.Location = new System.Drawing.Point(132, 256);
-            this.lblMontant2.Name = "lblMontant2";
-            this.lblMontant2.Size = new System.Drawing.Size(46, 17);
-            this.lblMontant2.TabIndex = 4;
-            this.lblMontant2.Text = "label3";
-            // 
-            // lblType2
-            // 
-            this.lblType2.AutoSize = true;
-            this.lblType2.Location = new System.Drawing.Point(132, 302);
-            this.lblType2.Name = "lblType2";
-            this.lblType2.Size = new System.Drawing.Size(46, 17);
-            this.lblType2.TabIndex = 5;
-            this.lblType2.Text = "label4";
-            // 
-            // lblRorP
-            // 
-            this.lblRorP.AutoSize = true;
-            this.lblRorP.Location = new System.Drawing.Point(132, 357);
-            this.lblRorP.Name = "lblRorP";
-            this.lblRorP.Size = new System.Drawing.Size(46, 17);
-            this.lblRorP.TabIndex = 6;
-            this.lblRorP.Text = "label1";
+            this.cbbChoixtransacModif.FormattingEnabled = true;
+            this.cbbChoixtransacModif.Location = new System.Drawing.Point(105, 37);
+            this.cbbChoixtransacModif.Name = "cbbChoixtransacModif";
+            this.cbbChoixtransacModif.Size = new System.Drawing.Size(208, 24);
+            this.cbbChoixtransacModif.TabIndex = 30;
+            this.cbbChoixtransacModif.SelectedValueChanged += new System.EventHandler(this.cbbChoixtransacModif_SelectedValueChanged);
             // 
             // btnAjouterInModif
             // 
@@ -497,58 +495,63 @@
             this.cbbTypeModif.Size = new System.Drawing.Size(270, 24);
             this.cbbTypeModif.TabIndex = 16;
             // 
-            // cbbChoixtransacModif
+            // TabRecapitulatif
             // 
-            this.cbbChoixtransacModif.FormattingEnabled = true;
-            this.cbbChoixtransacModif.Location = new System.Drawing.Point(105, 37);
-            this.cbbChoixtransacModif.Name = "cbbChoixtransacModif";
-            this.cbbChoixtransacModif.Size = new System.Drawing.Size(208, 24);
-            this.cbbChoixtransacModif.TabIndex = 30;
-            this.cbbChoixtransacModif.SelectedValueChanged += new System.EventHandler(this.cbbChoixtransacModif_SelectedValueChanged);
+            this.TabRecapitulatif.Controls.Add(this.dateTimePicker1);
+            this.TabRecapitulatif.Controls.Add(this.cbbChoixPeriode);
+            this.TabRecapitulatif.Controls.Add(this.btnPDF);
+            this.TabRecapitulatif.Location = new System.Drawing.Point(4, 28);
+            this.TabRecapitulatif.Margin = new System.Windows.Forms.Padding(4);
+            this.TabRecapitulatif.Name = "TabRecapitulatif";
+            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(4);
+            this.TabRecapitulatif.Size = new System.Drawing.Size(1569, 600);
+            this.TabRecapitulatif.TabIndex = 4;
+            this.TabRecapitulatif.Text = "Récapitulatif";
+            this.TabRecapitulatif.UseVisualStyleBackColor = true;
             // 
-            // rdbRecetteModif
+            // cbRecuModif
             // 
-            this.rdbRecetteModif.AutoSize = true;
-            this.rdbRecetteModif.Location = new System.Drawing.Point(25, 304);
-            this.rdbRecetteModif.Name = "rdbRecetteModif";
-            this.rdbRecetteModif.Size = new System.Drawing.Size(78, 21);
-            this.rdbRecetteModif.TabIndex = 31;
-            this.rdbRecetteModif.TabStop = true;
-            this.rdbRecetteModif.Text = "Recette";
-            this.rdbRecetteModif.UseVisualStyleBackColor = true;
+            this.cbRecuModif.AutoSize = true;
+            this.cbRecuModif.Location = new System.Drawing.Point(28, 263);
+            this.cbRecuModif.Name = "cbRecuModif";
+            this.cbRecuModif.Size = new System.Drawing.Size(63, 21);
+            this.cbRecuModif.TabIndex = 31;
+            this.cbRecuModif.Text = "Reçu";
+            this.cbRecuModif.UseVisualStyleBackColor = true;
             // 
-            // rdbPercuModif
+            // cbPercuModif
             // 
-            this.rdbPercuModif.AutoSize = true;
-            this.rdbPercuModif.Location = new System.Drawing.Point(188, 304);
-            this.rdbPercuModif.Name = "rdbPercuModif";
-            this.rdbPercuModif.Size = new System.Drawing.Size(66, 21);
-            this.rdbPercuModif.TabIndex = 32;
-            this.rdbPercuModif.TabStop = true;
-            this.rdbPercuModif.Text = "Perçu";
-            this.rdbPercuModif.UseVisualStyleBackColor = true;
+            this.cbPercuModif.AutoSize = true;
+            this.cbPercuModif.Location = new System.Drawing.Point(176, 263);
+            this.cbPercuModif.Name = "cbPercuModif";
+            this.cbPercuModif.Size = new System.Drawing.Size(67, 21);
+            this.cbPercuModif.TabIndex = 32;
+            this.cbPercuModif.Text = "Perçu";
+            this.cbPercuModif.UseVisualStyleBackColor = true;
             // 
-            // rdbRecette
+            // btnPDF
             // 
-            this.rdbRecette.AutoSize = true;
-            this.rdbRecette.Location = new System.Drawing.Point(24, 230);
-            this.rdbRecette.Name = "rdbRecette";
-            this.rdbRecette.Size = new System.Drawing.Size(78, 21);
-            this.rdbRecette.TabIndex = 16;
-            this.rdbRecette.TabStop = true;
-            this.rdbRecette.Text = "Recette";
-            this.rdbRecette.UseVisualStyleBackColor = true;
+            this.btnPDF.Location = new System.Drawing.Point(751, 344);
+            this.btnPDF.Name = "btnPDF";
+            this.btnPDF.Size = new System.Drawing.Size(225, 76);
+            this.btnPDF.TabIndex = 0;
+            this.btnPDF.Text = "Créer le PFD";
+            this.btnPDF.UseVisualStyleBackColor = true;
             // 
-            // rdbPercu
+            // cbbChoixPeriode
             // 
-            this.rdbPercu.AutoSize = true;
-            this.rdbPercu.Location = new System.Drawing.Point(187, 230);
-            this.rdbPercu.Name = "rdbPercu";
-            this.rdbPercu.Size = new System.Drawing.Size(66, 21);
-            this.rdbPercu.TabIndex = 17;
-            this.rdbPercu.TabStop = true;
-            this.rdbPercu.Text = "Perçu";
-            this.rdbPercu.UseVisualStyleBackColor = true;
+            this.cbbChoixPeriode.FormattingEnabled = true;
+            this.cbbChoixPeriode.Location = new System.Drawing.Point(200, 73);
+            this.cbbChoixPeriode.Name = "cbbChoixPeriode";
+            this.cbbChoixPeriode.Size = new System.Drawing.Size(198, 24);
+            this.cbbChoixPeriode.TabIndex = 1;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(29, 25);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 2;
             // 
             // FrmBudgetMois
             // 
@@ -566,6 +569,7 @@
             this.tabSuppression.PerformLayout();
             this.TabModif.ResumeLayout(false);
             this.TabModif.PerformLayout();
+            this.TabRecapitulatif.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -612,9 +616,10 @@
         private System.Windows.Forms.Label lblDesc;
         private System.Windows.Forms.Label lblDatedep;
         private System.Windows.Forms.ComboBox cbbTypeModif;
-        private System.Windows.Forms.RadioButton rdbPercuModif;
-        private System.Windows.Forms.RadioButton rdbRecetteModif;
-        private System.Windows.Forms.RadioButton rdbPercu;
-        private System.Windows.Forms.RadioButton rdbRecette;
+        private System.Windows.Forms.CheckBox cbPercuModif;
+        private System.Windows.Forms.CheckBox cbRecuModif;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox cbbChoixPeriode;
+        private System.Windows.Forms.Button btnPDF;
     }
 }
