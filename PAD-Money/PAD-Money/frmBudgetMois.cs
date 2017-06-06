@@ -46,15 +46,28 @@ namespace PAD_Money
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             String description = txtDescription.Text;
-            int montant = int.Parse(txtMontant.Text);
+            float montant = float.Parse(txtMontant.Text);
             DateTime depense = dtpDepense.Value;
-            String type = cbbType.Text;
+            String typeString = cbbType.Text;
+            DataTable Type = ds.Tables["TypeTransaction"].Select("upper (libtype) = upper(" + typeString + ")").CopyToDataTable();
+            long codeTypeLong = (long)Type.Rows[0]["codeType"];
             bool recette = true;
+            bool percu = true;
             if (cbPercu.Checked==true)
             {
-                recette = false;
+                percu = true;
+            }
+            if (cbRecette.Checked==true)
+            {
+                recette = true;
+            }
+            long[] listBenef;
+            for (int i=0; i<flpPersonne.Controls.Count; i++)
+            {
+                
             }
 
+            //BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong,   )
         }
 
 
@@ -111,11 +124,12 @@ namespace PAD_Money
         //Onglet "modifier", recuperation des données de la table
         private void cbbChoixtransacModif_SelectedValueChanged(object sender, EventArgs e)
         {
-            txbDescriptionModif.Text = transaction.Rows[0]["Description"].ToString();
+            transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+            txbDescriptionModif.Text = (transaction.Rows[0]["description"]).ToString();
             txbMontantModif.Text = transaction.Rows[0]["montant"].ToString();
             cbbTypeModif.Text = transaction.Rows[0]["type"].ToString();
-            rdbPercuModif.Checked = (bool)transaction.Rows[0]["PercuON"];
-            rdbRecetteModif.Checked = (bool)transaction.Rows[0]["recetteON"];
+            cbPercuModif.Checked = (bool)transaction.Rows[0]["PercuON"];
+            cbRecuModif.Checked = (bool)transaction.Rows[0]["recetteON"];
         }
     }
 }
