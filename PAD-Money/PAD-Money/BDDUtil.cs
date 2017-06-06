@@ -183,6 +183,25 @@ namespace PAD_Money
             return addLine("TypeTransaction",ds.Tables["TypeTransaction"].Rows.Count+1, libelle);
         }
 
+        public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
+            return 0;
+        }
+
+        public static int ajouterPostePeriodique(String libelle, float montant, String libellePeriodicite){
+
+            return 0;
+        }
+
+        public static int ajouterPosteRevenu(String libelle, float montant, long personne){
+            
+            return 0;
+        }
+
+        public static int ajouterPersonne(String nomPersonne, String pmPersonne){
+
+            return 0;
+        }
+
     }
 
 }
