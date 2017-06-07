@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.tabBudgetPrevi = new System.Windows.Forms.TabControl();
             this.tbpPF = new System.Windows.Forms.TabPage();
-            this.lblTitrePF = new System.Windows.Forms.Label();
             this.grbMontantPF = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtMontantPF = new System.Windows.Forms.TextBox();
@@ -44,6 +43,11 @@
             this.cbbPeriode = new System.Windows.Forms.ComboBox();
             this.cbbPoste = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtMontantPP = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnValiderPP = new System.Windows.Forms.Button();
+            this.btnCalculPP = new System.Windows.Forms.Button();
             this.txtIntitul = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.txtPrelevPP = new System.Windows.Forms.TextBox();
@@ -55,29 +59,27 @@
             this.lblIntitulePP = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.epIntitulPP = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnCalculPP = new System.Windows.Forms.Button();
-            this.btnValiderPP = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtMontantPP = new System.Windows.Forms.TextBox();
+            this.grbRevenu = new System.Windows.Forms.GroupBox();
+            this.lblMontantRevenu = new System.Windows.Forms.Label();
+            this.txtMontantRevenu = new System.Windows.Forms.TextBox();
+            this.dtpRevenu = new System.Windows.Forms.DateTimePicker();
+            this.btnValiderRevenu = new System.Windows.Forms.Button();
+            this.btnAutreRevenu = new System.Windows.Forms.Button();
+            this.lblDateRevenu = new System.Windows.Forms.Label();
+            this.lblBeneRevenu = new System.Windows.Forms.Label();
+            this.lblPosteRevenu = new System.Windows.Forms.Label();
+            this.cbbRevenu = new System.Windows.Forms.ComboBox();
+            this.clbRevenu = new System.Windows.Forms.CheckedListBox();
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.grbEcheance.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.grbRevenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabBudgetPrevi
@@ -90,10 +92,10 @@
             this.tabBudgetPrevi.SelectedIndex = 0;
             this.tabBudgetPrevi.Size = new System.Drawing.Size(758, 417);
             this.tabBudgetPrevi.TabIndex = 1;
+            this.tabBudgetPrevi.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabBudgetPrevi_Selected);
             // 
             // tbpPF
             // 
-            this.tbpPF.Controls.Add(this.lblTitrePF);
             this.tbpPF.Controls.Add(this.grbMontantPF);
             this.tbpPF.Controls.Add(this.dtpPF);
             this.tbpPF.Controls.Add(this.btnValiderPF);
@@ -110,16 +112,6 @@
             this.tbpPF.TabIndex = 0;
             this.tbpPF.Text = "Poste fixe";
             this.tbpPF.UseVisualStyleBackColor = true;
-            // 
-            // lblTitrePF
-            // 
-            this.lblTitrePF.AutoSize = true;
-            this.lblTitrePF.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitrePF.Location = new System.Drawing.Point(299, 31);
-            this.lblTitrePF.Name = "lblTitrePF";
-            this.lblTitrePF.Size = new System.Drawing.Size(207, 46);
-            this.lblTitrePF.TabIndex = 13;
-            this.lblTitrePF.Text = "Poste fixe";
             // 
             // grbMontantPF
             // 
@@ -242,6 +234,54 @@
             this.tabPage2.Text = "Poste ponctuel";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtMontantPP);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(87, 265);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(233, 100);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Montant";
+            // 
+            // txtMontantPP
+            // 
+            this.txtMontantPP.Location = new System.Drawing.Point(37, 48);
+            this.txtMontantPP.Name = "txtMontantPP";
+            this.txtMontantPP.Size = new System.Drawing.Size(72, 20);
+            this.txtMontantPP.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(133, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 63);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "€";
+            // 
+            // btnValiderPP
+            // 
+            this.btnValiderPP.Location = new System.Drawing.Point(624, 355);
+            this.btnValiderPP.Name = "btnValiderPP";
+            this.btnValiderPP.Size = new System.Drawing.Size(120, 30);
+            this.btnValiderPP.TabIndex = 26;
+            this.btnValiderPP.Text = "Valider";
+            this.btnValiderPP.UseVisualStyleBackColor = true;
+            this.btnValiderPP.Click += new System.EventHandler(this.btnValiderPP_Click);
+            // 
+            // btnCalculPP
+            // 
+            this.btnCalculPP.Location = new System.Drawing.Point(87, 214);
+            this.btnCalculPP.Name = "btnCalculPP";
+            this.btnCalculPP.Size = new System.Drawing.Size(147, 23);
+            this.btnCalculPP.TabIndex = 25;
+            this.btnCalculPP.Text = "Calculer les échéances";
+            this.btnCalculPP.UseVisualStyleBackColor = true;
+            this.btnCalculPP.Click += new System.EventHandler(this.btnCalculPP_Click);
+            // 
             // txtIntitul
             // 
             this.txtIntitul.Location = new System.Drawing.Point(240, 26);
@@ -320,16 +360,16 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.clbRevenu);
+            this.tabPage3.Controls.Add(this.grbRevenu);
+            this.tabPage3.Controls.Add(this.dtpRevenu);
+            this.tabPage3.Controls.Add(this.btnValiderRevenu);
+            this.tabPage3.Controls.Add(this.btnAutreRevenu);
+            this.tabPage3.Controls.Add(this.lblDateRevenu);
+            this.tabPage3.Controls.Add(this.lblBeneRevenu);
+            this.tabPage3.Controls.Add(this.lblPosteRevenu);
+            this.tabPage3.Controls.Add(this.cbbRevenu);
             this.tabPage3.Controls.Add(this.button4);
-            this.tabPage3.Controls.Add(this.textBox6);
-            this.tabPage3.Controls.Add(this.label11);
-            this.tabPage3.Controls.Add(this.textBox7);
-            this.tabPage3.Controls.Add(this.textBox8);
-            this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.label14);
-            this.tabPage3.Controls.Add(this.label15);
-            this.tabPage3.Controls.Add(this.comboBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -347,131 +387,106 @@
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(169, 196);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(60, 20);
-            this.textBox6.TabIndex = 31;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(84, 199);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(48, 13);
-            this.label11.TabIndex = 30;
-            this.label11.Text = "label11";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(169, 146);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(60, 20);
-            this.textBox7.TabIndex = 29;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(169, 48);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(116, 20);
-            this.textBox8.TabIndex = 28;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(240, 149);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(48, 13);
-            this.label12.TabIndex = 27;
-            this.label12.Text = "label12";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(83, 51);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(48, 13);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "label13";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(83, 149);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(48, 13);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "label14";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(83, 100);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(48, 13);
-            this.label15.TabIndex = 24;
-            this.label15.Text = "label15";
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(169, 97);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(140, 21);
-            this.comboBox3.TabIndex = 23;
-            // 
             // epIntitulPP
             // 
             this.epIntitulPP.ContainerControl = this;
             // 
-            // btnCalculPP
+            // grbRevenu
             // 
-            this.btnCalculPP.Location = new System.Drawing.Point(87, 214);
-            this.btnCalculPP.Name = "btnCalculPP";
-            this.btnCalculPP.Size = new System.Drawing.Size(147, 23);
-            this.btnCalculPP.TabIndex = 25;
-            this.btnCalculPP.Text = "Calculer les échéances";
-            this.btnCalculPP.UseVisualStyleBackColor = true;
-            this.btnCalculPP.Click += new System.EventHandler(this.btnCalculPP_Click);
+            this.grbRevenu.Controls.Add(this.lblMontantRevenu);
+            this.grbRevenu.Controls.Add(this.txtMontantRevenu);
+            this.grbRevenu.Location = new System.Drawing.Point(87, 264);
+            this.grbRevenu.Name = "grbRevenu";
+            this.grbRevenu.Size = new System.Drawing.Size(233, 100);
+            this.grbRevenu.TabIndex = 41;
+            this.grbRevenu.TabStop = false;
+            this.grbRevenu.Text = "Montant";
             // 
-            // btnValiderPP
+            // lblMontantRevenu
             // 
-            this.btnValiderPP.Location = new System.Drawing.Point(624, 355);
-            this.btnValiderPP.Name = "btnValiderPP";
-            this.btnValiderPP.Size = new System.Drawing.Size(120, 30);
-            this.btnValiderPP.TabIndex = 26;
-            this.btnValiderPP.Text = "Valider";
-            this.btnValiderPP.UseVisualStyleBackColor = true;
-            this.btnValiderPP.Click += new System.EventHandler(this.btnValiderPP_Click);
+            this.lblMontantRevenu.AutoSize = true;
+            this.lblMontantRevenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMontantRevenu.Location = new System.Drawing.Point(133, 16);
+            this.lblMontantRevenu.Name = "lblMontantRevenu";
+            this.lblMontantRevenu.Size = new System.Drawing.Size(57, 63);
+            this.lblMontantRevenu.TabIndex = 13;
+            this.lblMontantRevenu.Text = "€";
             // 
-            // groupBox1
+            // txtMontantRevenu
             // 
-            this.groupBox1.Controls.Add(this.txtMontantPP);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(87, 265);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(233, 100);
-            this.groupBox1.TabIndex = 27;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Montant";
+            this.txtMontantRevenu.Location = new System.Drawing.Point(37, 48);
+            this.txtMontantRevenu.Name = "txtMontantRevenu";
+            this.txtMontantRevenu.Size = new System.Drawing.Size(72, 20);
+            this.txtMontantRevenu.TabIndex = 7;
             // 
-            // label1
+            // dtpRevenu
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(133, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 63);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "€";
+            this.dtpRevenu.Location = new System.Drawing.Point(488, 121);
+            this.dtpRevenu.Name = "dtpRevenu";
+            this.dtpRevenu.Size = new System.Drawing.Size(233, 20);
+            this.dtpRevenu.TabIndex = 40;
             // 
-            // txtMontantPP
+            // btnValiderRevenu
             // 
-            this.txtMontantPP.Location = new System.Drawing.Point(37, 48);
-            this.txtMontantPP.Name = "txtMontantPP";
-            this.txtMontantPP.Size = new System.Drawing.Size(72, 20);
-            this.txtMontantPP.TabIndex = 14;
+            this.btnValiderRevenu.Location = new System.Drawing.Point(624, 354);
+            this.btnValiderRevenu.Name = "btnValiderRevenu";
+            this.btnValiderRevenu.Size = new System.Drawing.Size(120, 30);
+            this.btnValiderRevenu.TabIndex = 39;
+            this.btnValiderRevenu.Text = "Valider";
+            this.btnValiderRevenu.UseVisualStyleBackColor = true;
+            this.btnValiderRevenu.Click += new System.EventHandler(this.btnValiderRevenu_Click);
+            // 
+            // btnAutreRevenu
+            // 
+            this.btnAutreRevenu.Location = new System.Drawing.Point(283, 122);
+            this.btnAutreRevenu.Name = "btnAutreRevenu";
+            this.btnAutreRevenu.Size = new System.Drawing.Size(87, 23);
+            this.btnAutreRevenu.TabIndex = 38;
+            this.btnAutreRevenu.Text = "Autre";
+            this.btnAutreRevenu.UseVisualStyleBackColor = true;
+            // 
+            // lblDateRevenu
+            // 
+            this.lblDateRevenu.AutoSize = true;
+            this.lblDateRevenu.Location = new System.Drawing.Point(396, 127);
+            this.lblDateRevenu.Name = "lblDateRevenu";
+            this.lblDateRevenu.Size = new System.Drawing.Size(86, 13);
+            this.lblDateRevenu.TabIndex = 37;
+            this.lblDateRevenu.Text = "Jour du mois :";
+            // 
+            // lblBeneRevenu
+            // 
+            this.lblBeneRevenu.AutoSize = true;
+            this.lblBeneRevenu.Location = new System.Drawing.Point(400, 171);
+            this.lblBeneRevenu.Name = "lblBeneRevenu";
+            this.lblBeneRevenu.Size = new System.Drawing.Size(82, 13);
+            this.lblBeneRevenu.TabIndex = 36;
+            this.lblBeneRevenu.Text = "Bénéficiaire :";
+            // 
+            // lblPosteRevenu
+            // 
+            this.lblPosteRevenu.AutoSize = true;
+            this.lblPosteRevenu.Location = new System.Drawing.Point(84, 127);
+            this.lblPosteRevenu.Name = "lblPosteRevenu";
+            this.lblPosteRevenu.Size = new System.Drawing.Size(47, 13);
+            this.lblPosteRevenu.TabIndex = 35;
+            this.lblPosteRevenu.Text = "Poste :";
+            // 
+            // cbbRevenu
+            // 
+            this.cbbRevenu.FormattingEnabled = true;
+            this.cbbRevenu.Location = new System.Drawing.Point(137, 124);
+            this.cbbRevenu.Name = "cbbRevenu";
+            this.cbbRevenu.Size = new System.Drawing.Size(140, 21);
+            this.cbbRevenu.TabIndex = 33;
+            // 
+            // clbRevenu
+            // 
+            this.clbRevenu.FormattingEnabled = true;
+            this.clbRevenu.Location = new System.Drawing.Point(488, 171);
+            this.clbRevenu.Name = "clbRevenu";
+            this.clbRevenu.Size = new System.Drawing.Size(233, 169);
+            this.clbRevenu.TabIndex = 42;
             // 
             // FrmBudgetPrevi
             // 
@@ -490,12 +505,14 @@
             this.grbMontantPF.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.grbEcheance.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grbRevenu.ResumeLayout(false);
+            this.grbRevenu.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -519,15 +536,6 @@
         private System.Windows.Forms.Label lblDescripPP;
         private System.Windows.Forms.Label lblIntitulePP;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Button btnValiderPF;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
@@ -536,12 +544,22 @@
         private System.Windows.Forms.DateTimePicker dtpPF;
         private System.Windows.Forms.GroupBox grbMontantPF;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblTitrePF;
         private System.Windows.Forms.ErrorProvider epIntitulPP;
         private System.Windows.Forms.Button btnValiderPP;
         private System.Windows.Forms.Button btnCalculPP;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMontantPP;
+        private System.Windows.Forms.GroupBox grbRevenu;
+        private System.Windows.Forms.Label lblMontantRevenu;
+        private System.Windows.Forms.TextBox txtMontantRevenu;
+        private System.Windows.Forms.DateTimePicker dtpRevenu;
+        private System.Windows.Forms.Button btnValiderRevenu;
+        private System.Windows.Forms.Button btnAutreRevenu;
+        private System.Windows.Forms.Label lblDateRevenu;
+        private System.Windows.Forms.Label lblBeneRevenu;
+        private System.Windows.Forms.Label lblPosteRevenu;
+        private System.Windows.Forms.ComboBox cbbRevenu;
+        private System.Windows.Forms.CheckedListBox clbRevenu;
     }
 }

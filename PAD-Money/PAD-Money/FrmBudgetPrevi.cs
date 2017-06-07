@@ -21,7 +21,8 @@ namespace PAD_Money
             this.connec = connec;
             this.ds = ds;           
             InitializeComponent();
-            remplirCbbPoste();
+            remplirCbbPoste(cbbPoste);
+            remplirCbbPoste(cbbRevenu);
             remplirCbbPeriode();
         }
 
@@ -30,13 +31,13 @@ namespace PAD_Money
 
         }
 
-        private void remplirCbbPoste()
+        private void remplirCbbPoste(ComboBox cbb)
         {
             DataTable table = new DataTable();
             table = ds.Tables["Poste"];
-            cbbPoste.DataSource = table;
-            cbbPoste.DisplayMember = "libPoste";
-            cbbPoste.ValueMember = "codePoste";
+            cbb.DataSource = table;
+            cbb.DisplayMember = "libPoste";
+            cbb.ValueMember = "codePoste";
             
         }
 
@@ -47,6 +48,17 @@ namespace PAD_Money
             cbbPeriode.DataSource = table;
             cbbPeriode.DisplayMember = "libPer";
             cbbPeriode.ValueMember = "codePer";
+        }
+
+        private void remplirClbRevenu()
+        {
+            clbRevenu.Controls.Clear();
+            DataTable table = new DataTable();
+            table = ds.Tables["Personne"];
+            foreach(DataRow row in table.Rows)
+            {
+                clbRevenu.Items.Add(row["nomPersonne"] + " " + row["pnPersonne"], false);
+            }
         }
 
         private void cbbPoste_KeyPress(object sender, KeyPressEventArgs e)
@@ -180,7 +192,27 @@ namespace PAD_Money
 
         private void btnValiderPP_Click(object sender, EventArgs e)
         {
+            //BDDUtil.ajouterPostePonctuel(txtIntitul.Text,txtDescription.Text,flpEcheance.Controls.Cast<PrelevementControl>().ToArray<PrelevementControl>());          
+        }
+
+        private void tabBudgetPrevi_Selected(object sender, TabControlEventArgs e)
+        {
+            if(tabBudgetPrevi.SelectedTab == tabBudgetPrevi.TabPages["tabPage3"])
+            {
+                remplirClbRevenu();
+            }
+        }
+
+        private void btnValiderRevenu_Click(object sender, EventArgs e)
+        {
             
+            foreach(Control c in clbRevenu.Items)
+            {
+                if(((CheckBox)c).Checked)
+                {
+                    //BDDUtil.ajouterPosteRevenu(cbbRevenu.SelectedItem,int.Parse(lblMontantRevenu.Text),c.Text;
+                }
+            }
         }
     }
 }
