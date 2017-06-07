@@ -156,13 +156,133 @@ namespace PAD_Money
         }
 
 
+        //Methodes de suppression de lignes :
+
+        public static int removeLine(String table, String kname1, object val1){
+            return removeLine(table, kname1, null, val1, null);
+        }
+
+        public static int removeLine(String table, String kname1, String kname2, object val1, object val2){
+            if(connec == null || ds == null)
+                throw new InvalidOperationException("Classe BDDUtil incorrectement initialisée");
+            
+            int retLoc = removeLineLoc(table, kname1, kname2, val1, val2);
+            int remLoc = removeLineRem(table, kname1, kname2, val1, val2);
+            return retLoc | remLoc;
+        }
+
+        public static int removeLineLoc(String table, String kname1, String kname2, object val1, object val2){
+            
+            DataRowCollection rows = ds.Tables[table].Rows;
+
+            try{
+                for (int i = rows.Count - 1; i >= 0; i--){
+                    //Si la première condition est vérifiée :
+                    if(rows[i][kname1].Equals(val1)){
+                        //On vérifie s'il y en a une 2ème
+                        if(kname2 != null){
+                            //Si c'est le cas on vérifie qu'elle est vraie
+                            if(rows[i][kname2].Equals(val2)){
+                                rows.RemoveAt(i);
+                            }
+                            
+                        } else {//S'il n'y a qu'une seule condition, et qu'elel est vérifiée :
+                            rows.RemoveAt(i);
+                        }
+                    }
+                }
+
+            } catch {
+                return LOCAL_ERROR;
+            }
+
+            return LOCAL_SUCCES;
+
+        }
+
+        public static int removeLineRem(String table, String kname1, String kname2, object val1, object val2){
+            //On utilise une variable pour ne pas quitter au beau milieu des blocs catch
+            int resultat = REMOTE_SUCCES;
+
+            try {
+                connec.Open();
+
+                OleDbCommand comm = connec.CreateCommand();
+                //pas besoin d'indiquer le type par défaut puisque c'est text et c'est ce qu'on veut
+                
+                StringBuilder builder = new StringBuilder();
+                builder
+                .Append("DELETE FROM [").Append(table).Append("] WHERE ")
+                .Append(kname1);
+                
+                if(val1 == null){
+                        //Si la valeur est nulle, on le met comme tel
+                    builder.Append(" IS NULL");
+                } else if(val1.GetType().Equals(typeof(DateTime))){
+                    //La date parce qu'il faut rajouter des # avant et après
+                    DateTime time = (DateTime)val1;
+                    builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                } else if(val1.GetType().Equals(typeof(String))){
+                    //Les chaines de caractères car elles doivent êtres entre '
+                    builder.Append(" = '"+val1.ToString()+"'");
+                }else {
+                    //Pour le reste des types disponibles (entiers, flottants, etc...)
+                    //On les affiches de manière brute
+                    builder.Append(" = "+val1.ToString());
+                }
+
+                //S'il y a une deuxième clé
+                if(kname2 != null){
+                    builder.Append(" AND ").Append(kname2);
+                
+                    if(val2 == null){
+                        //Si la valeur est nulle, on le met comme tel
+                        builder.Append(" IS NULL");
+                    } else if(val2.GetType().Equals(typeof(DateTime))){
+                        //La date parce qu'il faut rajouter des # avant et après
+                        DateTime time = (DateTime)val1;
+                        builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                    } else if(val2.GetType().Equals(typeof(String))){
+                        //Les chaines de caractères car elles doivent êtres entre '
+                        builder.Append(" = '"+val2.ToString()+"'");
+                    }else {
+                        //Pour le reste des types disponibles (entiers, flottants, etc...)
+                        //On les affiches de manière brute
+                        builder.Append(" = "+val2.ToString());
+                    }
+                }
+
+                comm.CommandText = builder.ToString();
+
+                int reqRes = comm.ExecuteNonQuery();
+                
+                if(reqRes < 0)
+                    resultat = REMOTE_SQL_ERROR;
+
+            } catch (InvalidOperationException) {
+                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+                //Donc on renvoie le message d'ereur approrié
+                resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException) {
+                resultat = REMOTE_SQL_ERROR;
+            } finally {
+                if(connec.State == ConnectionState.Open)
+                    connec.Close();
+            }
+
+            return resultat;
+        }
+
+
+
         //Methode utilitaires de gestion d'ajout :
 
         public static int ajouterTransaction(DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
             return ajouterTransaction(ds.Tables["Transaction"].Rows.Count+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
         }
 
-        public static int ajouterTransaction(long codeTransaction, DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
+        public static int ajouterTransaction(long codeTransaction, DateTime dateTransac, String description,
+         float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
             //On ajoute la ligne de la transaction
             int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
             
@@ -232,6 +352,21 @@ namespace PAD_Money
 
         public static int ajouterPersonne(String nomPersonne, String pmPersonne){
             return addLine("Personne", ds.Tables["Personne"].Rows.Count + 1 ,nomPersonne, pmPersonne);
+        }
+
+        public static int supprimerTransaction(long codeTransaction){
+            int remBenef = removeLine("Beneficiaires", "codeTransaction", codeTransaction);
+            return remBenef | removeLine("Transaction", "codeTransaction", codeTransaction);
+        }
+
+        public static int supprimerPoste(long codePoste){
+            int remEchea = removeLine("Echeances", "codePoste", codePoste);
+            int remPonct = removeLine("PostePonctuel", "codePoste", codePoste);
+            int remPerio = removeLine("PostePeriodique", "codePoste", codePoste);
+            int remReven = removeLine("PosteRevenu", "codePoste", codePoste);
+            int remPoste = removeLine("Poste", "codePoste", codePoste);
+
+            return remEchea | remPonct | remPerio | remReven | remPoste;
         }
 
         public static long[] getCodeFromNames(String[] nomPrenom){
