@@ -58,6 +58,19 @@ namespace PAD_Money
             return d;
         }
 
+        private static long maxCode(String table, String keyname){
+            //On renvoie la valeur maximale de la table, pour pouvoir affecter une clef primaire non utilisée
+            DataTable tab = ds.Tables[table];
+            long max = 0;
+            foreach(DataRow r in tab.Rows){
+                if((long)r[keyname] > max){
+                    max = (long)r.ItemArray[0];
+                }
+            }
+
+            return max;
+        }
+
         public static int addLine(String table, params object[] data){
 
             //Maintenant le but est de convertir la liste data en datarow
@@ -359,7 +372,7 @@ namespace PAD_Money
         //Methode utilitaires de gestion d'ajout :
 
         public static int ajouterTransaction(DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
-            return ajouterTransaction(ds.Tables["Transaction"].Rows.Count+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
+            return ajouterTransaction(maxCode("Transaction","codeTransaction")+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
         }
 
         public static int ajouterTransaction(long codeTransaction, DateTime dateTransac, String description,
@@ -383,11 +396,12 @@ namespace PAD_Money
         }
 
         public static int ajouterTypeTransaction(String libelle){
-            return addLine("TypeTransaction",ds.Tables["TypeTransaction"].Rows.Count+1, libelle);
+            return addLine("TypeTransaction",maxCode("Transaction","codeTransaction")+1, libelle);
         }
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
-            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            //int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            long codePoste = maxCode("Poste","codePoste")+1;
             //On ajoute le poste
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPostePonct = addLine("PostePonctuel", codePoste, commentaire);
@@ -414,7 +428,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, long codePeriode){
-            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            long codePoste = maxCode("Poste","codePoste")+1;
             
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode);
@@ -423,7 +437,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPosteRevenu(String libelle, float montant, long personne){
-            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            long codePoste = maxCode("Poste","codePoste")+1;
             
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPosteRev = addLine("PostePeriodique", codePoste, montant, personne);
@@ -432,7 +446,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPersonne(String nomPersonne, String pmPersonne){
-            return addLine("Personne", ds.Tables["Personne"].Rows.Count + 1 ,nomPersonne, pmPersonne);
+            return addLine("Personne", maxCode("Personne","codePersonne")+1,nomPersonne, pmPersonne);
         }
 
         public static int supprimerTransaction(long codeTransaction){
