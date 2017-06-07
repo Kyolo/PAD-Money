@@ -58,8 +58,7 @@
             this.lblDescripPP = new System.Windows.Forms.Label();
             this.lblIntitulePP = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
-            this.epIntitulPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.clbRevenu = new System.Windows.Forms.CheckedListBox();
             this.grbRevenu = new System.Windows.Forms.GroupBox();
             this.lblMontantRevenu = new System.Windows.Forms.Label();
             this.txtMontantRevenu = new System.Windows.Forms.TextBox();
@@ -70,7 +69,14 @@
             this.lblBeneRevenu = new System.Windows.Forms.Label();
             this.lblPosteRevenu = new System.Windows.Forms.Label();
             this.cbbRevenu = new System.Windows.Forms.ComboBox();
-            this.clbRevenu = new System.Windows.Forms.CheckedListBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.epIntitulPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvRecap = new System.Windows.Forms.DataGridView();
+            this.grbChoix = new System.Windows.Forms.GroupBox();
+            this.rdbPF = new System.Windows.Forms.RadioButton();
+            this.rdbPP = new System.Windows.Forms.RadioButton();
+            this.rdbR = new System.Windows.Forms.RadioButton();
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
@@ -78,8 +84,11 @@
             this.groupBox1.SuspendLayout();
             this.grbEcheance.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).BeginInit();
             this.grbRevenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecap)).BeginInit();
+            this.grbChoix.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabBudgetPrevi
@@ -87,6 +96,7 @@
             this.tabBudgetPrevi.Controls.Add(this.tbpPF);
             this.tabBudgetPrevi.Controls.Add(this.tabPage2);
             this.tabBudgetPrevi.Controls.Add(this.tabPage3);
+            this.tabBudgetPrevi.Controls.Add(this.tabPage1);
             this.tabBudgetPrevi.Location = new System.Drawing.Point(14, 12);
             this.tabBudgetPrevi.Name = "tabBudgetPrevi";
             this.tabBudgetPrevi.SelectedIndex = 0;
@@ -378,18 +388,13 @@
             this.tabPage3.Text = "Revenu";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // clbRevenu
             // 
-            this.button4.Location = new System.Drawing.Point(783, 362);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(87, 23);
-            this.button4.TabIndex = 32;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // epIntitulPP
-            // 
-            this.epIntitulPP.ContainerControl = this;
+            this.clbRevenu.FormattingEnabled = true;
+            this.clbRevenu.Location = new System.Drawing.Point(488, 171);
+            this.clbRevenu.Name = "clbRevenu";
+            this.clbRevenu.Size = new System.Drawing.Size(233, 169);
+            this.clbRevenu.TabIndex = 42;
             // 
             // grbRevenu
             // 
@@ -480,13 +485,90 @@
             this.cbbRevenu.Size = new System.Drawing.Size(140, 21);
             this.cbbRevenu.TabIndex = 33;
             // 
-            // clbRevenu
+            // button4
             // 
-            this.clbRevenu.FormattingEnabled = true;
-            this.clbRevenu.Location = new System.Drawing.Point(488, 171);
-            this.clbRevenu.Name = "clbRevenu";
-            this.clbRevenu.Size = new System.Drawing.Size(233, 169);
-            this.clbRevenu.TabIndex = 42;
+            this.button4.Location = new System.Drawing.Point(783, 362);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(87, 23);
+            this.button4.TabIndex = 32;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // epIntitulPP
+            // 
+            this.epIntitulPP.ContainerControl = this;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.grbChoix);
+            this.tabPage1.Controls.Add(this.dgvRecap);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(750, 391);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Vue d\'ensemble";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvRecap
+            // 
+            this.dgvRecap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRecap.Location = new System.Drawing.Point(6, 84);
+            this.dgvRecap.Name = "dgvRecap";
+            this.dgvRecap.Size = new System.Drawing.Size(738, 301);
+            this.dgvRecap.TabIndex = 0;
+            // 
+            // grbChoix
+            // 
+            this.grbChoix.Controls.Add(this.rdbR);
+            this.grbChoix.Controls.Add(this.rdbPP);
+            this.grbChoix.Controls.Add(this.rdbPF);
+            this.grbChoix.Location = new System.Drawing.Point(6, 6);
+            this.grbChoix.Name = "grbChoix";
+            this.grbChoix.Size = new System.Drawing.Size(738, 72);
+            this.grbChoix.TabIndex = 1;
+            this.grbChoix.TabStop = false;
+            this.grbChoix.Tag = "PostePeriodique";
+            this.grbChoix.Text = "Choix des flux";
+            // 
+            // rdbPF
+            // 
+            this.rdbPF.AutoSize = true;
+            this.rdbPF.Location = new System.Drawing.Point(6, 31);
+            this.rdbPF.Name = "rdbPF";
+            this.rdbPF.Size = new System.Drawing.Size(86, 17);
+            this.rdbPF.TabIndex = 0;
+            this.rdbPF.TabStop = true;
+            this.rdbPF.Tag = "PostePeriodique";
+            this.rdbPF.Text = "postes fixe";
+            this.rdbPF.UseVisualStyleBackColor = true;
+            this.rdbPF.CheckedChanged += new System.EventHandler(this.rdbPF_CheckedChanged);
+            // 
+            // rdbPP
+            // 
+            this.rdbPP.AutoSize = true;
+            this.rdbPP.Location = new System.Drawing.Point(149, 31);
+            this.rdbPP.Name = "rdbPP";
+            this.rdbPP.Size = new System.Drawing.Size(115, 17);
+            this.rdbPP.TabIndex = 1;
+            this.rdbPP.TabStop = true;
+            this.rdbPP.Tag = "PostePonctuel";
+            this.rdbPP.Text = "postes ponctuel";
+            this.rdbPP.UseVisualStyleBackColor = true;
+            this.rdbPP.CheckedChanged += new System.EventHandler(this.rdbPF_CheckedChanged);
+            // 
+            // rdbR
+            // 
+            this.rdbR.AutoSize = true;
+            this.rdbR.Location = new System.Drawing.Point(340, 31);
+            this.rdbR.Name = "rdbR";
+            this.rdbR.Size = new System.Drawing.Size(70, 17);
+            this.rdbR.TabIndex = 2;
+            this.rdbR.TabStop = true;
+            this.rdbR.Tag = "PosteRevenu";
+            this.rdbR.Text = "revenus";
+            this.rdbR.UseVisualStyleBackColor = true;
+            this.rdbR.CheckedChanged += new System.EventHandler(this.rdbPF_CheckedChanged);
             // 
             // FrmBudgetPrevi
             // 
@@ -510,9 +592,13 @@
             this.grbEcheance.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).EndInit();
             this.grbRevenu.ResumeLayout(false);
             this.grbRevenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecap)).EndInit();
+            this.grbChoix.ResumeLayout(false);
+            this.grbChoix.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -561,5 +647,11 @@
         private System.Windows.Forms.Label lblPosteRevenu;
         private System.Windows.Forms.ComboBox cbbRevenu;
         private System.Windows.Forms.CheckedListBox clbRevenu;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.GroupBox grbChoix;
+        private System.Windows.Forms.RadioButton rdbR;
+        private System.Windows.Forms.RadioButton rdbPP;
+        private System.Windows.Forms.RadioButton rdbPF;
+        private System.Windows.Forms.DataGridView dgvRecap;
     }
 }

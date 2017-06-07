@@ -192,7 +192,7 @@ namespace PAD_Money
 
         private void btnValiderPP_Click(object sender, EventArgs e)
         {
-            //BDDUtil.ajouterPostePonctuel(txtIntitul.Text,txtDescription.Text,flpEcheance.Controls.Cast<PrelevementControl>().ToArray<PrelevementControl>());          
+            BDDUtil.ajouterPostePonctuel(txtIntitul.Text,txtCom.Text,flpEcheance.Controls.Cast<PrelevementControl>().ToArray<PrelevementControl>());          
         }
 
         private void tabBudgetPrevi_Selected(object sender, TabControlEventArgs e)
@@ -210,9 +210,129 @@ namespace PAD_Money
             {
                 if(((CheckBox)c).Checked)
                 {
-                    //BDDUtil.ajouterPosteRevenu(cbbRevenu.SelectedItem,int.Parse(lblMontantRevenu.Text),c.Text;
+                    BDDUtil.ajouterPosteRevenu(cbbRevenu.SelectedItem.ToString(),int.Parse(lblMontantRevenu.Text),BDDUtil.getCodeFromNames(new string[] { ((CheckBox)c).Text })[0]);
                 }
             }
+        }
+
+        private void rdbPF_CheckedChanged(object sender, EventArgs e)
+        {
+            if(((RadioButton)sender).Checked)
+            {
+                remplirDgv(((RadioButton)sender).Tag.ToString());
+            }
+        }
+
+        private void remplirDgv(string table)
+        {
+            DataTable res = new DataTable();
+            if(table == "PostePeriodique")
+            {
+                res.Columns.Add("Code");
+                res.Columns.Add("Description");
+                res.Columns.Add("Montant");
+                res.Columns.Add("Periodicite");
+
+                foreach(DataRow row in ds.Tables["PostePeriodique"].Rows)
+                {
+                    DataRow r = res.NewRow();
+                    r["Code"] = row["codePoste"];
+                    r["Description"] = getLibPoste(row["codePoste"].ToString());
+                    r["Montant"] = row["montant"];
+                    r["Periodicite"] = getLibPeriodicite(row["typePer"].ToString());
+                    res.Rows.Add(r);
+                }
+
+            }
+
+            else if(table == "PostePonctuel")
+            {
+                res.Columns.Add("Poste");
+                res.Columns.Add("Description");
+                res.Columns.Add("Echeances");
+                res.Columns.Add("Montant");
+                foreach (DataRow row in ds.Tables["PostePonctuel"].Rows)
+                {
+                    DataRow r = res.NewRow();
+                    r["Poste"] = row["codePoste"];
+                    r["Description"] = getLibPoste(row["codePoste"].ToString());
+                    r["Echeances"] = getNbEcheanceMontant(row["codePoste"].ToString())[0];
+                    r["Montant"] = getNbEcheanceMontant(row["codePoste"].ToString())[1];
+                    res.Rows.Add(r);
+                }
+
+            }
+
+            else if(table == "PosteRevenu")
+            {
+                res.Columns.Add("Poste");
+                res.Columns.Add("Description");
+                res.Columns.Add("Beneficiaire");
+                res.Columns.Add("Montant");
+                foreach (DataRow row in ds.Tables["PosteRevenu"].Rows)
+                {
+                    DataRow r = res.NewRow();
+                    r["Poste"] = row["codePoste"];
+                    r["Description"] = getLibPoste(row["codePoste"].ToString());
+                    r["Beneficaire"] = getBeneficaire(row["codePersonne"].ToString());
+                    r["Montant"] = row["montant"];
+                    res.Rows.Add(r);
+                }
+            }
+            dgvRecap.DataSource = res;
+        }
+        private string getLibPoste(string code)
+        {
+            string res = string.Empty;
+            foreach(DataRow r in ds.Tables["Poste"].Rows)
+            {
+                if(r["codePoste"].ToString() == code)
+                {
+                    res = r["libPoste"].ToString();
+                    break;
+                }
+            }
+            return res;
+        }
+
+        private string getLibPeriodicite(string typePer)
+        {
+            string res = string.Empty;
+            foreach(DataRow r in ds.Tables["Periodicite"].Rows)
+            {
+                if(r["codePer"].ToString() == typePer)
+                {
+                    res = r["libPer"].ToString();
+                }
+            }
+            return res;
+        }
+
+        private int[] getNbEcheanceMontant(string code)
+        {
+            int[] res = { 0, 0};
+            foreach(DataRow r in ds.Tables["Echeances"].Rows)
+            {
+                if(r["codePoste"].ToString() == code)
+                {
+                    res[0]++;
+                    res[1] += (int)r["montantEcheance"];
+                }
+            }
+            return res;
+        }
+
+        private string getBeneficaire(string codePers)
+        {
+            string res = string.Empty;
+            foreach(DataRow r in ds.Tables["Personne"].Rows)
+            {
+                if(r["codePersonne"].ToString() == codePers)
+                {
+                    res = r["nomPersonne"] + " " + r["pnPersonne"];
+                }
+            }
+            return res;
         }
     }
 }
