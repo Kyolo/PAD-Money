@@ -62,7 +62,7 @@ namespace PAD_Money
         private void txtKPress(object sender, KeyPressEventArgs args){
             TextBox txt = (TextBox)sender;
 
-            if((!(txt.Text.Contains(",")) && args.KeyChar == ',') || char.IsDigit(args.KeyChar)){
+            if((!(txt.Text.Contains(",")) && args.KeyChar == ',') || char.IsDigit(args.KeyChar) || char.IsControl(args.KeyChar)){
                 //S'il n'y a pas encore de ',' on n'empeche pas de le mettre
                 //Si c'est un chiffre on le rajoute aussi
                 txt.Text += args.KeyChar;

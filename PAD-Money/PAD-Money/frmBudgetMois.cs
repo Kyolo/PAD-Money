@@ -15,6 +15,7 @@ namespace PAD_Money
     {
         private OleDbConnection connec;
         DataSet ds;
+        DataTable transaction;
         public FrmBudgetMois(OleDbConnection connec, DataSet ds)
         {
             this.connec = connec;
@@ -22,22 +23,55 @@ namespace PAD_Money
             InitializeComponent();
             generationdyna();
             type();
+            codeTransa();
+            transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+           
+            //Onglet Supprimer à changer de place plus tard
+
+            lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
+            lblDescription2.Text = transaction.Rows[0]["description"].ToString();
+            lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
+            lblType2.Text = transaction.Rows[0]["type"].ToString();
+            if (transaction.Rows[0]["recetteON"].ToString() == "True")
+            {
+                lblRorP.Text = "Recette";
+            }
+            else lblRorP.Text = "Perçu";
+
+          
+
         }
 
+        //ajoute pas grand chose pour le moment mais ça viendra
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             String description = txtDescription.Text;
-            int montant = int.Parse(txtMontant.Text);
+            float montant = float.Parse(txtMontant.Text);
             DateTime depense = dtpDepense.Value;
-            String type = cbbType.Text;
+            String typeString = cbbType.Text;
+            DataTable Type = ds.Tables["TypeTransaction"].Select("upper (libtype) = upper(" + typeString + ")").CopyToDataTable();
+            long codeTypeLong = (long)Type.Rows[0]["codeType"];
             bool recette = true;
+            bool percu = true;
             if (cbPercu.Checked==true)
             {
-                recette = false;
+                percu = true;
+            }
+            if (cbRecette.Checked==true)
+            {
+                recette = true;
+            }
+            long[] listBenef;
+            for (int i=0; i<flpPersonne.Controls.Count; i++)
+            {
+                
             }
 
+            //BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong,   )
         }
 
+
+        // Permet de récuperer les types de transactions présents dans la base de donnée 
         private void type()
         {
             DataTable type = new DataTable();
@@ -47,7 +81,20 @@ namespace PAD_Money
             cbbType.ValueMember = "codeType";
         }
 
+        // Permet de récuperer le code de la transaction afin de pouvoir la modifier/ la supprimer
+        private void codeTransa()
+        {
+            DataTable code = ds.Tables["Transaction"];
+            cbbTransactionExistantes.DataSource = code;
+            cbbTransactionExistantes.DisplayMember = "codeTransaction";
+            cbbTransactionExistantes.ValueMember = "codeTransaction";
+            cbbChoixtransacModif.DataSource = code;
+            cbbChoixtransacModif.DisplayMember = "codeTransaction";
+            cbbChoixtransacModif.ValueMember = "codeTransaction";
+        }
 
+
+        //Generation dynamique despnj de la famille
         private void generationdyna()
         {
             int x = 623;
@@ -64,6 +111,25 @@ namespace PAD_Money
                 flpPersonne.Controls.Add(nom);
                 y += 20;
             }
+        }
+
+
+        //inutile, je supprimerai plus tard
+        private void TabAjout_Selecting(object sender, TabControlCancelEventArgs e){}
+
+        //inutile, je supprimerai plus tard
+        private void lblDate2_Click(object sender, EventArgs e) {}
+
+
+        //Onglet "modifier", recuperation des données de la table
+        private void cbbChoixtransacModif_SelectedValueChanged(object sender, EventArgs e)
+        {
+            transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+            txbDescriptionModif.Text = (transaction.Rows[0]["description"]).ToString();
+            txbMontantModif.Text = transaction.Rows[0]["montant"].ToString();
+            cbbTypeModif.Text = transaction.Rows[0]["type"].ToString();
+            cbPercuModif.Checked = (bool)transaction.Rows[0]["PercuON"];
+            cbRecuModif.Checked = (bool)transaction.Rows[0]["recetteON"];
         }
     }
 }

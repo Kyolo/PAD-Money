@@ -31,6 +31,8 @@
             this.TabAjout = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.TabTransac = new System.Windows.Forms.TabPage();
+            this.btnAjouterType = new System.Windows.Forms.Button();
+            this.flpPersonne = new System.Windows.Forms.FlowLayoutPanel();
             this.lblType = new System.Windows.Forms.Label();
             this.dtpDepense = new System.Windows.Forms.DateTimePicker();
             this.txtMontant = new System.Windows.Forms.TextBox();
@@ -43,36 +45,64 @@
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.cbbType = new System.Windows.Forms.ComboBox();
-            this.cbbDatedep = new System.Windows.Forms.ComboBox();
             this.tabSuppression = new System.Windows.Forms.TabPage();
+            this.lblRorP = new System.Windows.Forms.Label();
+            this.lblType2 = new System.Windows.Forms.Label();
+            this.lblMontant2 = new System.Windows.Forms.Label();
+            this.lblDescription2 = new System.Windows.Forms.Label();
+            this.lblDate2 = new System.Windows.Forms.Label();
+            this.btnSupp = new System.Windows.Forms.Button();
+            this.cbbTransactionExistantes = new System.Windows.Forms.ComboBox();
             this.TabModif = new System.Windows.Forms.TabPage();
+            this.cbbChoixtransacModif = new System.Windows.Forms.ComboBox();
+            this.btnAjouterInModif = new System.Windows.Forms.Button();
+            this.flpListePersonneInModif = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblTyp = new System.Windows.Forms.Label();
+            this.dtmDateModif = new System.Windows.Forms.DateTimePicker();
+            this.txbMontantModif = new System.Windows.Forms.TextBox();
+            this.txbDescriptionModif = new System.Windows.Forms.TextBox();
+            this.btnModifier = new System.Windows.Forms.Button();
+            this.btnAjouterPersonneInModif = new System.Windows.Forms.Button();
+            this.lblMont = new System.Windows.Forms.Label();
+            this.lblDesc = new System.Windows.Forms.Label();
+            this.lblDatedep = new System.Windows.Forms.Label();
+            this.cbbTypeModif = new System.Windows.Forms.ComboBox();
             this.TabRecapitulatif = new System.Windows.Forms.TabPage();
-            this.flpPersonne = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbRecuModif = new System.Windows.Forms.CheckBox();
+            this.cbPercuModif = new System.Windows.Forms.CheckBox();
+            this.btnPDF = new System.Windows.Forms.Button();
+            this.cbbChoixPeriode = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.TabAjout.SuspendLayout();
             this.TabTransac.SuspendLayout();
+            this.tabSuppression.SuspendLayout();
+            this.TabModif.SuspendLayout();
+            this.TabRecapitulatif.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabAjout
             // 
+            this.TabAjout.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.TabAjout.Controls.Add(this.tabPage1);
             this.TabAjout.Controls.Add(this.TabTransac);
             this.TabAjout.Controls.Add(this.tabSuppression);
             this.TabAjout.Controls.Add(this.TabModif);
             this.TabAjout.Controls.Add(this.TabRecapitulatif);
             this.TabAjout.Location = new System.Drawing.Point(-2, 1);
-            this.TabAjout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TabAjout.Margin = new System.Windows.Forms.Padding(4);
             this.TabAjout.Name = "TabAjout";
             this.TabAjout.SelectedIndex = 0;
             this.TabAjout.Size = new System.Drawing.Size(1577, 632);
             this.TabAjout.TabIndex = 0;
+            this.TabAjout.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabAjout_Selecting);
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1551, 589);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1569, 600);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Affichage 1 à 1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -80,6 +110,7 @@
             // TabTransac
             // 
             this.TabTransac.BackColor = System.Drawing.Color.DarkGreen;
+            this.TabTransac.Controls.Add(this.btnAjouterType);
             this.TabTransac.Controls.Add(this.flpPersonne);
             this.TabTransac.Controls.Add(this.lblType);
             this.TabTransac.Controls.Add(this.dtpDepense);
@@ -93,14 +124,30 @@
             this.TabTransac.Controls.Add(this.lblDescription);
             this.TabTransac.Controls.Add(this.lblDate);
             this.TabTransac.Controls.Add(this.cbbType);
-            this.TabTransac.Controls.Add(this.cbbDatedep);
-            this.TabTransac.Location = new System.Drawing.Point(4, 25);
-            this.TabTransac.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TabTransac.Location = new System.Drawing.Point(4, 28);
+            this.TabTransac.Margin = new System.Windows.Forms.Padding(4);
             this.TabTransac.Name = "TabTransac";
-            this.TabTransac.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TabTransac.Size = new System.Drawing.Size(1569, 603);
+            this.TabTransac.Padding = new System.Windows.Forms.Padding(4);
+            this.TabTransac.Size = new System.Drawing.Size(1569, 600);
             this.TabTransac.TabIndex = 1;
             this.TabTransac.Text = "Ajout d\'une transaction";
+            // 
+            // btnAjouterType
+            // 
+            this.btnAjouterType.Location = new System.Drawing.Point(543, 127);
+            this.btnAjouterType.Name = "btnAjouterType";
+            this.btnAjouterType.Size = new System.Drawing.Size(75, 23);
+            this.btnAjouterType.TabIndex = 15;
+            this.btnAjouterType.Text = "ajouter";
+            this.btnAjouterType.UseVisualStyleBackColor = true;
+            // 
+            // flpPersonne
+            // 
+            this.flpPersonne.AutoScroll = true;
+            this.flpPersonne.Location = new System.Drawing.Point(750, 67);
+            this.flpPersonne.Name = "flpPersonne";
+            this.flpPersonne.Size = new System.Drawing.Size(229, 100);
+            this.flpPersonne.TabIndex = 14;
             // 
             // lblType
             // 
@@ -115,7 +162,7 @@
             // dtpDepense
             // 
             this.dtpDepense.Location = new System.Drawing.Point(252, 36);
-            this.dtpDepense.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDepense.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDepense.Name = "dtpDepense";
             this.dtpDepense.Size = new System.Drawing.Size(270, 22);
             this.dtpDepense.TabIndex = 12;
@@ -123,7 +170,7 @@
             // txtMontant
             // 
             this.txtMontant.Location = new System.Drawing.Point(252, 96);
-            this.txtMontant.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMontant.Margin = new System.Windows.Forms.Padding(4);
             this.txtMontant.Name = "txtMontant";
             this.txtMontant.Size = new System.Drawing.Size(270, 22);
             this.txtMontant.TabIndex = 11;
@@ -131,16 +178,17 @@
             // txtDescription
             // 
             this.txtDescription.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDescription.Location = new System.Drawing.Point(252, 66);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(270, 22);
+            this.txtDescription.Size = new System.Drawing.Size(270, 15);
             this.txtDescription.TabIndex = 10;
             // 
             // btnAjouter
             // 
             this.btnAjouter.Location = new System.Drawing.Point(27, 299);
-            this.btnAjouter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAjouter.Margin = new System.Windows.Forms.Padding(4);
             this.btnAjouter.Name = "btnAjouter";
             this.btnAjouter.Size = new System.Drawing.Size(100, 28);
             this.btnAjouter.TabIndex = 9;
@@ -151,7 +199,7 @@
             // btnAjouterPers
             // 
             this.btnAjouterPers.Location = new System.Drawing.Point(1013, 73);
-            this.btnAjouterPers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAjouterPers.Margin = new System.Windows.Forms.Padding(4);
             this.btnAjouterPers.Name = "btnAjouterPers";
             this.btnAjouterPers.Size = new System.Drawing.Size(248, 77);
             this.btnAjouterPers.TabIndex = 8;
@@ -162,7 +210,7 @@
             // 
             this.cbPercu.AutoSize = true;
             this.cbPercu.Location = new System.Drawing.Point(187, 186);
-            this.cbPercu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbPercu.Margin = new System.Windows.Forms.Padding(4);
             this.cbPercu.Name = "cbPercu";
             this.cbPercu.Size = new System.Drawing.Size(67, 21);
             this.cbPercu.TabIndex = 7;
@@ -173,7 +221,7 @@
             // 
             this.cbRecette.AutoSize = true;
             this.cbRecette.Location = new System.Drawing.Point(24, 186);
-            this.cbRecette.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbRecette.Margin = new System.Windows.Forms.Padding(4);
             this.cbRecette.Name = "cbRecette";
             this.cbRecette.Size = new System.Drawing.Size(79, 21);
             this.cbRecette.TabIndex = 6;
@@ -214,60 +262,296 @@
             // 
             this.cbbType.FormattingEnabled = true;
             this.cbbType.Location = new System.Drawing.Point(252, 126);
-            this.cbbType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbType.Margin = new System.Windows.Forms.Padding(4);
             this.cbbType.Name = "cbbType";
             this.cbbType.Size = new System.Drawing.Size(270, 24);
             this.cbbType.TabIndex = 1;
             // 
-            // cbbDatedep
-            // 
-            this.cbbDatedep.FormattingEnabled = true;
-            this.cbbDatedep.Location = new System.Drawing.Point(865, 390);
-            this.cbbDatedep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbbDatedep.Name = "cbbDatedep";
-            this.cbbDatedep.Size = new System.Drawing.Size(243, 24);
-            this.cbbDatedep.TabIndex = 0;
-            // 
             // tabSuppression
             // 
-            this.tabSuppression.Location = new System.Drawing.Point(4, 25);
-            this.tabSuppression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSuppression.Controls.Add(this.lblRorP);
+            this.tabSuppression.Controls.Add(this.lblType2);
+            this.tabSuppression.Controls.Add(this.lblMontant2);
+            this.tabSuppression.Controls.Add(this.lblDescription2);
+            this.tabSuppression.Controls.Add(this.lblDate2);
+            this.tabSuppression.Controls.Add(this.btnSupp);
+            this.tabSuppression.Controls.Add(this.cbbTransactionExistantes);
+            this.tabSuppression.Location = new System.Drawing.Point(4, 28);
+            this.tabSuppression.Margin = new System.Windows.Forms.Padding(4);
             this.tabSuppression.Name = "tabSuppression";
-            this.tabSuppression.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabSuppression.Size = new System.Drawing.Size(1551, 589);
+            this.tabSuppression.Padding = new System.Windows.Forms.Padding(4);
+            this.tabSuppression.Size = new System.Drawing.Size(1569, 600);
             this.tabSuppression.TabIndex = 2;
             this.tabSuppression.Text = "Suppression d\'une transaction";
             this.tabSuppression.UseVisualStyleBackColor = true;
             // 
+            // lblRorP
+            // 
+            this.lblRorP.AutoSize = true;
+            this.lblRorP.Location = new System.Drawing.Point(132, 357);
+            this.lblRorP.Name = "lblRorP";
+            this.lblRorP.Size = new System.Drawing.Size(46, 17);
+            this.lblRorP.TabIndex = 6;
+            this.lblRorP.Text = "label1";
+            // 
+            // lblType2
+            // 
+            this.lblType2.AutoSize = true;
+            this.lblType2.Location = new System.Drawing.Point(132, 302);
+            this.lblType2.Name = "lblType2";
+            this.lblType2.Size = new System.Drawing.Size(46, 17);
+            this.lblType2.TabIndex = 5;
+            this.lblType2.Text = "label4";
+            // 
+            // lblMontant2
+            // 
+            this.lblMontant2.AutoSize = true;
+            this.lblMontant2.Location = new System.Drawing.Point(132, 256);
+            this.lblMontant2.Name = "lblMontant2";
+            this.lblMontant2.Size = new System.Drawing.Size(46, 17);
+            this.lblMontant2.TabIndex = 4;
+            this.lblMontant2.Text = "label3";
+            // 
+            // lblDescription2
+            // 
+            this.lblDescription2.AutoSize = true;
+            this.lblDescription2.Location = new System.Drawing.Point(132, 206);
+            this.lblDescription2.Name = "lblDescription2";
+            this.lblDescription2.Size = new System.Drawing.Size(46, 17);
+            this.lblDescription2.TabIndex = 3;
+            this.lblDescription2.Text = "label2";
+            // 
+            // lblDate2
+            // 
+            this.lblDate2.AutoSize = true;
+            this.lblDate2.Location = new System.Drawing.Point(132, 162);
+            this.lblDate2.Name = "lblDate2";
+            this.lblDate2.Size = new System.Drawing.Size(46, 17);
+            this.lblDate2.TabIndex = 2;
+            this.lblDate2.Text = "label1";
+            this.lblDate2.Click += new System.EventHandler(this.lblDate2_Click);
+            // 
+            // btnSupp
+            // 
+            this.btnSupp.Location = new System.Drawing.Point(566, 410);
+            this.btnSupp.Name = "btnSupp";
+            this.btnSupp.Size = new System.Drawing.Size(109, 52);
+            this.btnSupp.TabIndex = 1;
+            this.btnSupp.Text = "Supprimer";
+            this.btnSupp.UseVisualStyleBackColor = true;
+            // 
+            // cbbTransactionExistantes
+            // 
+            this.cbbTransactionExistantes.FormattingEnabled = true;
+            this.cbbTransactionExistantes.Location = new System.Drawing.Point(135, 73);
+            this.cbbTransactionExistantes.Name = "cbbTransactionExistantes";
+            this.cbbTransactionExistantes.Size = new System.Drawing.Size(208, 24);
+            this.cbbTransactionExistantes.TabIndex = 0;
+            // 
             // TabModif
             // 
-            this.TabModif.Location = new System.Drawing.Point(4, 25);
-            this.TabModif.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TabModif.Controls.Add(this.cbPercuModif);
+            this.TabModif.Controls.Add(this.cbRecuModif);
+            this.TabModif.Controls.Add(this.cbbChoixtransacModif);
+            this.TabModif.Controls.Add(this.btnAjouterInModif);
+            this.TabModif.Controls.Add(this.flpListePersonneInModif);
+            this.TabModif.Controls.Add(this.lblTyp);
+            this.TabModif.Controls.Add(this.dtmDateModif);
+            this.TabModif.Controls.Add(this.txbMontantModif);
+            this.TabModif.Controls.Add(this.txbDescriptionModif);
+            this.TabModif.Controls.Add(this.btnModifier);
+            this.TabModif.Controls.Add(this.btnAjouterPersonneInModif);
+            this.TabModif.Controls.Add(this.lblMont);
+            this.TabModif.Controls.Add(this.lblDesc);
+            this.TabModif.Controls.Add(this.lblDatedep);
+            this.TabModif.Controls.Add(this.cbbTypeModif);
+            this.TabModif.Location = new System.Drawing.Point(4, 28);
+            this.TabModif.Margin = new System.Windows.Forms.Padding(4);
             this.TabModif.Name = "TabModif";
-            this.TabModif.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TabModif.Size = new System.Drawing.Size(1551, 589);
+            this.TabModif.Padding = new System.Windows.Forms.Padding(4);
+            this.TabModif.Size = new System.Drawing.Size(1569, 600);
             this.TabModif.TabIndex = 3;
             this.TabModif.Text = "Modification d\'une transaction";
             this.TabModif.UseVisualStyleBackColor = true;
             // 
+            // cbbChoixtransacModif
+            // 
+            this.cbbChoixtransacModif.FormattingEnabled = true;
+            this.cbbChoixtransacModif.Location = new System.Drawing.Point(105, 37);
+            this.cbbChoixtransacModif.Name = "cbbChoixtransacModif";
+            this.cbbChoixtransacModif.Size = new System.Drawing.Size(208, 24);
+            this.cbbChoixtransacModif.TabIndex = 30;
+            this.cbbChoixtransacModif.SelectedValueChanged += new System.EventHandler(this.cbbChoixtransacModif_SelectedValueChanged);
+            // 
+            // btnAjouterInModif
+            // 
+            this.btnAjouterInModif.Location = new System.Drawing.Point(544, 190);
+            this.btnAjouterInModif.Name = "btnAjouterInModif";
+            this.btnAjouterInModif.Size = new System.Drawing.Size(75, 23);
+            this.btnAjouterInModif.TabIndex = 29;
+            this.btnAjouterInModif.Text = "ajouter";
+            this.btnAjouterInModif.UseVisualStyleBackColor = true;
+            // 
+            // flpListePersonneInModif
+            // 
+            this.flpListePersonneInModif.AutoScroll = true;
+            this.flpListePersonneInModif.Location = new System.Drawing.Point(751, 130);
+            this.flpListePersonneInModif.Name = "flpListePersonneInModif";
+            this.flpListePersonneInModif.Size = new System.Drawing.Size(229, 100);
+            this.flpListePersonneInModif.TabIndex = 28;
+            // 
+            // lblTyp
+            // 
+            this.lblTyp.AutoSize = true;
+            this.lblTyp.Location = new System.Drawing.Point(25, 189);
+            this.lblTyp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTyp.Name = "lblTyp";
+            this.lblTyp.Size = new System.Drawing.Size(40, 17);
+            this.lblTyp.TabIndex = 27;
+            this.lblTyp.Text = "Type";
+            // 
+            // dtmDateModif
+            // 
+            this.dtmDateModif.Location = new System.Drawing.Point(253, 99);
+            this.dtmDateModif.Margin = new System.Windows.Forms.Padding(4);
+            this.dtmDateModif.Name = "dtmDateModif";
+            this.dtmDateModif.Size = new System.Drawing.Size(270, 22);
+            this.dtmDateModif.TabIndex = 26;
+            // 
+            // txbMontantModif
+            // 
+            this.txbMontantModif.Location = new System.Drawing.Point(253, 159);
+            this.txbMontantModif.Margin = new System.Windows.Forms.Padding(4);
+            this.txbMontantModif.Name = "txbMontantModif";
+            this.txbMontantModif.Size = new System.Drawing.Size(270, 22);
+            this.txbMontantModif.TabIndex = 25;
+            // 
+            // txbDescriptionModif
+            // 
+            this.txbDescriptionModif.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.txbDescriptionModif.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txbDescriptionModif.Location = new System.Drawing.Point(253, 129);
+            this.txbDescriptionModif.Margin = new System.Windows.Forms.Padding(4);
+            this.txbDescriptionModif.Name = "txbDescriptionModif";
+            this.txbDescriptionModif.Size = new System.Drawing.Size(270, 15);
+            this.txbDescriptionModif.TabIndex = 24;
+            // 
+            // btnModifier
+            // 
+            this.btnModifier.Location = new System.Drawing.Point(28, 362);
+            this.btnModifier.Margin = new System.Windows.Forms.Padding(4);
+            this.btnModifier.Name = "btnModifier";
+            this.btnModifier.Size = new System.Drawing.Size(100, 28);
+            this.btnModifier.TabIndex = 23;
+            this.btnModifier.Text = "Modifier";
+            this.btnModifier.UseVisualStyleBackColor = true;
+            // 
+            // btnAjouterPersonneInModif
+            // 
+            this.btnAjouterPersonneInModif.Location = new System.Drawing.Point(1014, 136);
+            this.btnAjouterPersonneInModif.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAjouterPersonneInModif.Name = "btnAjouterPersonneInModif";
+            this.btnAjouterPersonneInModif.Size = new System.Drawing.Size(248, 77);
+            this.btnAjouterPersonneInModif.TabIndex = 22;
+            this.btnAjouterPersonneInModif.Text = "Ajouter une personne";
+            this.btnAjouterPersonneInModif.UseVisualStyleBackColor = true;
+            // 
+            // lblMont
+            // 
+            this.lblMont.AutoSize = true;
+            this.lblMont.Location = new System.Drawing.Point(25, 159);
+            this.lblMont.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMont.Name = "lblMont";
+            this.lblMont.Size = new System.Drawing.Size(59, 17);
+            this.lblMont.TabIndex = 19;
+            this.lblMont.Text = "Montant";
+            // 
+            // lblDesc
+            // 
+            this.lblDesc.AutoSize = true;
+            this.lblDesc.Location = new System.Drawing.Point(25, 134);
+            this.lblDesc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Size = new System.Drawing.Size(79, 17);
+            this.lblDesc.TabIndex = 18;
+            this.lblDesc.Text = "Description";
+            // 
+            // lblDatedep
+            // 
+            this.lblDatedep.AutoSize = true;
+            this.lblDatedep.Location = new System.Drawing.Point(25, 104);
+            this.lblDatedep.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDatedep.Name = "lblDatedep";
+            this.lblDatedep.Size = new System.Drawing.Size(132, 17);
+            this.lblDatedep.TabIndex = 17;
+            this.lblDatedep.Text = "Date de la dépense";
+            // 
+            // cbbTypeModif
+            // 
+            this.cbbTypeModif.FormattingEnabled = true;
+            this.cbbTypeModif.Location = new System.Drawing.Point(253, 189);
+            this.cbbTypeModif.Margin = new System.Windows.Forms.Padding(4);
+            this.cbbTypeModif.Name = "cbbTypeModif";
+            this.cbbTypeModif.Size = new System.Drawing.Size(270, 24);
+            this.cbbTypeModif.TabIndex = 16;
+            // 
             // TabRecapitulatif
             // 
-            this.TabRecapitulatif.Location = new System.Drawing.Point(4, 25);
-            this.TabRecapitulatif.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TabRecapitulatif.Controls.Add(this.dateTimePicker1);
+            this.TabRecapitulatif.Controls.Add(this.cbbChoixPeriode);
+            this.TabRecapitulatif.Controls.Add(this.btnPDF);
+            this.TabRecapitulatif.Location = new System.Drawing.Point(4, 28);
+            this.TabRecapitulatif.Margin = new System.Windows.Forms.Padding(4);
             this.TabRecapitulatif.Name = "TabRecapitulatif";
-            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TabRecapitulatif.Size = new System.Drawing.Size(1551, 589);
+            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(4);
+            this.TabRecapitulatif.Size = new System.Drawing.Size(1569, 600);
             this.TabRecapitulatif.TabIndex = 4;
             this.TabRecapitulatif.Text = "Récapitulatif";
             this.TabRecapitulatif.UseVisualStyleBackColor = true;
             // 
-            // flpPersonne
+            // cbRecuModif
             // 
-            this.flpPersonne.AutoScroll = true;
-            this.flpPersonne.Location = new System.Drawing.Point(750, 67);
-            this.flpPersonne.Name = "flpPersonne";
-            this.flpPersonne.Size = new System.Drawing.Size(229, 100);
-            this.flpPersonne.TabIndex = 14;
+            this.cbRecuModif.AutoSize = true;
+            this.cbRecuModif.Location = new System.Drawing.Point(28, 263);
+            this.cbRecuModif.Name = "cbRecuModif";
+            this.cbRecuModif.Size = new System.Drawing.Size(63, 21);
+            this.cbRecuModif.TabIndex = 31;
+            this.cbRecuModif.Text = "Reçu";
+            this.cbRecuModif.UseVisualStyleBackColor = true;
+            // 
+            // cbPercuModif
+            // 
+            this.cbPercuModif.AutoSize = true;
+            this.cbPercuModif.Location = new System.Drawing.Point(176, 263);
+            this.cbPercuModif.Name = "cbPercuModif";
+            this.cbPercuModif.Size = new System.Drawing.Size(67, 21);
+            this.cbPercuModif.TabIndex = 32;
+            this.cbPercuModif.Text = "Perçu";
+            this.cbPercuModif.UseVisualStyleBackColor = true;
+            // 
+            // btnPDF
+            // 
+            this.btnPDF.Location = new System.Drawing.Point(751, 344);
+            this.btnPDF.Name = "btnPDF";
+            this.btnPDF.Size = new System.Drawing.Size(225, 76);
+            this.btnPDF.TabIndex = 0;
+            this.btnPDF.Text = "Créer le PFD";
+            this.btnPDF.UseVisualStyleBackColor = true;
+            // 
+            // cbbChoixPeriode
+            // 
+            this.cbbChoixPeriode.FormattingEnabled = true;
+            this.cbbChoixPeriode.Location = new System.Drawing.Point(200, 73);
+            this.cbbChoixPeriode.Name = "cbbChoixPeriode";
+            this.cbbChoixPeriode.Size = new System.Drawing.Size(198, 24);
+            this.cbbChoixPeriode.TabIndex = 1;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(29, 25);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 2;
             // 
             // FrmBudgetMois
             // 
@@ -281,6 +565,11 @@
             this.TabAjout.ResumeLayout(false);
             this.TabTransac.ResumeLayout(false);
             this.TabTransac.PerformLayout();
+            this.tabSuppression.ResumeLayout(false);
+            this.tabSuppression.PerformLayout();
+            this.TabModif.ResumeLayout(false);
+            this.TabModif.PerformLayout();
+            this.TabRecapitulatif.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -297,7 +586,6 @@
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.ComboBox cbbType;
-        private System.Windows.Forms.ComboBox cbbDatedep;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnAjouterPers;
         private System.Windows.Forms.TextBox txtMontant;
@@ -307,5 +595,31 @@
         private System.Windows.Forms.CheckBox cbPercu;
         private System.Windows.Forms.CheckBox cbRecette;
         private System.Windows.Forms.FlowLayoutPanel flpPersonne;
+        private System.Windows.Forms.Button btnAjouterType;
+        private System.Windows.Forms.ComboBox cbbTransactionExistantes;
+        private System.Windows.Forms.Button btnSupp;
+        private System.Windows.Forms.Label lblType2;
+        private System.Windows.Forms.Label lblMontant2;
+        private System.Windows.Forms.Label lblDescription2;
+        private System.Windows.Forms.Label lblDate2;
+        private System.Windows.Forms.Label lblRorP;
+        private System.Windows.Forms.ComboBox cbbChoixtransacModif;
+        private System.Windows.Forms.Button btnAjouterInModif;
+        private System.Windows.Forms.FlowLayoutPanel flpListePersonneInModif;
+        private System.Windows.Forms.Label lblTyp;
+        private System.Windows.Forms.DateTimePicker dtmDateModif;
+        private System.Windows.Forms.TextBox txbMontantModif;
+        private System.Windows.Forms.TextBox txbDescriptionModif;
+        private System.Windows.Forms.Button btnModifier;
+        private System.Windows.Forms.Button btnAjouterPersonneInModif;
+        private System.Windows.Forms.Label lblMont;
+        private System.Windows.Forms.Label lblDesc;
+        private System.Windows.Forms.Label lblDatedep;
+        private System.Windows.Forms.ComboBox cbbTypeModif;
+        private System.Windows.Forms.CheckBox cbPercuModif;
+        private System.Windows.Forms.CheckBox cbRecuModif;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox cbbChoixPeriode;
+        private System.Windows.Forms.Button btnPDF;
     }
 }
