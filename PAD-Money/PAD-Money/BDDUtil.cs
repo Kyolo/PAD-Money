@@ -178,7 +178,7 @@ namespace PAD_Money
             return retLoc | remLoc;
         }
 
-        public static int removeLineLoc(String table, String kname1, String kname2, object val1, object val2){
+        private static int removeLineLoc(String table, String kname1, String kname2, object val1, object val2){
             
             DataRowCollection rows = ds.Tables[table].Rows;
 
@@ -207,7 +207,7 @@ namespace PAD_Money
 
         }
 
-        public static int removeLineRem(String table, String kname1, String kname2, object val1, object val2){
+        private static int removeLineRem(String table, String kname1, String kname2, object val1, object val2){
             //On utilise une variable pour ne pas quitter au beau milieu des blocs catch
             int resultat = REMOTE_SUCCES;
 
