@@ -35,6 +35,29 @@ namespace PAD_Money
             BDDUtil.ds = ds;
         }
 
+        private static String objectToStringRep(object val){
+            String d = "";
+
+            //On gère des types particuliers
+            if(val == null){
+                //Si la valeur est nulle, on le met comme tel
+                d = "NULL";
+            } else if(val.GetType().Equals(typeof(DateTime))){
+                //La date parce qu'il faut rajouter des # avant et après
+                DateTime time = (DateTime)val;
+                d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
+            } else if(val.GetType().Equals(typeof(String))){
+                //Les chaines de caractères car elles doivent êtres entre '
+                d = "'"+val.ToString()+"'";
+            }else {
+                //Pour le reste des types disponibles (entiers, flottants, etc...)
+                //On les affiches de manière brute
+                d = val.ToString();
+            }
+
+            return d;
+        }
+
         public static int addLine(String table, params object[] data){
 
             //Maintenant le but est de convertir la liste data en datarow
@@ -102,23 +125,7 @@ namespace PAD_Money
 
                 for(int i = 0; i < col.Count; i++){
                     String name = "["+col[i].ColumnName+"], ";
-                    String d = "";
-                    //On gère des types particuliers
-                    if(rawdata[i] == null){
-                        //Si la valeur est nulle, on le met comme tel
-                        d = "NULL";
-                    } else if(rawdata[i].GetType().Equals(typeof(DateTime))){
-                        //La date parce qu'il faut rajouter des # avant et après
-                        DateTime time = (DateTime)rawdata[i];
-                        d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
-                    } else if(rawdata[i].GetType().Equals(typeof(String))){
-                        //Les chaines de caractères car elles doivent êtres entre '
-                        d = "'"+rawdata[i].ToString()+"'";
-                    }else {
-                        //Pour le reste des types disponibles (entiers, flottants, etc...)
-                        //On les affiches de manière brute
-                        d = rawdata[i].ToString();
-                    }
+                    String d = objectToStringRep(rawdata[i]);
 
                     commLeft.Append(name);
                     commRight.Append(d+", ");
@@ -273,6 +280,80 @@ namespace PAD_Money
             return resultat;
         }
 
+        public static int modifyLine(String table, String keyname, object keyval, Dictionary<String, object> values){
+            int modLoc = modifyLineLoc(table, keyname, keyval, values);
+            return modLoc | modifyLineRem(table, keyname, keyval, values);
+        }
+
+        private static int modifyLineLoc(String table, String keyname, object keyval, Dictionary<String, object> values){
+            DataRowCollection collec = ds.Tables[table].Rows;
+            
+            try{
+                foreach(DataRow row in collec){
+                    if(row[keyname].Equals(keyval)){
+                        foreach(KeyValuePair<String, object> kv in values){
+                            row[kv.Key]=values;
+                        }
+                    }
+                }
+            } catch {
+                return LOCAL_ERROR;
+            }
+
+            return LOCAL_SUCCES;
+        }
+
+        private static int modifyLineRem(String table, String keyname, object keyval, Dictionary<String, object> values){
+            //On utilise une variable pour ne pas quitter au beau milieu des blocs catch
+            int resultat = REMOTE_SUCCES;
+
+            try {
+                connec.Open();
+
+                OleDbCommand comm = connec.CreateCommand();
+                //pas besoin d'indiquer le type par défaut puisque c'est text et c'est ce qu'on veut
+                
+                //On crée des StringBuilder pour travailler facilements sur la commande
+                StringBuilder commSet = new StringBuilder().Append("UPDATE ["+table+"] SET ");
+                
+
+                foreach(KeyValuePair<String, object> kv in values){
+                    commSet.Append(kv.Key);
+                    String v = objectToStringRep(kv.Value);
+                    commSet.Append(v.Equals("NULL") ? " IS " : " = ").Append(v).Append(", ");
+                }
+
+                //On vire la dernière virgule et on ferme les paranthèse
+                commSet.Remove(commSet.Length -2, 2);
+                // commRight.Remove(commRight.Length -2, 2).Append(") ");
+
+                //Et on stocke la commande dans le OleDbCommand
+                String condVal = objectToStringRep(keyval);
+                comm.CommandText = commSet.ToString() + " WHERE "+keyname+(condVal.Equals("NULL") ? " IS " : " = ")+condVal;
+
+                //Et maintenant qu'on a notre commande on peut l'éxécuter !
+                int reqRes = comm.ExecuteNonQuery();
+                
+                //En théorie une insertion ne modifie qu'une ligne, donc ça renvoie qqch de différent ssi il y a un problème
+                if(reqRes != 1)
+                    resultat = REMOTE_SQL_ERROR;
+            
+
+            } catch (InvalidOperationException) {
+                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+                //Donc on renvoie le message d'ereur approrié
+                resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException) {
+
+                resultat = REMOTE_SQL_ERROR;
+            } finally {
+                if(connec.State == ConnectionState.Open)
+                    connec.Close();
+            }
+
+            return resultat;
+
+        }   
 
 
         //Methode utilitaires de gestion d'ajout :
