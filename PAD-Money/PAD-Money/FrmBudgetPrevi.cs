@@ -15,6 +15,8 @@ namespace PAD_Money
     {
         private OleDbConnection connec;
         private DataSet ds;
+        private DataRow dr;
+        private string currentTag;
 
         public FrmBudgetPrevi(OleDbConnection connec, DataSet ds)
         {
@@ -52,7 +54,7 @@ namespace PAD_Money
 
         private void remplirClbRevenu()
         {
-            clbRevenu.Controls.Clear();
+            clbRevenu.Items.Clear();
             DataTable table = new DataTable();
             table = ds.Tables["Personne"];
             foreach(DataRow row in table.Rows)
@@ -219,7 +221,8 @@ namespace PAD_Money
         {
             if(((RadioButton)sender).Checked)
             {
-                remplirDgv(((RadioButton)sender).Tag.ToString());
+                currentTag = ((RadioButton)sender).Tag.ToString();
+                remplirDgv(currentTag);
             }
         }
 
@@ -230,8 +233,8 @@ namespace PAD_Money
             {
                 res.Columns.Add("Code");
                 res.Columns.Add("Description");
-                res.Columns.Add("Montant");
                 res.Columns.Add("Periodicite");
+                res.Columns.Add("Montant");
 
                 foreach(DataRow row in ds.Tables["PostePeriodique"].Rows)
                 {
@@ -281,6 +284,7 @@ namespace PAD_Money
             }
             dgvRecap.DataSource = res;
         }
+
         private string getLibPoste(string code)
         {
             string res = string.Empty;
@@ -333,6 +337,55 @@ namespace PAD_Money
                 }
             }
             return res;
+        }
+
+        private void dgvRecap_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != dgvRecap.RowCount-1)
+            {
+                DataRowView currentDataRowView = (DataRowView)dgvRecap.CurrentRow.DataBoundItem;
+                DataRow row = currentDataRowView.Row;
+                if (rdbPF.Checked || rdbR.Checked)
+                {
+                    dgvRecap.ContextMenuStrip = cms;
+                    cms.Show(dgvRecap.PointToClient(Cursor.Position));
+                }
+                dr = row;
+            }           
+        }
+
+        private void cms_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(e.ClickedItem.Text == "Modifier")
+            {
+                frmModifier frm;
+                if (rdbPF.Checked)
+                {
+                    frm = new frmModifier(ds, false, dr);
+                }
+                else
+                {
+                    frm = new frmModifier(ds, true, dr);
+                }
+                frm.ShowDialog();
+                if(frm.DialogResult == DialogResult.OK)
+                {
+                    remplirDgv(currentTag);
+                }
+            }
+            else if(e.ClickedItem.Text == "Supprimer")
+            {
+                BDDUtil.supprimerPoste((long)dr[0]);
+                remplirDgv(currentTag);
+            }
+        }
+
+        private void rdbCal_CheckedChanged(object sender, EventArgs e)
+        {
+            if(((RadioButton)sender).Checked)
+            {
+
+            }
         }
     }
 }

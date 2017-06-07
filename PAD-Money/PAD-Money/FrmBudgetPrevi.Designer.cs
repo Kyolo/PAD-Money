@@ -70,13 +70,17 @@
             this.lblPosteRevenu = new System.Windows.Forms.Label();
             this.cbbRevenu = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.epIntitulPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dgvRecap = new System.Windows.Forms.DataGridView();
             this.grbChoix = new System.Windows.Forms.GroupBox();
             this.rdbPF = new System.Windows.Forms.RadioButton();
             this.rdbPP = new System.Windows.Forms.RadioButton();
             this.rdbR = new System.Windows.Forms.RadioButton();
+            this.rdbCal = new System.Windows.Forms.RadioButton();
+            this.dgvRecap = new System.Windows.Forms.DataGridView();
+            this.epIntitulPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.modifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
@@ -85,10 +89,11 @@
             this.grbEcheance.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.grbRevenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).BeginInit();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRecap)).BeginInit();
             this.grbChoix.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).BeginInit();
+            this.cms.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabBudgetPrevi
@@ -494,10 +499,6 @@
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // epIntitulPP
-            // 
-            this.epIntitulPP.ContainerControl = this;
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.grbChoix);
@@ -510,26 +511,18 @@
             this.tabPage1.Text = "Vue d\'ensemble";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dgvRecap
-            // 
-            this.dgvRecap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRecap.Location = new System.Drawing.Point(6, 84);
-            this.dgvRecap.Name = "dgvRecap";
-            this.dgvRecap.Size = new System.Drawing.Size(738, 301);
-            this.dgvRecap.TabIndex = 0;
-            // 
             // grbChoix
             // 
-            this.grbChoix.Controls.Add(this.rdbR);
-            this.grbChoix.Controls.Add(this.rdbPP);
             this.grbChoix.Controls.Add(this.rdbPF);
+            this.grbChoix.Controls.Add(this.rdbPP);
+            this.grbChoix.Controls.Add(this.rdbR);
+            this.grbChoix.Controls.Add(this.rdbCal);
             this.grbChoix.Location = new System.Drawing.Point(6, 6);
             this.grbChoix.Name = "grbChoix";
             this.grbChoix.Size = new System.Drawing.Size(738, 72);
             this.grbChoix.TabIndex = 1;
             this.grbChoix.TabStop = false;
             this.grbChoix.Tag = "PostePeriodique";
-            this.grbChoix.Text = "Choix des flux";
             // 
             // rdbPF
             // 
@@ -570,6 +563,52 @@
             this.rdbR.UseVisualStyleBackColor = true;
             this.rdbR.CheckedChanged += new System.EventHandler(this.rdbPF_CheckedChanged);
             // 
+            // rdbCal
+            // 
+            this.rdbCal.AutoSize = true;
+            this.rdbCal.Location = new System.Drawing.Point(472, 31);
+            this.rdbCal.Name = "rdbCal";
+            this.rdbCal.Size = new System.Drawing.Size(154, 17);
+            this.rdbCal.TabIndex = 3;
+            this.rdbCal.TabStop = true;
+            this.rdbCal.Text = "Calendrier previsionnel";
+            this.rdbCal.UseVisualStyleBackColor = true;
+            this.rdbCal.CheckedChanged += new System.EventHandler(this.rdbCal_CheckedChanged);
+            // 
+            // dgvRecap
+            // 
+            this.dgvRecap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRecap.Location = new System.Drawing.Point(6, 84);
+            this.dgvRecap.Name = "dgvRecap";
+            this.dgvRecap.Size = new System.Drawing.Size(738, 301);
+            this.dgvRecap.TabIndex = 0;
+            this.dgvRecap.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecap_CellClick);
+            // 
+            // epIntitulPP
+            // 
+            this.epIntitulPP.ContainerControl = this;
+            // 
+            // cms
+            // 
+            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modifierToolStripMenuItem,
+            this.supprimerToolStripMenuItem});
+            this.cms.Name = "cms";
+            this.cms.Size = new System.Drawing.Size(130, 48);
+            this.cms.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cms_ItemClicked);
+            // 
+            // modifierToolStripMenuItem
+            // 
+            this.modifierToolStripMenuItem.Name = "modifierToolStripMenuItem";
+            this.modifierToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.modifierToolStripMenuItem.Text = "Modifier";
+            // 
+            // supprimerToolStripMenuItem
+            // 
+            this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.supprimerToolStripMenuItem.Text = "Supprimer";
+            // 
             // FrmBudgetPrevi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -594,11 +633,12 @@
             this.tabPage3.PerformLayout();
             this.grbRevenu.ResumeLayout(false);
             this.grbRevenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).EndInit();
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRecap)).EndInit();
             this.grbChoix.ResumeLayout(false);
             this.grbChoix.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epIntitulPP)).EndInit();
+            this.cms.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -647,11 +687,15 @@
         private System.Windows.Forms.Label lblPosteRevenu;
         private System.Windows.Forms.ComboBox cbbRevenu;
         private System.Windows.Forms.CheckedListBox clbRevenu;
+        private System.Windows.Forms.ContextMenuStrip cms;
+        private System.Windows.Forms.ToolStripMenuItem modifierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supprimerToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox grbChoix;
-        private System.Windows.Forms.RadioButton rdbR;
-        private System.Windows.Forms.RadioButton rdbPP;
-        private System.Windows.Forms.RadioButton rdbPF;
         private System.Windows.Forms.DataGridView dgvRecap;
+        private System.Windows.Forms.RadioButton rdbPF;
+        private System.Windows.Forms.RadioButton rdbPP;
+        private System.Windows.Forms.RadioButton rdbR;
+        private System.Windows.Forms.RadioButton rdbCal;
     }
 }
