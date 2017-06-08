@@ -65,6 +65,12 @@
     <Compile Include="FrmBudgetPrevi.Designer.cs">
       <DependentUpon>FrmBudgetPrevi.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmModifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModifier.Designer.cs">
+      <DependentUpon>frmModifier.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrelevementCtrl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBudgetPrevi.resx">
       <DependentUpon>FrmBudgetPrevi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModifier.resx">
+      <DependentUpon>frmModifier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

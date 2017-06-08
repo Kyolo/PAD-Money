@@ -35,6 +35,42 @@ namespace PAD_Money
             BDDUtil.ds = ds;
         }
 
+        private static String objectToStringRep(object val){
+            String d = "";
+
+            //On gère des types particuliers
+            if(val == null){
+                //Si la valeur est nulle, on le met comme tel
+                d = "NULL";
+            } else if(val.GetType().Equals(typeof(DateTime))){
+                //La date parce qu'il faut rajouter des # avant et après
+                DateTime time = (DateTime)val;
+                d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
+            } else if(val.GetType().Equals(typeof(String))){
+                //Les chaines de caractères car elles doivent êtres entre '
+                d = "'"+val.ToString()+"'";
+            }else {
+                //Pour le reste des types disponibles (entiers, flottants, etc...)
+                //On les affiches de manière brute
+                d = val.ToString();
+            }
+
+            return d;
+        }
+
+        private static long maxCode(String table, String keyname){
+            //On renvoie la valeur maximale de la table, pour pouvoir affecter une clef primaire non utilisée
+            DataTable tab = ds.Tables[table];
+            long max = 0;
+            foreach(DataRow r in tab.Rows){
+                if((long)r[keyname] > max){
+                    max = (long)r.ItemArray[0];
+                }
+            }
+
+            return max;
+        }
+
         public static int addLine(String table, params object[] data){
 
             //Maintenant le but est de convertir la liste data en datarow
@@ -102,23 +138,7 @@ namespace PAD_Money
 
                 for(int i = 0; i < col.Count; i++){
                     String name = "["+col[i].ColumnName+"], ";
-                    String d = "";
-                    //On gère des types particuliers
-                    if(rawdata[i] == null){
-                        //Si la valeur est nulle, on le met comme tel
-                        d = "NULL";
-                    } else if(rawdata[i].GetType().Equals(typeof(DateTime))){
-                        //La date parce qu'il faut rajouter des # avant et après
-                        DateTime time = (DateTime)rawdata[i];
-                        d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
-                    } else if(rawdata[i].GetType().Equals(typeof(String))){
-                        //Les chaines de caractères car elles doivent êtres entre '
-                        d = "'"+rawdata[i].ToString()+"'";
-                    }else {
-                        //Pour le reste des types disponibles (entiers, flottants, etc...)
-                        //On les affiches de manière brute
-                        d = rawdata[i].ToString();
-                    }
+                    String d = objectToStringRep(rawdata[i]);
 
                     commLeft.Append(name);
                     commRight.Append(d+", ");
@@ -171,7 +191,7 @@ namespace PAD_Money
             return retLoc | remLoc;
         }
 
-        public static int removeLineLoc(String table, String kname1, String kname2, object val1, object val2){
+        private static int removeLineLoc(String table, String kname1, String kname2, object val1, object val2){
             
             DataRowCollection rows = ds.Tables[table].Rows;
 
@@ -200,7 +220,7 @@ namespace PAD_Money
 
         }
 
-        public static int removeLineRem(String table, String kname1, String kname2, object val1, object val2){
+        private static int removeLineRem(String table, String kname1, String kname2, object val1, object val2){
             //On utilise une variable pour ne pas quitter au beau milieu des blocs catch
             int resultat = REMOTE_SUCCES;
 
@@ -273,12 +293,86 @@ namespace PAD_Money
             return resultat;
         }
 
+        public static int modifyLine(String table, String keyname, object keyval, Dictionary<String, object> values){
+            int modLoc = modifyLineLoc(table, keyname, keyval, values);
+            return modLoc | modifyLineRem(table, keyname, keyval, values);
+        }
+
+        private static int modifyLineLoc(String table, String keyname, object keyval, Dictionary<String, object> values){
+            DataRowCollection collec = ds.Tables[table].Rows;
+            
+            try{
+                foreach(DataRow row in collec){
+                    if(row[keyname].Equals(keyval)){
+                        foreach(KeyValuePair<String, object> kv in values){
+                            row[kv.Key]=values;
+                        }
+                    }
+                }
+            } catch {
+                return LOCAL_ERROR;
+            }
+
+            return LOCAL_SUCCES;
+        }
+
+        private static int modifyLineRem(String table, String keyname, object keyval, Dictionary<String, object> values){
+            //On utilise une variable pour ne pas quitter au beau milieu des blocs catch
+            int resultat = REMOTE_SUCCES;
+
+            try {
+                connec.Open();
+
+                OleDbCommand comm = connec.CreateCommand();
+                //pas besoin d'indiquer le type par défaut puisque c'est text et c'est ce qu'on veut
+                
+                //On crée des StringBuilder pour travailler facilements sur la commande
+                StringBuilder commSet = new StringBuilder().Append("UPDATE ["+table+"] SET ");
+                
+
+                foreach(KeyValuePair<String, object> kv in values){
+                    commSet.Append(kv.Key);
+                    String v = objectToStringRep(kv.Value);
+                    commSet.Append(v.Equals("NULL") ? " IS " : " = ").Append(v).Append(", ");
+                }
+
+                //On vire la dernière virgule et on ferme les paranthèse
+                commSet.Remove(commSet.Length -2, 2);
+                // commRight.Remove(commRight.Length -2, 2).Append(") ");
+
+                //Et on stocke la commande dans le OleDbCommand
+                String condVal = objectToStringRep(keyval);
+                comm.CommandText = commSet.ToString() + " WHERE "+keyname+(condVal.Equals("NULL") ? " IS " : " = ")+condVal;
+
+                //Et maintenant qu'on a notre commande on peut l'éxécuter !
+                int reqRes = comm.ExecuteNonQuery();
+                
+                //En théorie une insertion ne modifie qu'une ligne, donc ça renvoie qqch de différent ssi il y a un problème
+                if(reqRes != 1)
+                    resultat = REMOTE_SQL_ERROR;
+            
+
+            } catch (InvalidOperationException) {
+                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+                //Donc on renvoie le message d'ereur approrié
+                resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException) {
+
+                resultat = REMOTE_SQL_ERROR;
+            } finally {
+                if(connec.State == ConnectionState.Open)
+                    connec.Close();
+            }
+
+            return resultat;
+
+        }   
 
 
         //Methode utilitaires de gestion d'ajout :
 
         public static int ajouterTransaction(DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
-            return ajouterTransaction(ds.Tables["Transaction"].Rows.Count+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
+            return ajouterTransaction(maxCode("Transaction","codeTransaction")+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
         }
 
         public static int ajouterTransaction(long codeTransaction, DateTime dateTransac, String description,
@@ -302,11 +396,12 @@ namespace PAD_Money
         }
 
         public static int ajouterTypeTransaction(String libelle){
-            return addLine("TypeTransaction",ds.Tables["TypeTransaction"].Rows.Count+1, libelle);
+            return addLine("TypeTransaction",maxCode("Transaction","codeTransaction")+1, libelle);
         }
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
-            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            //int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            long codePoste = maxCode("Poste","codePoste")+1;
             //On ajoute le poste
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPostePonct = addLine("PostePonctuel", codePoste, commentaire);
@@ -333,7 +428,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, long codePeriode){
-            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            long codePoste = maxCode("Poste","codePoste")+1;
             
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode);
@@ -342,7 +437,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPosteRevenu(String libelle, float montant, long personne){
-            int codePoste = ds.Tables["Poste"].Rows.Count + 1;
+            long codePoste = maxCode("Poste","codePoste")+1;
             
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPosteRev = addLine("PostePeriodique", codePoste, montant, personne);
@@ -351,7 +446,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPersonne(String nomPersonne, String pmPersonne){
-            return addLine("Personne", ds.Tables["Personne"].Rows.Count + 1 ,nomPersonne, pmPersonne);
+            return addLine("Personne", maxCode("Personne","codePersonne")+1,nomPersonne, pmPersonne);
         }
 
         public static int supprimerTransaction(long codeTransaction){
