@@ -84,6 +84,8 @@ namespace PAD_Money
         private void btnValiderPF_Click(object sender, EventArgs e)
         {
             BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text), dtpPF.Value.Day);
+            txtPostePF.Text = string.Empty;
+            txtMontantPF.Text = string.Empty;
         }
 
         private void verifPF()
@@ -92,35 +94,10 @@ namespace PAD_Money
         }
 
         private void txtMontantPP_KeyPress(object sender, KeyPressEventArgs e)
-        {           
-            bool virgule = false;
-            if (txtMontantPF.Text.Contains('.'))
-            {
-                virgule = true;
-            }
-            if (char.IsDigit(e.KeyChar) || e.KeyChar == '.' || e.KeyChar == ',' || char.IsControl(e.KeyChar))
-            {
-                if ((e.KeyChar == '.' || e.KeyChar == ',') && virgule)
-                {
-                    e.Handled = true;
-                }
-                if (e.KeyChar == ',' && !virgule)
-                {
-                    e.Handled = true;
-                    txtMontantPF.Text += '.';
-                }
-            }
-            else
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
-            }
-
-            if(e.KeyChar == (char)Keys.Enter)
-            {
-                if (verifPP())
-                {
-                    afficherPP();
-                }
             }
         }
 
@@ -182,7 +159,15 @@ namespace PAD_Money
 
         private void btnValiderPP_Click(object sender, EventArgs e)
         {
-            BDDUtil.ajouterPostePonctuel(txtIntitul.Text,txtCom.Text,flpEcheance.Controls.Cast<PrelevementControl>().ToArray<PrelevementControl>());          
+            if (txtPrelevPP.Text != string.Empty && flpEcheance.Controls.Count == int.Parse(txtPrelevPP.Text))
+            {
+                BDDUtil.ajouterPostePonctuel(txtIntitul.Text, txtCom.Text, flpEcheance.Controls.Cast<PrelevementControl>().ToArray<PrelevementControl>());
+                txtIntitul.Text = string.Empty;
+                txtMontantPP.Text = string.Empty;
+                txtCom.Text = string.Empty;
+                txtPrelevPP.Text = string.Empty;
+                flpEcheance.Controls.Clear();
+            }
         }
 
         private void tabBudgetPrevi_Selected(object sender, TabControlEventArgs e)
@@ -197,7 +182,7 @@ namespace PAD_Money
         {
             string[] tab = new string[1];
             int[] tab2;     
-            for(int i = 0; i < clbRevenu.Items.Count-1;i++)
+            for(int i = 0; i < clbRevenu.Items.Count;i++)
             {
                 if (clbRevenu.GetItemChecked(i))
                 {
@@ -380,7 +365,6 @@ namespace PAD_Money
             }
             else if(e.ClickedItem.Text == "Supprimer")
             {
-                MessageBox.Show(dr[0].ToString());
                 BDDUtil.supprimerPoste(int.Parse(dr[0].ToString()));
                 remplirDgv(currentTag);
             }
@@ -487,7 +471,7 @@ namespace PAD_Money
         private void txtMontantPP_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             bool virgule = false;
-            if (txtMontantPF.Text.Contains('.'))
+            if (((TextBox)sender).Text.Contains('.'))
             {
                 virgule = true;
             }
@@ -500,7 +484,7 @@ namespace PAD_Money
                 if (e.KeyChar == ',' && !virgule)
                 {
                     e.Handled = true;
-                    txtMontantPF.Text += '.';
+                    ((TextBox)sender).Text += '.';
                 }
             }
             else

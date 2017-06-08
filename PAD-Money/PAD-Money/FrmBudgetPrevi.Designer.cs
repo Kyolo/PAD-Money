@@ -136,7 +136,7 @@
             // 
             this.grbMontantPF.Controls.Add(this.label4);
             this.grbMontantPF.Controls.Add(this.txtMontantPF);
-            this.grbMontantPF.Location = new System.Drawing.Point(87, 265);
+            this.grbMontantPF.Location = new System.Drawing.Point(87, 214);
             this.grbMontantPF.Name = "grbMontantPF";
             this.grbMontantPF.Size = new System.Drawing.Size(233, 100);
             this.grbMontantPF.TabIndex = 12;
@@ -239,7 +239,7 @@
             // 
             this.groupBox1.Controls.Add(this.txtMontantPP);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(87, 265);
+            this.groupBox1.Location = new System.Drawing.Point(87, 214);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(233, 100);
             this.groupBox1.TabIndex = 27;
@@ -276,7 +276,7 @@
             // 
             // btnCalculPP
             // 
-            this.btnCalculPP.Location = new System.Drawing.Point(87, 214);
+            this.btnCalculPP.Location = new System.Drawing.Point(87, 320);
             this.btnCalculPP.Name = "btnCalculPP";
             this.btnCalculPP.Size = new System.Drawing.Size(147, 23);
             this.btnCalculPP.TabIndex = 25;
@@ -398,7 +398,7 @@
             // 
             this.grbRevenu.Controls.Add(this.lblMontantRevenu);
             this.grbRevenu.Controls.Add(this.txtMontantRevenu);
-            this.grbRevenu.Location = new System.Drawing.Point(87, 264);
+            this.grbRevenu.Location = new System.Drawing.Point(87, 214);
             this.grbRevenu.Name = "grbRevenu";
             this.grbRevenu.Size = new System.Drawing.Size(233, 100);
             this.grbRevenu.TabIndex = 41;
@@ -432,7 +432,7 @@
             // 
             // btnValiderRevenu
             // 
-            this.btnValiderRevenu.Location = new System.Drawing.Point(624, 354);
+            this.btnValiderRevenu.Location = new System.Drawing.Point(624, 355);
             this.btnValiderRevenu.Name = "btnValiderRevenu";
             this.btnValiderRevenu.Size = new System.Drawing.Size(120, 30);
             this.btnValiderRevenu.TabIndex = 39;

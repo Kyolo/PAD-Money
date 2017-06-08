@@ -31,9 +31,9 @@
             this.btnValider = new System.Windows.Forms.Button();
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.lblCode = new System.Windows.Forms.Label();
-            this.cbbDescription = new System.Windows.Forms.ComboBox();
             this.cbbBP = new System.Windows.Forms.ComboBox();
             this.txtMontant = new System.Windows.Forms.TextBox();
+            this.lblPoste = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnValider
@@ -65,14 +65,6 @@
             this.lblCode.TabIndex = 2;
             this.lblCode.Text = "lblCode";
             // 
-            // cbbDescription
-            // 
-            this.cbbDescription.FormattingEnabled = true;
-            this.cbbDescription.Location = new System.Drawing.Point(60, 12);
-            this.cbbDescription.Name = "cbbDescription";
-            this.cbbDescription.Size = new System.Drawing.Size(106, 21);
-            this.cbbDescription.TabIndex = 3;
-            // 
             // cbbBP
             // 
             this.cbbBP.FormattingEnabled = true;
@@ -88,14 +80,23 @@
             this.txtMontant.Size = new System.Drawing.Size(59, 20);
             this.txtMontant.TabIndex = 5;
             // 
+            // lblPoste
+            // 
+            this.lblPoste.AutoSize = true;
+            this.lblPoste.Location = new System.Drawing.Point(60, 15);
+            this.lblPoste.Name = "lblPoste";
+            this.lblPoste.Size = new System.Drawing.Size(35, 13);
+            this.lblPoste.TabIndex = 6;
+            this.lblPoste.Text = "label1";
+            // 
             // frmModifier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 69);
+            this.Controls.Add(this.lblPoste);
             this.Controls.Add(this.txtMontant);
             this.Controls.Add(this.cbbBP);
-            this.Controls.Add(this.cbbDescription);
             this.Controls.Add(this.lblCode);
             this.Controls.Add(this.btnAnnuler);
             this.Controls.Add(this.btnValider);
@@ -112,8 +113,8 @@
         private System.Windows.Forms.Button btnValider;
         private System.Windows.Forms.Button btnAnnuler;
         private System.Windows.Forms.Label lblCode;
-        private System.Windows.Forms.ComboBox cbbDescription;
         private System.Windows.Forms.ComboBox cbbBP;
         private System.Windows.Forms.TextBox txtMontant;
+        private System.Windows.Forms.Label lblPoste;
     }
 }
