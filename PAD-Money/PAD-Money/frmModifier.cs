@@ -40,32 +40,32 @@ namespace PAD_Money
 
         private void afficherP()
         {
-            cbbDescription.DataSource = ds.Tables["Poste"];
-            cbbDescription.ValueMember = "codePoste";
-            cbbDescription.DisplayMember = "libPoste";
+            lblPoste.Text = row[1].ToString();
 
             cbbBP.DataSource = ds.Tables["Periodicite"];
             cbbBP.ValueMember = "codePer";
             cbbBP.DisplayMember = "libPer";
 
             lblCode.Text = row[0].ToString();
-            cbbDescription.Text = row[1].ToString();
             cbbBP.Text = row[2].ToString();
             txtMontant.Text = row[3].ToString();
         }
 
         private void afficherR()
         {
-            cbbDescription.DataSource = ds.Tables["Poste"];
-            cbbDescription.ValueMember = "codePoste";
-            cbbDescription.DisplayMember = "libPoste";
+            lblPoste.Text = row[1].ToString();
 
             cbbBP.DataSource = ds.Tables["Personne"];
             cbbBP.ValueMember = "codePersonne";
-            cbbBP.DisplayMember = "nomPersonne"+" "+"pnPersonne";
+            cbbBP.DisplayMember = "nomPersonne";
+
+            int i = 0;
+            foreach(DataRow r in ds.Tables["Personne"].Rows)
+            {
+                //cbbBP.Items[i] += " " + r["pnPersonne"];
+            }
 
             lblCode.Text = row[0].ToString();
-            cbbDescription.Text = row[1].ToString();
             cbbBP.Text = row[2].ToString();
             txtMontant.Text = row[3].ToString();
         }
@@ -82,7 +82,7 @@ namespace PAD_Money
                 Dictionary<String, object> dico = new Dictionary<String, object>();
                 dico.Add("codePersonne",cbbBP.SelectedValue);
                 dico.Add("montant", float.Parse(txtMontant.Text));
-                dico.Add("codePoste", cbbDescription.SelectedValue);
+                dico.Add("codePoste", int.Parse(row[0].ToString()));
                 BDDUtil.modifyLine("PosteRevenu", "codePoste", int.Parse(row[0].ToString()), dico);
             }
             else
@@ -90,7 +90,7 @@ namespace PAD_Money
                 Dictionary<String, object> dico = new Dictionary<String, object>();
                 dico.Add("typePer", cbbBP.SelectedValue);
                 dico.Add("montant", float.Parse(txtMontant.Text));
-                dico.Add("codePoste", cbbDescription.SelectedValue);
+                dico.Add("codePoste", int.Parse(row[0].ToString()));
                 BDDUtil.modifyLine("PostePeriodique", "codePoste", int.Parse(row[0].ToString()), dico);
             }
             this.DialogResult = DialogResult.OK;
