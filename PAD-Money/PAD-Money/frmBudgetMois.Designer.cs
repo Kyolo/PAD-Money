@@ -86,6 +86,8 @@
             this.dtpFinPer = new System.Windows.Forms.DateTimePicker();
             this.dtpDebPer = new System.Windows.Forms.DateTimePicker();
             this.btnPDF = new System.Windows.Forms.Button();
+            this.txbNom = new System.Windows.Forms.TextBox();
+            this.txbPrenom = new System.Windows.Forms.TextBox();
             this.TabBudgetMois.SuspendLayout();
             this.TabTransac.SuspendLayout();
             this.tabSuppression.SuspendLayout();
@@ -101,18 +103,20 @@
             this.TabBudgetMois.Controls.Add(this.tabSuppression);
             this.TabBudgetMois.Controls.Add(this.TabModif);
             this.TabBudgetMois.Controls.Add(this.TabRecapitulatif);
-            this.TabBudgetMois.Location = new System.Drawing.Point(-2, 1);
+            this.TabBudgetMois.Location = new System.Drawing.Point(-3, 1);
+            this.TabBudgetMois.Margin = new System.Windows.Forms.Padding(4);
             this.TabBudgetMois.Name = "TabBudgetMois";
             this.TabBudgetMois.SelectedIndex = 0;
-            this.TabBudgetMois.Size = new System.Drawing.Size(1183, 514);
+            this.TabBudgetMois.Size = new System.Drawing.Size(1577, 633);
             this.TabBudgetMois.TabIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1175, 485);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1569, 601);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Affichage 1 à 1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -137,19 +141,21 @@
             this.TabTransac.Controls.Add(this.cbbType);
             this.TabTransac.Controls.Add(this.label1);
             this.TabTransac.Font = new System.Drawing.Font("Modern No. 20", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabTransac.Location = new System.Drawing.Point(4, 25);
+            this.TabTransac.Location = new System.Drawing.Point(4, 28);
+            this.TabTransac.Margin = new System.Windows.Forms.Padding(4);
             this.TabTransac.Name = "TabTransac";
-            this.TabTransac.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.TabTransac.Size = new System.Drawing.Size(1175, 485);
+            this.TabTransac.Padding = new System.Windows.Forms.Padding(4);
+            this.TabTransac.Size = new System.Drawing.Size(1569, 601);
             this.TabTransac.TabIndex = 1;
             this.TabTransac.Text = "Ajout d\'une transaction";
             // 
             // btnAjouterType
             // 
             this.btnAjouterType.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjouterType.Location = new System.Drawing.Point(386, 174);
+            this.btnAjouterType.Location = new System.Drawing.Point(515, 214);
+            this.btnAjouterType.Margin = new System.Windows.Forms.Padding(4);
             this.btnAjouterType.Name = "btnAjouterType";
-            this.btnAjouterType.Size = new System.Drawing.Size(104, 34);
+            this.btnAjouterType.Size = new System.Drawing.Size(139, 42);
             this.btnAjouterType.TabIndex = 15;
             this.btnAjouterType.Text = "Ajouter un type";
             this.btnAjouterType.UseVisualStyleBackColor = true;
@@ -159,19 +165,20 @@
             // 
             this.flpPersonne.AutoScroll = true;
             this.flpPersonne.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.flpPersonne.Location = new System.Drawing.Point(533, 37);
-            this.flpPersonne.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flpPersonne.Location = new System.Drawing.Point(711, 46);
+            this.flpPersonne.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpPersonne.Name = "flpPersonne";
-            this.flpPersonne.Size = new System.Drawing.Size(172, 142);
+            this.flpPersonne.Size = new System.Drawing.Size(229, 175);
             this.flpPersonne.TabIndex = 14;
             // 
             // lblType
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.Location = new System.Drawing.Point(26, 176);
+            this.lblType.Location = new System.Drawing.Point(35, 217);
+            this.lblType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(39, 18);
+            this.lblType.Size = new System.Drawing.Size(49, 22);
             this.lblType.TabIndex = 13;
             this.lblType.Text = "Type";
             // 
@@ -179,18 +186,20 @@
             // 
             this.dtpDepense.CalendarMonthBackground = System.Drawing.SystemColors.ControlDark;
             this.dtpDepense.Font = new System.Drawing.Font("Trebuchet MS", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDepense.Location = new System.Drawing.Point(170, 38);
+            this.dtpDepense.Location = new System.Drawing.Point(227, 47);
+            this.dtpDepense.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDepense.Name = "dtpDepense";
-            this.dtpDepense.Size = new System.Drawing.Size(204, 20);
+            this.dtpDepense.Size = new System.Drawing.Size(271, 23);
             this.dtpDepense.TabIndex = 12;
             // 
             // txtMontant
             // 
             this.txtMontant.BackColor = System.Drawing.SystemColors.ControlDark;
             this.txtMontant.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMontant.Location = new System.Drawing.Point(170, 128);
+            this.txtMontant.Location = new System.Drawing.Point(227, 158);
+            this.txtMontant.Margin = new System.Windows.Forms.Padding(4);
             this.txtMontant.Name = "txtMontant";
-            this.txtMontant.Size = new System.Drawing.Size(204, 23);
+            this.txtMontant.Size = new System.Drawing.Size(271, 27);
             this.txtMontant.TabIndex = 11;
             // 
             // txtDescription
@@ -198,9 +207,10 @@
             this.txtDescription.BackColor = System.Drawing.SystemColors.ControlDark;
             this.txtDescription.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescription.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtDescription.Location = new System.Drawing.Point(170, 83);
+            this.txtDescription.Location = new System.Drawing.Point(227, 102);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(204, 23);
+            this.txtDescription.Size = new System.Drawing.Size(271, 27);
             this.txtDescription.TabIndex = 10;
             // 
             // btnAjouter
@@ -208,9 +218,10 @@
             this.btnAjouter.BackColor = System.Drawing.Color.Transparent;
             this.btnAjouter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnAjouter.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjouter.Location = new System.Drawing.Point(49, 327);
+            this.btnAjouter.Location = new System.Drawing.Point(65, 402);
+            this.btnAjouter.Margin = new System.Windows.Forms.Padding(4);
             this.btnAjouter.Name = "btnAjouter";
-            this.btnAjouter.Size = new System.Drawing.Size(137, 60);
+            this.btnAjouter.Size = new System.Drawing.Size(183, 74);
             this.btnAjouter.TabIndex = 9;
             this.btnAjouter.Text = "Ajouter la transaction";
             this.btnAjouter.UseVisualStyleBackColor = false;
@@ -219,9 +230,10 @@
             // btnAjouterPers
             // 
             this.btnAjouterPers.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjouterPers.Location = new System.Drawing.Point(674, 188);
+            this.btnAjouterPers.Location = new System.Drawing.Point(899, 231);
+            this.btnAjouterPers.Margin = new System.Windows.Forms.Padding(4);
             this.btnAjouterPers.Name = "btnAjouterPers";
-            this.btnAjouterPers.Size = new System.Drawing.Size(121, 71);
+            this.btnAjouterPers.Size = new System.Drawing.Size(161, 87);
             this.btnAjouterPers.TabIndex = 8;
             this.btnAjouterPers.Text = "Ajouter une personne";
             this.btnAjouterPers.UseVisualStyleBackColor = true;
@@ -231,9 +243,10 @@
             // 
             this.cbPercu.AutoSize = true;
             this.cbPercu.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPercu.Location = new System.Drawing.Point(127, 252);
+            this.cbPercu.Location = new System.Drawing.Point(169, 310);
+            this.cbPercu.Margin = new System.Windows.Forms.Padding(4);
             this.cbPercu.Name = "cbPercu";
-            this.cbPercu.Size = new System.Drawing.Size(63, 22);
+            this.cbPercu.Size = new System.Drawing.Size(79, 26);
             this.cbPercu.TabIndex = 7;
             this.cbPercu.Text = "Perçu";
             this.cbPercu.UseVisualStyleBackColor = true;
@@ -242,9 +255,10 @@
             // 
             this.cbRecette.AutoSize = true;
             this.cbRecette.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRecette.Location = new System.Drawing.Point(28, 252);
+            this.cbRecette.Location = new System.Drawing.Point(37, 310);
+            this.cbRecette.Margin = new System.Windows.Forms.Padding(4);
             this.cbRecette.Name = "cbRecette";
-            this.cbRecette.Size = new System.Drawing.Size(72, 22);
+            this.cbRecette.Size = new System.Drawing.Size(90, 26);
             this.cbRecette.TabIndex = 6;
             this.cbRecette.Text = "Recette";
             this.cbRecette.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -254,9 +268,10 @@
             // 
             this.lblMontant.AutoSize = true;
             this.lblMontant.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontant.Location = new System.Drawing.Point(26, 126);
+            this.lblMontant.Location = new System.Drawing.Point(35, 155);
+            this.lblMontant.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMontant.Name = "lblMontant";
-            this.lblMontant.Size = new System.Drawing.Size(64, 18);
+            this.lblMontant.Size = new System.Drawing.Size(79, 22);
             this.lblMontant.TabIndex = 4;
             this.lblMontant.Text = "Montant";
             // 
@@ -264,9 +279,10 @@
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(26, 80);
+            this.lblDescription.Location = new System.Drawing.Point(35, 98);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(83, 18);
+            this.lblDescription.Size = new System.Drawing.Size(104, 22);
             this.lblDescription.TabIndex = 3;
             this.lblDescription.Text = "Description";
             // 
@@ -276,10 +292,11 @@
             this.lblDate.BackColor = System.Drawing.Color.Transparent;
             this.lblDate.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDate.Location = new System.Drawing.Point(26, 37);
+            this.lblDate.Location = new System.Drawing.Point(35, 46);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Padding = new System.Windows.Forms.Padding(1);
-            this.lblDate.Size = new System.Drawing.Size(130, 20);
+            this.lblDate.Size = new System.Drawing.Size(160, 24);
             this.lblDate.TabIndex = 2;
             this.lblDate.Text = "Date de la dépense";
             // 
@@ -288,9 +305,10 @@
             this.cbbType.BackColor = System.Drawing.SystemColors.ControlDark;
             this.cbbType.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbType.FormattingEnabled = true;
-            this.cbbType.Location = new System.Drawing.Point(170, 173);
+            this.cbbType.Location = new System.Drawing.Point(227, 213);
+            this.cbbType.Margin = new System.Windows.Forms.Padding(4);
             this.cbbType.Name = "cbbType";
-            this.cbbType.Size = new System.Drawing.Size(204, 26);
+            this.cbbType.Size = new System.Drawing.Size(271, 31);
             this.cbbType.TabIndex = 1;
             // 
             // label1
@@ -298,10 +316,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(316, 235);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(421, 289);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(432, 200);
+            this.label1.Size = new System.Drawing.Size(540, 250);
             this.label1.TabIndex = 16;
             this.label1.Text = "€ $ £";
             // 
@@ -322,10 +339,11 @@
             this.tabSuppression.Controls.Add(this.lblDate2);
             this.tabSuppression.Controls.Add(this.btnSupp);
             this.tabSuppression.Controls.Add(this.cbbTransactionExistantes);
-            this.tabSuppression.Location = new System.Drawing.Point(4, 25);
+            this.tabSuppression.Location = new System.Drawing.Point(4, 28);
+            this.tabSuppression.Margin = new System.Windows.Forms.Padding(4);
             this.tabSuppression.Name = "tabSuppression";
-            this.tabSuppression.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabSuppression.Size = new System.Drawing.Size(1175, 485);
+            this.tabSuppression.Padding = new System.Windows.Forms.Padding(4);
+            this.tabSuppression.Size = new System.Drawing.Size(1569, 601);
             this.tabSuppression.TabIndex = 2;
             this.tabSuppression.Text = "Suppression d\'une transaction";
             // 
@@ -333,10 +351,9 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Modern No. 20", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(24, 59);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Location = new System.Drawing.Point(32, 73);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(112, 21);
+            this.label10.Size = new System.Drawing.Size(140, 25);
             this.label10.TabIndex = 23;
             this.label10.Text = "Transaction :";
             // 
@@ -344,10 +361,9 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(22, 124);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Location = new System.Drawing.Point(29, 153);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 24);
+            this.label9.Size = new System.Drawing.Size(80, 29);
             this.label9.TabIndex = 22;
             this.label9.Text = "Date :";
             // 
@@ -355,10 +371,9 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(22, 165);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Location = new System.Drawing.Point(29, 203);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(118, 24);
+            this.label8.Size = new System.Drawing.Size(151, 29);
             this.label8.TabIndex = 21;
             this.label8.Text = "Description :";
             // 
@@ -366,10 +381,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(22, 208);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(29, 256);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 24);
+            this.label7.Size = new System.Drawing.Size(118, 29);
             this.label7.TabIndex = 20;
             this.label7.Text = "Montant :";
             // 
@@ -377,10 +391,9 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(22, 252);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(29, 310);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(62, 24);
+            this.label6.Size = new System.Drawing.Size(78, 29);
             this.label6.TabIndex = 19;
             this.label6.Text = "Type :";
             // 
@@ -388,10 +401,9 @@
             // 
             this.lblPerca.AutoSize = true;
             this.lblPerca.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPerca.Location = new System.Drawing.Point(22, 294);
-            this.lblPerca.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPerca.Location = new System.Drawing.Point(29, 362);
             this.lblPerca.Name = "lblPerca";
-            this.lblPerca.Size = new System.Drawing.Size(63, 24);
+            this.lblPerca.Size = new System.Drawing.Size(79, 29);
             this.lblPerca.TabIndex = 18;
             this.lblPerca.Text = "label1";
             // 
@@ -400,10 +412,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label2.Location = new System.Drawing.Point(328, 228);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(437, 281);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(432, 200);
+            this.label2.Size = new System.Drawing.Size(540, 250);
             this.label2.TabIndex = 17;
             this.label2.Text = "€ $ £";
             // 
@@ -411,10 +422,9 @@
             // 
             this.lblRorP.AutoSize = true;
             this.lblRorP.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRorP.Location = new System.Drawing.Point(169, 294);
-            this.lblRorP.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRorP.Location = new System.Drawing.Point(225, 362);
             this.lblRorP.Name = "lblRorP";
-            this.lblRorP.Size = new System.Drawing.Size(63, 24);
+            this.lblRorP.Size = new System.Drawing.Size(79, 29);
             this.lblRorP.TabIndex = 6;
             this.lblRorP.Text = "label1";
             // 
@@ -422,10 +432,9 @@
             // 
             this.lblType2.AutoSize = true;
             this.lblType2.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType2.Location = new System.Drawing.Point(169, 252);
-            this.lblType2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblType2.Location = new System.Drawing.Point(225, 310);
             this.lblType2.Name = "lblType2";
-            this.lblType2.Size = new System.Drawing.Size(63, 24);
+            this.lblType2.Size = new System.Drawing.Size(79, 29);
             this.lblType2.TabIndex = 5;
             this.lblType2.Text = "label4";
             // 
@@ -433,10 +442,9 @@
             // 
             this.lblMontant2.AutoSize = true;
             this.lblMontant2.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontant2.Location = new System.Drawing.Point(169, 208);
-            this.lblMontant2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMontant2.Location = new System.Drawing.Point(225, 256);
             this.lblMontant2.Name = "lblMontant2";
-            this.lblMontant2.Size = new System.Drawing.Size(63, 24);
+            this.lblMontant2.Size = new System.Drawing.Size(79, 29);
             this.lblMontant2.TabIndex = 4;
             this.lblMontant2.Text = "label3";
             // 
@@ -444,10 +452,9 @@
             // 
             this.lblDescription2.AutoSize = true;
             this.lblDescription2.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription2.Location = new System.Drawing.Point(169, 165);
-            this.lblDescription2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDescription2.Location = new System.Drawing.Point(225, 203);
             this.lblDescription2.Name = "lblDescription2";
-            this.lblDescription2.Size = new System.Drawing.Size(63, 24);
+            this.lblDescription2.Size = new System.Drawing.Size(79, 29);
             this.lblDescription2.TabIndex = 3;
             this.lblDescription2.Text = "label2";
             // 
@@ -455,20 +462,19 @@
             // 
             this.lblDate2.AutoSize = true;
             this.lblDate2.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate2.Location = new System.Drawing.Point(169, 124);
-            this.lblDate2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDate2.Location = new System.Drawing.Point(225, 153);
             this.lblDate2.Name = "lblDate2";
-            this.lblDate2.Size = new System.Drawing.Size(63, 24);
+            this.lblDate2.Size = new System.Drawing.Size(79, 29);
             this.lblDate2.TabIndex = 2;
             this.lblDate2.Text = "label1";
             // 
             // btnSupp
             // 
             this.btnSupp.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSupp.Location = new System.Drawing.Point(404, 106);
-            this.btnSupp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSupp.Location = new System.Drawing.Point(539, 130);
+            this.btnSupp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSupp.Name = "btnSupp";
-            this.btnSupp.Size = new System.Drawing.Size(128, 57);
+            this.btnSupp.Size = new System.Drawing.Size(171, 70);
             this.btnSupp.TabIndex = 1;
             this.btnSupp.Text = "Supprimer la transaction";
             this.btnSupp.UseVisualStyleBackColor = true;
@@ -478,15 +484,17 @@
             // 
             this.cbbTransactionExistantes.BackColor = System.Drawing.Color.DarkGray;
             this.cbbTransactionExistantes.FormattingEnabled = true;
-            this.cbbTransactionExistantes.Location = new System.Drawing.Point(172, 59);
-            this.cbbTransactionExistantes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbTransactionExistantes.Location = new System.Drawing.Point(229, 73);
+            this.cbbTransactionExistantes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbbTransactionExistantes.Name = "cbbTransactionExistantes";
-            this.cbbTransactionExistantes.Size = new System.Drawing.Size(157, 21);
+            this.cbbTransactionExistantes.Size = new System.Drawing.Size(208, 24);
             this.cbbTransactionExistantes.TabIndex = 0;
             // 
             // TabModif
             // 
             this.TabModif.BackColor = System.Drawing.Color.DimGray;
+            this.TabModif.Controls.Add(this.txbPrenom);
+            this.TabModif.Controls.Add(this.txbNom);
             this.TabModif.Controls.Add(this.label4);
             this.TabModif.Controls.Add(this.cbPercuModif);
             this.TabModif.Controls.Add(this.cbRecuModif);
@@ -504,21 +512,22 @@
             this.TabModif.Controls.Add(this.lblDatedep);
             this.TabModif.Controls.Add(this.cbbTypeModif);
             this.TabModif.Controls.Add(this.label3);
-            this.TabModif.Location = new System.Drawing.Point(4, 25);
+            this.TabModif.Location = new System.Drawing.Point(4, 28);
+            this.TabModif.Margin = new System.Windows.Forms.Padding(4);
             this.TabModif.Name = "TabModif";
-            this.TabModif.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.TabModif.Size = new System.Drawing.Size(1175, 485);
+            this.TabModif.Padding = new System.Windows.Forms.Padding(4);
+            this.TabModif.Size = new System.Drawing.Size(1569, 601);
             this.TabModif.TabIndex = 3;
             this.TabModif.Text = "Modification d\'une transaction";
+            this.TabModif.Click += new System.EventHandler(this.TabModif_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(16, 32);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(21, 39);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 18);
+            this.label4.Size = new System.Drawing.Size(116, 22);
             this.label4.TabIndex = 34;
             this.label4.Text = "Transaction :";
             // 
@@ -526,10 +535,10 @@
             // 
             this.cbPercuModif.AutoSize = true;
             this.cbPercuModif.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPercuModif.Location = new System.Drawing.Point(130, 255);
-            this.cbPercuModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbPercuModif.Location = new System.Drawing.Point(173, 314);
+            this.cbPercuModif.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbPercuModif.Name = "cbPercuModif";
-            this.cbPercuModif.Size = new System.Drawing.Size(63, 22);
+            this.cbPercuModif.Size = new System.Drawing.Size(79, 26);
             this.cbPercuModif.TabIndex = 32;
             this.cbPercuModif.Text = "Perçu";
             this.cbPercuModif.UseVisualStyleBackColor = true;
@@ -538,10 +547,10 @@
             // 
             this.cbRecuModif.AutoSize = true;
             this.cbRecuModif.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRecuModif.Location = new System.Drawing.Point(22, 255);
-            this.cbRecuModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbRecuModif.Location = new System.Drawing.Point(29, 314);
+            this.cbRecuModif.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbRecuModif.Name = "cbRecuModif";
-            this.cbRecuModif.Size = new System.Drawing.Size(58, 22);
+            this.cbRecuModif.Size = new System.Drawing.Size(72, 26);
             this.cbRecuModif.TabIndex = 31;
             this.cbRecuModif.Text = "Reçu";
             this.cbRecuModif.UseVisualStyleBackColor = true;
@@ -550,20 +559,20 @@
             // 
             this.cbbChoixtransacModif.BackColor = System.Drawing.Color.DarkGray;
             this.cbbChoixtransacModif.FormattingEnabled = true;
-            this.cbbChoixtransacModif.Location = new System.Drawing.Point(172, 31);
-            this.cbbChoixtransacModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbChoixtransacModif.Location = new System.Drawing.Point(229, 38);
+            this.cbbChoixtransacModif.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbbChoixtransacModif.Name = "cbbChoixtransacModif";
-            this.cbbChoixtransacModif.Size = new System.Drawing.Size(137, 21);
+            this.cbbChoixtransacModif.Size = new System.Drawing.Size(181, 24);
             this.cbbChoixtransacModif.TabIndex = 30;
             this.cbbChoixtransacModif.SelectedValueChanged += new System.EventHandler(this.cbbChoixtransacModif_SelectedValueChanged);
             // 
             // btnAjouterInModif
             // 
             this.btnAjouterInModif.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjouterInModif.Location = new System.Drawing.Point(390, 188);
-            this.btnAjouterInModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAjouterInModif.Location = new System.Drawing.Point(520, 231);
+            this.btnAjouterInModif.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAjouterInModif.Name = "btnAjouterInModif";
-            this.btnAjouterInModif.Size = new System.Drawing.Size(61, 26);
+            this.btnAjouterInModif.Size = new System.Drawing.Size(81, 32);
             this.btnAjouterInModif.TabIndex = 29;
             this.btnAjouterInModif.Text = "Ajouter un type";
             this.btnAjouterInModif.UseVisualStyleBackColor = true;
@@ -573,53 +582,58 @@
             // 
             this.flpListePersonneInModif.AutoScroll = true;
             this.flpListePersonneInModif.BackColor = System.Drawing.Color.DarkGray;
-            this.flpListePersonneInModif.Location = new System.Drawing.Point(518, 39);
-            this.flpListePersonneInModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flpListePersonneInModif.Location = new System.Drawing.Point(691, 48);
+            this.flpListePersonneInModif.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpListePersonneInModif.Name = "flpListePersonneInModif";
-            this.flpListePersonneInModif.Size = new System.Drawing.Size(172, 136);
+            this.flpListePersonneInModif.Size = new System.Drawing.Size(229, 167);
             this.flpListePersonneInModif.TabIndex = 28;
             // 
             // lblTyp
             // 
             this.lblTyp.AutoSize = true;
             this.lblTyp.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTyp.Location = new System.Drawing.Point(19, 195);
+            this.lblTyp.Location = new System.Drawing.Point(25, 240);
+            this.lblTyp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTyp.Name = "lblTyp";
-            this.lblTyp.Size = new System.Drawing.Size(39, 18);
+            this.lblTyp.Size = new System.Drawing.Size(49, 22);
             this.lblTyp.TabIndex = 27;
             this.lblTyp.Text = "Type";
             // 
             // dtmDateModif
             // 
-            this.dtmDateModif.Location = new System.Drawing.Point(172, 88);
+            this.dtmDateModif.Location = new System.Drawing.Point(229, 108);
+            this.dtmDateModif.Margin = new System.Windows.Forms.Padding(4);
             this.dtmDateModif.Name = "dtmDateModif";
-            this.dtmDateModif.Size = new System.Drawing.Size(204, 20);
+            this.dtmDateModif.Size = new System.Drawing.Size(271, 22);
             this.dtmDateModif.TabIndex = 26;
             // 
             // txbMontantModif
             // 
             this.txbMontantModif.BackColor = System.Drawing.Color.DarkGray;
             this.txbMontantModif.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbMontantModif.Location = new System.Drawing.Point(172, 153);
+            this.txbMontantModif.Location = new System.Drawing.Point(229, 188);
+            this.txbMontantModif.Margin = new System.Windows.Forms.Padding(4);
             this.txbMontantModif.Name = "txbMontantModif";
-            this.txbMontantModif.Size = new System.Drawing.Size(204, 23);
+            this.txbMontantModif.Size = new System.Drawing.Size(271, 27);
             this.txbMontantModif.TabIndex = 25;
             // 
             // txbDescriptionModif
             // 
             this.txbDescriptionModif.BackColor = System.Drawing.Color.DarkGray;
             this.txbDescriptionModif.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbDescriptionModif.Location = new System.Drawing.Point(172, 119);
+            this.txbDescriptionModif.Location = new System.Drawing.Point(229, 146);
+            this.txbDescriptionModif.Margin = new System.Windows.Forms.Padding(4);
             this.txbDescriptionModif.Name = "txbDescriptionModif";
-            this.txbDescriptionModif.Size = new System.Drawing.Size(204, 23);
+            this.txbDescriptionModif.Size = new System.Drawing.Size(271, 27);
             this.txbDescriptionModif.TabIndex = 24;
             // 
             // btnModifier
             // 
             this.btnModifier.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifier.Location = new System.Drawing.Point(22, 371);
+            this.btnModifier.Location = new System.Drawing.Point(29, 457);
+            this.btnModifier.Margin = new System.Windows.Forms.Padding(4);
             this.btnModifier.Name = "btnModifier";
-            this.btnModifier.Size = new System.Drawing.Size(100, 24);
+            this.btnModifier.Size = new System.Drawing.Size(133, 30);
             this.btnModifier.TabIndex = 23;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = true;
@@ -628,9 +642,10 @@
             // btnAjouterPersonneInModif
             // 
             this.btnAjouterPersonneInModif.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjouterPersonneInModif.Location = new System.Drawing.Point(670, 188);
+            this.btnAjouterPersonneInModif.Location = new System.Drawing.Point(893, 231);
+            this.btnAjouterPersonneInModif.Margin = new System.Windows.Forms.Padding(4);
             this.btnAjouterPersonneInModif.Name = "btnAjouterPersonneInModif";
-            this.btnAjouterPersonneInModif.Size = new System.Drawing.Size(86, 49);
+            this.btnAjouterPersonneInModif.Size = new System.Drawing.Size(115, 60);
             this.btnAjouterPersonneInModif.TabIndex = 22;
             this.btnAjouterPersonneInModif.Text = "Ajouter une personne";
             this.btnAjouterPersonneInModif.UseVisualStyleBackColor = true;
@@ -639,9 +654,10 @@
             // 
             this.lblMont.AutoSize = true;
             this.lblMont.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMont.Location = new System.Drawing.Point(16, 157);
+            this.lblMont.Location = new System.Drawing.Point(21, 193);
+            this.lblMont.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMont.Name = "lblMont";
-            this.lblMont.Size = new System.Drawing.Size(64, 18);
+            this.lblMont.Size = new System.Drawing.Size(79, 22);
             this.lblMont.TabIndex = 19;
             this.lblMont.Text = "Montant";
             // 
@@ -649,9 +665,10 @@
             // 
             this.lblDesc.AutoSize = true;
             this.lblDesc.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDesc.Location = new System.Drawing.Point(19, 124);
+            this.lblDesc.Location = new System.Drawing.Point(25, 153);
+            this.lblDesc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.Size = new System.Drawing.Size(83, 18);
+            this.lblDesc.Size = new System.Drawing.Size(104, 22);
             this.lblDesc.TabIndex = 18;
             this.lblDesc.Text = "Description";
             // 
@@ -659,9 +676,10 @@
             // 
             this.lblDatedep.AutoSize = true;
             this.lblDatedep.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDatedep.Location = new System.Drawing.Point(19, 88);
+            this.lblDatedep.Location = new System.Drawing.Point(25, 108);
+            this.lblDatedep.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDatedep.Name = "lblDatedep";
-            this.lblDatedep.Size = new System.Drawing.Size(128, 18);
+            this.lblDatedep.Size = new System.Drawing.Size(158, 22);
             this.lblDatedep.TabIndex = 17;
             this.lblDatedep.Text = "Date de la dépense";
             // 
@@ -670,9 +688,10 @@
             this.cbbTypeModif.BackColor = System.Drawing.Color.DarkGray;
             this.cbbTypeModif.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbTypeModif.FormattingEnabled = true;
-            this.cbbTypeModif.Location = new System.Drawing.Point(172, 188);
+            this.cbbTypeModif.Location = new System.Drawing.Point(229, 231);
+            this.cbbTypeModif.Margin = new System.Windows.Forms.Padding(4);
             this.cbbTypeModif.Name = "cbbTypeModif";
-            this.cbbTypeModif.Size = new System.Drawing.Size(204, 26);
+            this.cbbTypeModif.Size = new System.Drawing.Size(271, 31);
             this.cbbTypeModif.TabIndex = 16;
             // 
             // label3
@@ -680,10 +699,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label3.Location = new System.Drawing.Point(326, 228);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(435, 281);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(432, 200);
+            this.label3.Size = new System.Drawing.Size(540, 250);
             this.label3.TabIndex = 33;
             this.label3.Text = "€ $ £";
             // 
@@ -696,10 +714,11 @@
             this.TabRecapitulatif.Controls.Add(this.dtpFinPer);
             this.TabRecapitulatif.Controls.Add(this.dtpDebPer);
             this.TabRecapitulatif.Controls.Add(this.btnPDF);
-            this.TabRecapitulatif.Location = new System.Drawing.Point(4, 25);
+            this.TabRecapitulatif.Location = new System.Drawing.Point(4, 28);
+            this.TabRecapitulatif.Margin = new System.Windows.Forms.Padding(4);
             this.TabRecapitulatif.Name = "TabRecapitulatif";
-            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.TabRecapitulatif.Size = new System.Drawing.Size(1175, 485);
+            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(4);
+            this.TabRecapitulatif.Size = new System.Drawing.Size(1569, 601);
             this.TabRecapitulatif.TabIndex = 4;
             this.TabRecapitulatif.Text = "Récapitulatif";
             // 
@@ -708,10 +727,9 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label5.Location = new System.Drawing.Point(322, 228);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(429, 281);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(432, 200);
+            this.label5.Size = new System.Drawing.Size(540, 250);
             this.label5.TabIndex = 34;
             this.label5.Text = "€ $ £";
             // 
@@ -719,10 +737,9 @@
             // 
             this.lblFinPer.AutoSize = true;
             this.lblFinPer.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinPer.Location = new System.Drawing.Point(38, 167);
-            this.lblFinPer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFinPer.Location = new System.Drawing.Point(51, 206);
             this.lblFinPer.Name = "lblFinPer";
-            this.lblFinPer.Size = new System.Drawing.Size(167, 18);
+            this.lblFinPer.Size = new System.Drawing.Size(206, 22);
             this.lblFinPer.TabIndex = 5;
             this.lblFinPer.Text = "Fin de la période désirée";
             // 
@@ -730,48 +747,61 @@
             // 
             this.lblDebPer.AutoSize = true;
             this.lblDebPer.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDebPer.Location = new System.Drawing.Point(38, 80);
-            this.lblDebPer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDebPer.Location = new System.Drawing.Point(51, 98);
             this.lblDebPer.Name = "lblDebPer";
-            this.lblDebPer.Size = new System.Drawing.Size(182, 18);
+            this.lblDebPer.Size = new System.Drawing.Size(225, 22);
             this.lblDebPer.TabIndex = 4;
             this.lblDebPer.Text = "Début de la période désirée";
             // 
             // dtpFinPer
             // 
-            this.dtpFinPer.Location = new System.Drawing.Point(243, 167);
-            this.dtpFinPer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFinPer.Location = new System.Drawing.Point(324, 206);
+            this.dtpFinPer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpFinPer.Name = "dtpFinPer";
-            this.dtpFinPer.Size = new System.Drawing.Size(151, 20);
+            this.dtpFinPer.Size = new System.Drawing.Size(200, 22);
             this.dtpFinPer.TabIndex = 3;
             // 
             // dtpDebPer
             // 
-            this.dtpDebPer.Location = new System.Drawing.Point(243, 80);
-            this.dtpDebPer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpDebPer.Location = new System.Drawing.Point(324, 98);
+            this.dtpDebPer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpDebPer.Name = "dtpDebPer";
-            this.dtpDebPer.Size = new System.Drawing.Size(151, 20);
+            this.dtpDebPer.Size = new System.Drawing.Size(200, 22);
             this.dtpDebPer.TabIndex = 2;
             // 
             // btnPDF
             // 
             this.btnPDF.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPDF.Location = new System.Drawing.Point(41, 246);
-            this.btnPDF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPDF.Location = new System.Drawing.Point(55, 303);
+            this.btnPDF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPDF.Name = "btnPDF";
-            this.btnPDF.Size = new System.Drawing.Size(169, 62);
+            this.btnPDF.Size = new System.Drawing.Size(225, 76);
             this.btnPDF.TabIndex = 0;
             this.btnPDF.Text = "Créer le PFD";
             this.btnPDF.UseVisualStyleBackColor = true;
             this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
             // 
+            // txbNom
+            // 
+            this.txbNom.Location = new System.Drawing.Point(691, 236);
+            this.txbNom.Name = "txbNom";
+            this.txbNom.Size = new System.Drawing.Size(145, 22);
+            this.txbNom.TabIndex = 35;
+            // 
+            // txbPrenom
+            // 
+            this.txbPrenom.Location = new System.Drawing.Point(691, 269);
+            this.txbPrenom.Name = "txbPrenom";
+            this.txbPrenom.Size = new System.Drawing.Size(145, 22);
+            this.txbPrenom.TabIndex = 36;
+            // 
             // FrmBudgetMois
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 462);
+            this.ClientSize = new System.Drawing.Size(1075, 569);
             this.Controls.Add(this.TabBudgetMois);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmBudgetMois";
             this.Text = "frmBudgetMois";
             this.TabBudgetMois.ResumeLayout(false);
@@ -847,5 +877,7 @@
         private System.Windows.Forms.Label lblPerca;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txbPrenom;
+        private System.Windows.Forms.TextBox txbNom;
     }
 }

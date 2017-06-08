@@ -16,6 +16,8 @@ namespace PAD_Money
         private OleDbConnection connec;
         DataSet ds;
         DataTable transaction;
+
+
         public FrmBudgetMois(OleDbConnection connec, DataSet ds)
         {
             //btnAjouter.ImageAlign = ContentAlignment.TopCenter;
@@ -29,18 +31,22 @@ namespace PAD_Money
             codeTransa();
             afficher_sup();
             transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
-           
-           
+
+
 
 
         }
+
         //affiche les elements de l'onglet "supprimer"
         private void afficher_sup()
         {
+            string res = transaction.Rows[0]["type"].ToString();
+            DataTable TypeFin = ds.Tables["TypeTransaction"].Select("codeType = " + res).CopyToDataTable();
             lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
             lblDescription2.Text = transaction.Rows[0]["description"].ToString();
             lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
-            lblType2.Text = transaction.Rows[0]["type"].ToString();
+
+            lblType2.Text = TypeFin.Rows[0]["libType"].ToString();
             if (transaction.Rows[0]["recetteON"].ToString() == "True")
             {
                 lblRorP.Text = "Recette";
@@ -60,30 +66,30 @@ namespace PAD_Money
             float montant = float.Parse(txtMontant.Text);
             DateTime depense = dtpDepense.Value;
             String typeString = cbbType.Text;
-            DataTable Type = ds.Tables["TypeTransaction"].Select("upper (libtype) = upper(" + typeString + ")").CopyToDataTable();
-            int[] listBenef= null;
+            DataTable Type = ds.Tables["TypeTransaction"].Select("libtype ='" + typeString + "'").CopyToDataTable();
+            int[] listBenef = null;
             int codeTypeLong = (int)Type.Rows[0]["codeType"];
             bool recette = true;
             bool percu = true;
-            if (cbPercu.Checked==true)
+            if (cbPercu.Checked == true)
             {
                 percu = true;
             }
-            if (cbRecette.Checked==true)
+            if (cbRecette.Checked == true)
             {
                 recette = true;
             }
-            for (int i=0; i<flpPersonne.Controls.Count; i++)
+            for (int i = 0; i < flpPersonne.Controls.Count; i++)
             {
                 if (((CheckBox)flpPersonne.Controls[i]).Checked == true)
                 {
-                    String[] res = new String[]{ flpPersonne.Controls[i].Text };
+                    String[] res = new String[] { flpPersonne.Controls[i].Text };
                     listBenef = BDDUtil.getCodeFromNames(res);
                 }
 
             }
 
-            BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong, listBenef );
+            BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong, listBenef);
         }
 
 
@@ -123,7 +129,7 @@ namespace PAD_Money
                 nom.AutoSize = true;
                 nom.Location = new System.Drawing.Point(x, y);
                 nom.Size = new System.Drawing.Size(98, 21);
-                nom.Text =row["nomPersonne"].ToString() + " " + row["pnPersonne"].ToString();
+                nom.Text = row["nomPersonne"].ToString() + " " + row["pnPersonne"].ToString();
                 flpPersonne.Controls.Add(nom);
                 y += 20;
             }
@@ -150,19 +156,21 @@ namespace PAD_Money
 
 
         //inutile, je supprimerai plus tard
-       // private void TabAjout_Selecting(object sender, TabControlCancelEventArgs e){}
+        // private void TabAjout_Selecting(object sender, TabControlCancelEventArgs e){}
 
         //inutile, je supprimerai plus tard
-       // private void lblDate2_Click(object sender, EventArgs e) {}
+        // private void lblDate2_Click(object sender, EventArgs e) {}
 
 
         //Onglet "modifier", recuperation des données de la table
         private void cbbChoixtransacModif_SelectedValueChanged(object sender, EventArgs e)
         {
             transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+            String res = transaction.Rows[0]["type"].ToString();
+            DataTable transactionFin = ds.Tables["TypeTransaction"].Select("codeType = " + res).CopyToDataTable();
             txbDescriptionModif.Text = (transaction.Rows[0]["description"]).ToString();
             txbMontantModif.Text = transaction.Rows[0]["montant"].ToString();
-            cbbTypeModif.Text = transaction.Rows[0]["type"].ToString();
+            cbbTypeModif.Text = transactionFin.Rows[0]["libType"].ToString();
             cbPercuModif.Checked = (bool)transaction.Rows[0]["PercuON"];
             cbRecuModif.Checked = (bool)transaction.Rows[0]["recetteON"];
         }
@@ -170,7 +178,7 @@ namespace PAD_Money
         //ajoute un nouveau type via la table "ajouter"
         private void btnAjouterType_Click(object sender, EventArgs e)
         {
-            DataTable Type = ds.Tables["Transaction"].Select("upper (type) = upper(" + cbbType + ")").CopyToDataTable();
+            DataTable Type = ds.Tables["Transaction"].Select("UCASE (type) = UCASE(" + cbbType + ")").CopyToDataTable();
             if (cbbType.Text != (string)Type.Rows[0]["type"])
             {
                 string nvxType = cbbType.Text;
@@ -188,13 +196,13 @@ namespace PAD_Money
         //Modifie une transaction
         private void btnModifier_Click(object sender, EventArgs e)
         {
-           // BDDUtil.modifyLine("Transaction", )
+            // BDDUtil.modifyLine("Transaction", )
         }
 
         //Ajoute de nouveaux types via l'onglet "modifier"
         private void btnAjouterInModif_Click(object sender, EventArgs e)
         {
-            DataTable Type = ds.Tables["Transaction"].Select("upper (type) = upper(" + cbbType + ")").CopyToDataTable();
+            DataTable Type = ds.Tables["Transaction"].Select("UCASE (type) = UCASE(" + cbbType + ")").CopyToDataTable();
             if (cbbType.Text != (string)Type.Rows[0]["type"])
             {
                 string nvxType = cbbType.Text;
@@ -202,15 +210,54 @@ namespace PAD_Money
             }
         }
 
-
-        private void btnPDF_Click(object sender, EventArgs e)
+        //ajoute des gens à la liste des gens
+        private void ajouterPersonne()
         {
-
+            string prenom = txbPrenom.Text;
+            string nom = txbNom.Text;
+            string[] NP = new string[] { nom + " " + prenom };
+            DataTable Personne = ds.Tables["Personne"].Select("UCASE (codePersonne) = UCASE(" + BDDUtil.getCodeFromNames(NP) + ")").CopyToDataTable();
+            if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
+            {
+                BDDUtil.ajouterPersonne(nom, prenom);
+            }
         }
 
+        //crée un PDF
+        private void btnPDF_Click(object sender, EventArgs e)
+        {
+            transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+            if (dtpFinPer.Value >= dtpDebPer.Value)
+            {
+                DateTime date = new DateTime(2000, 1, 1);
+                int i = 0;
+                while (date <= dtpFinPer.Value || i < transaction.Rows.Count)
+                {
+                    date = (DateTime)transaction.Rows[0]["dateTransaction"];
+                    if (date <= dtpDebPer.Value)
+                    {
+
+                    }
+                    i++;
+                }
+
+            }
+        }
+        //ajoute un personne via l'onglet ajouter"
         private void btnAjouterPers_Click(object sender, EventArgs e)
         {
-            //BDDUtil.ajouterPersonne()
+            ajouterPersonne();
+        }
+
+        //ajoute une personne via l'onglet "modifier"
+        private void btnAjouterPersonneInModif_Click(object sender, EventArgs e)
+        {
+            ajouterPersonne();
+        }
+
+        private void TabModif_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
