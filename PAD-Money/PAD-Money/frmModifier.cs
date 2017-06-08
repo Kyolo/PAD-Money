@@ -79,19 +79,19 @@ namespace PAD_Money
         {
             if(revenu)
             {
-                Dictionary<string, object> dico = new Dictionary<string, object>();
-                dico.Add("codePersonne",cbbBP.ValueMember);
-                dico.Add("montant", txtMontant.Text);
-                dico.Add("codePoste", cbbDescription.ValueMember);
-                BDDUtil.modifyLine("PosteRevenu", "codePoste", row[0], dico);
+                Dictionary<String, object> dico = new Dictionary<String, object>();
+                dico.Add("codePersonne",cbbBP.SelectedValue);
+                dico.Add("montant", float.Parse(txtMontant.Text));
+                dico.Add("codePoste", cbbDescription.SelectedValue);
+                BDDUtil.modifyLine("PosteRevenu", "codePoste", int.Parse(row[0].ToString()), dico);
             }
             else
             {
-                Dictionary<string, object> dico = new Dictionary<string, object>();
-                dico.Add("typePer", cbbBP.ValueMember);
-                dico.Add("montant", txtMontant.Text);
-                dico.Add("codePoste", cbbDescription.ValueMember);
-                BDDUtil.modifyLine("PostePeriodique", "codePoste", row[0], dico);
+                Dictionary<String, object> dico = new Dictionary<String, object>();
+                dico.Add("typePer", cbbBP.SelectedValue);
+                dico.Add("montant", float.Parse(txtMontant.Text));
+                dico.Add("codePoste", cbbDescription.SelectedValue);
+                BDDUtil.modifyLine("PostePeriodique", "codePoste", int.Parse(row[0].ToString()), dico);
             }
             this.DialogResult = DialogResult.OK;
         }

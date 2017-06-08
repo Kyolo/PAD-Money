@@ -63,8 +63,8 @@ namespace PAD_Money
             DataTable tab = ds.Tables[table];
             long max = 0;
             foreach(DataRow r in tab.Rows){
-                if((long)r[keyname] > max){
-                    max = (long)r.ItemArray[0];
+                if((int)r[keyname] > max){
+                    max = (int)r.ItemArray[0];
                 }
             }
 
@@ -299,13 +299,14 @@ namespace PAD_Money
         }
 
         private static int modifyLineLoc(String table, String keyname, object keyval, Dictionary<String, object> values){
-            DataRowCollection collec = ds.Tables[table].Rows;
-            
+            DataRowCollection collec = ds.Tables[table].Rows;           
             try{
                 foreach(DataRow row in collec){
                     if(row[keyname].Equals(keyval)){
                         foreach(KeyValuePair<String, object> kv in values){
-                            row[kv.Key]=values;
+                            MessageBox.Show("1");
+                            row[kv.Key]=kv.Value;
+                            MessageBox.Show("2");
                         }
                     }
                 }
@@ -436,11 +437,11 @@ namespace PAD_Money
             return retAddPoste | retAddPostePer;
         }
 
-        public static int ajouterPosteRevenu(String libelle, float montant, long personne){
+        public static int ajouterPosteRevenu(String libelle, float montant, long personne,int date){
             long codePoste = maxCode("Poste","codePoste")+1;
             
             int retAddPoste = addLine("Poste", codePoste, libelle);
-            int retAddPosteRev = addLine("PostePeriodique", codePoste, montant, personne);
+            int retAddPosteRev = addLine("PosteRevenu", codePoste, montant, personne,date);
 
             return retAddPoste | retAddPosteRev;
         }
@@ -470,7 +471,7 @@ namespace PAD_Money
             foreach(DataRow dr in ds.Tables["Personne"].Rows){
                 foreach(String nmpm in nomPrenom){
                     if((dr[1].ToString() + " " + dr[2].ToString()).Equals(nmpm)){
-                        lg.Add((long)dr[0]);
+                        lg.Add((int)dr[0]);
                     }
                 }
             }

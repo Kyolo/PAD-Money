@@ -39,8 +39,7 @@ namespace PAD_Money
             table = ds.Tables["Poste"];
             cbb.DataSource = table;
             cbb.DisplayMember = "libPoste";
-            cbb.ValueMember = "codePoste";
-            
+            cbb.ValueMember = "codePoste";           
         }
 
         private void remplirCbbPeriode()
@@ -207,12 +206,15 @@ namespace PAD_Money
 
         private void btnValiderRevenu_Click(object sender, EventArgs e)
         {
-            
-            foreach(Control c in clbRevenu.Items)
+            string[] tab = new string[1];
+            long[] tab2;     
+            for(int i = 0; i < clbRevenu.Items.Count;i++)
             {
-                if(((CheckBox)c).Checked)
+                if (clbRevenu.GetItemChecked(i))
                 {
-                    BDDUtil.ajouterPosteRevenu(cbbRevenu.SelectedItem.ToString(),int.Parse(lblMontantRevenu.Text),BDDUtil.getCodeFromNames(new string[] { ((CheckBox)c).Text })[0]);
+                    tab[0] = clbRevenu.Items[i].ToString();
+                    tab2 = BDDUtil.getCodeFromNames(tab);
+                    BDDUtil.ajouterPosteRevenu(cbbRevenu.Text, float.Parse(txtMontantRevenu.Text), tab2[0],dtpRevenu.Value.Day);
                 }
             }
         }
@@ -277,7 +279,7 @@ namespace PAD_Money
                     DataRow r = res.NewRow();
                     r["Poste"] = row["codePoste"];
                     r["Description"] = getLibPoste(row["codePoste"].ToString());
-                    r["Beneficaire"] = getBeneficaire(row["codePersonne"].ToString());
+                    r["Beneficiaire"] = getBeneficaire(int.Parse(row["codePersonne"].ToString()));
                     r["Montant"] = row["montant"];
                     res.Rows.Add(r);
                 }
@@ -326,14 +328,14 @@ namespace PAD_Money
             return res;
         }
 
-        private string getBeneficaire(string codePers)
+        private string getBeneficaire(int codePers)
         {
             string res = string.Empty;
             foreach(DataRow r in ds.Tables["Personne"].Rows)
             {
-                if(r["codePersonne"].ToString() == codePers)
+                if(int.Parse(r["codePersonne"].ToString()) == codePers)
                 {
-                    res = r["nomPersonne"] + " " + r["pnPersonne"];
+                    res = r["nomPersonne"].ToString();// + " " + r["pnPersonne"];
                 }
             }
             return res;
