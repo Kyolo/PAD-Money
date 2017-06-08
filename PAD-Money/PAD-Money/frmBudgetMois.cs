@@ -30,7 +30,7 @@ namespace PAD_Money
             type();
             codeTransa();
             afficher_sup();
-            transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+            transaction = ds.Tables["Transaction"].Select("codeTransaction = '" + cbbTransactionExistantes.SelectedValue + "'").CopyToDataTable();
 
 
 
@@ -41,7 +41,7 @@ namespace PAD_Money
         private void afficher_sup()
         {
             string res = transaction.Rows[0]["type"].ToString();
-            DataTable TypeFin = ds.Tables["TypeTransaction"].Select("codeType = " + res).CopyToDataTable();
+            DataTable TypeFin = ds.Tables["TypeTransaction"].Select("codeType = '" + res + "'").CopyToDataTable();
             lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
             lblDescription2.Text = transaction.Rows[0]["description"].ToString();
             lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
@@ -89,7 +89,7 @@ namespace PAD_Money
 
             }
             BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong, listBenef);
-          //  BDDUtil.ajouterTransaction(;
+            //  BDDUtil.ajouterTransaction(;
         }
 
 
@@ -165,9 +165,9 @@ namespace PAD_Money
         //Onglet "modifier", recuperation des données de la table
         private void cbbChoixtransacModif_SelectedValueChanged(object sender, EventArgs e)
         {
-            transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+            transaction = ds.Tables["Transaction"].Select("codeTransaction = '" + cbbTransactionExistantes.SelectedValue + "'").CopyToDataTable();
             String res = transaction.Rows[0]["type"].ToString();
-            DataTable transactionFin = ds.Tables["TypeTransaction"].Select("codeType = " + res).CopyToDataTable();
+            DataTable transactionFin = ds.Tables["TypeTransaction"].Select("codeType = '" + res + "'").CopyToDataTable();
             txbDescriptionModif.Text = (transaction.Rows[0]["description"]).ToString();
             txbMontantModif.Text = transaction.Rows[0]["montant"].ToString();
             DataTable type = new DataTable();
@@ -220,7 +220,7 @@ namespace PAD_Money
             string prenom = txbPrenom.Text;
             string nom = txbNom.Text;
             string[] NP = new string[] { nom + " " + prenom };
-            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= "+ BDDUtil.getCodeFromNames(NP)).CopyToDataTable();
+            DataTable Personne = ds.Tables["Personne"];
             if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
             {
                 BDDUtil.ajouterPersonne(nom, prenom);
@@ -232,7 +232,7 @@ namespace PAD_Money
             string prenom = txbPrenom1.Text;
             string nom = txbNom2.Text;
             string[] NP = new string[] { nom + " " + prenom };
-            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= " + BDDUtil.getCodeFromNames(NP)).CopyToDataTable();
+            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= '" + BDDUtil.getCodeFromNames(NP) + "'").CopyToDataTable();
             if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
             {
                 BDDUtil.ajouterPersonne(nom, prenom);
@@ -242,13 +242,13 @@ namespace PAD_Money
         //crée un PDF
         private void btnPDF_Click(object sender, EventArgs e)
         {
-            transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
-          //  DataRow[] tabTransaction = new DataRow()[transaction.Rows.Count];
+            transaction = ds.Tables["Transaction"].Select("codeTransaction = '" + cbbTransactionExistantes.SelectedValue + "'").CopyToDataTable();
+            //  DataRow[] tabTransaction = new DataRow()[transaction.Rows.Count];
 
 
             if (dtpFinPer.Value >= dtpDebPer.Value)
             {
-                while ((DateTime)transaction.Rows[0]["dateTransaction"]<dtpFinPer.Value);
+                while ((DateTime)transaction.Rows[0]["dateTransaction"] < dtpFinPer.Value) ;
                 {
                     if ((DateTime)transaction.Rows[0]["dateTransaction"] > dtpDebPer.Value) ;
                     {
@@ -261,16 +261,40 @@ namespace PAD_Money
         //ajoute un personne via l'onglet ajouter"
         private void btnAjouterPers_Click(object sender, EventArgs e)
         {
+            supprimerGens();
             ajouterPersonneGlob();
+            regeneAgain();
+        }
+
+        //supprimme l'affichage des gens
+        private void supprimerGens()
+        {
+            flpListePersonneInModif.Controls.Clear();
+            flpPersonne.Controls.Clear();
+        }
+
+
+        //reregenere les gens
+        private void regeneAgain()
+        {
+            generationdyna1();
+            generationdyna2();
         }
 
         //ajoute une personne via l'onglet "modifier"
         private void btnAjouterPersonneInModif_Click(object sender, EventArgs e)
         {
-            ajouterPersonneGlob();
+            supprimerGens();
+            ajouterPersonneModif();
+            regeneAgain();
         }
 
         private void TabModif_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fileSystemWatcher1_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
 
         }

@@ -96,7 +96,7 @@ namespace PAD_Money
                     }
                 }
 
-                BDDUtil.init(connec, ds);
+                BDDUtil.init(connec, ds, this.Font);
             }
         }
 

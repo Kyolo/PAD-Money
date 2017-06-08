@@ -24,15 +24,18 @@ namespace PAD_Money
 
         private BDDUtil(){}//Classe utilitaire : on ne veut pas qu'elle puisse être instanciée
 
+		public static Font defaultFont;
+
         //L'objet connection permettant d'acceder à la bdd
         private static OleDbConnection connec = null;
 
         //La bdd locale
         private static DataSet ds = null;
 
-        public static void init(OleDbConnection connec, DataSet ds){
+        public static void init(OleDbConnection connec, DataSet ds, Font ft){
             BDDUtil.connec = connec;
             BDDUtil.ds = ds;
+			BDDUtil.defaultFont = ft;
         }
 
         private static String objectToStringRep(object val){
@@ -45,7 +48,7 @@ namespace PAD_Money
             } else if(val.GetType().Equals(typeof(DateTime))){
                 //La date parce qu'il faut rajouter des # avant et après
                 DateTime time = (DateTime)val;
-                d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
+                d = "#"+time.Day+"/"+time.Month+"/"+time.Year+"#";
             } else if(val.GetType().Equals(typeof(String))){
                 //Les chaines de caractères car elles doivent êtres entre '
                 d = "'"+val.ToString()+"'";
@@ -63,12 +66,11 @@ namespace PAD_Money
             DataTable tab = ds.Tables[table];
             int max = 0;
             foreach(DataRow r in tab.Rows){
-                if((int)r[keyname] > max){
-                    max = (int)r.ItemArray[0];
+                if(((int)r[keyname]) > max){
+                    max = (int)r[0];
                 }
             }
-
-            return max;
+           return max;
         }
 
         public static int addLine(String table, params object[] data){
@@ -159,13 +161,15 @@ namespace PAD_Money
                     resultat = REMOTE_SQL_ERROR;
             
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-                Console.WriteLine("invalidopeexcep");
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+                MessageBox.Show(table + " : " +"invalidopeexcep");
             } catch (OleDbException e) {
-                Console.WriteLine(e.GetType().ToString() + "\n" + e.Message);
+                MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -241,7 +245,7 @@ namespace PAD_Money
                 } else if(val1.GetType().Equals(typeof(DateTime))){
                     //La date parce qu'il faut rajouter des # avant et après
                     DateTime time = (DateTime)val1;
-                    builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                    builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year + "#");
                 } else if(val1.GetType().Equals(typeof(String))){
                     //Les chaines de caractères car elles doivent êtres entre '
                     builder.Append(" = '"+val1.ToString()+"'");
@@ -261,7 +265,7 @@ namespace PAD_Money
                     } else if(val2.GetType().Equals(typeof(DateTime))){
                         //La date parce qu'il faut rajouter des # avant et après
                         DateTime time = (DateTime)val1;
-                        builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                        builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year + "#");
                     } else if(val2.GetType().Equals(typeof(String))){
                         //Les chaines de caractères car elles doivent êtres entre '
                         builder.Append(" = '"+val2.ToString()+"'");
@@ -279,11 +283,14 @@ namespace PAD_Money
                 if(reqRes < 0)
                     resultat = REMOTE_SQL_ERROR;
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-            } catch (OleDbException) {
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException e) {
+				MessageBox.Show(table + " : " +e.GetType()+"\n"+e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -351,12 +358,13 @@ namespace PAD_Money
                     resultat = REMOTE_SQL_ERROR;
             
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-            } catch (OleDbException) {
-
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException e) {
+				MessageBox.Show(table + " : " +e.GetType()+"\n"+e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -378,7 +386,7 @@ namespace PAD_Money
          float montant, bool recette, bool percu, int codeType, int[] codeBeneficiaires){
             //On ajoute la ligne de la transaction
             int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
-            
+				
             int retAddBenef = 0;
             foreach(int codeBenef in codeBeneficiaires){//On ajoute les bénéficiares
                 retAddBenef |= addLine("Beneficiaires", codeTransaction, codeBenef);
@@ -395,7 +403,7 @@ namespace PAD_Money
         }
 
         public static int ajouterTypeTransaction(String libelle){
-            return addLine("TypeTransaction",maxCode("Transaction","codeTransaction")+1, libelle);
+            return addLine("TypeTransaction",maxCode("TypeTransaction","codeType")+1, libelle);
         }
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
@@ -423,7 +431,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode){
-            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("[libPer] = '"+codePeriode+"'")[0][0]);
+            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("libPer = '"+codePeriode+"'")[0]["codePer"]);
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode){
@@ -474,7 +482,7 @@ namespace PAD_Money
                 }
             }
 
-            return lg.ToArray();
+			return lg.ToArray();
 
         }
 
