@@ -159,13 +159,15 @@ namespace PAD_Money
                     resultat = REMOTE_SQL_ERROR;
             
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-                Console.WriteLine("invalidopeexcep");
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+                MessageBox.Show(table + " : " +"invalidopeexcep");
             } catch (OleDbException e) {
-                Console.WriteLine(e.GetType().ToString() + "\n" + e.Message);
+                MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -279,11 +281,14 @@ namespace PAD_Money
                 if(reqRes < 0)
                     resultat = REMOTE_SQL_ERROR;
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-            } catch (OleDbException) {
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException e) {
+				MessageBox.Show(table + " : " +e.GetType()+"\n"+e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -351,12 +356,13 @@ namespace PAD_Money
                     resultat = REMOTE_SQL_ERROR;
             
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-            } catch (OleDbException) {
-
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException e) {
+				MessageBox.Show(table + " : " +e.GetType()+"\n"+e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
