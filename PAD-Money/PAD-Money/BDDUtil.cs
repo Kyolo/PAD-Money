@@ -84,7 +84,7 @@ namespace PAD_Money
 
             //Puis on remplit (data.length = nrow.ItemArray.Length, voir plus gaut)
             for(int i = 0; i < data.Length; i++){
-                nrow.ItemArray[i] = data[i];
+                nrow[i] = data[i];
 
             }
 
