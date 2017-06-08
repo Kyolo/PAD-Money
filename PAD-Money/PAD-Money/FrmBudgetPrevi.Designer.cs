@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabBudgetPrevi = new System.Windows.Forms.TabControl();
             this.tbpPF = new System.Windows.Forms.TabPage();
+            this.txtPostePF = new System.Windows.Forms.TextBox();
             this.grbMontantPF = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtMontantPF = new System.Windows.Forms.TextBox();
@@ -56,6 +57,7 @@
             this.lblDescripPP = new System.Windows.Forms.Label();
             this.lblIntitulePP = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtPosteR = new System.Windows.Forms.TextBox();
             this.clbRevenu = new System.Windows.Forms.CheckedListBox();
             this.grbRevenu = new System.Windows.Forms.GroupBox();
             this.lblMontantRevenu = new System.Windows.Forms.Label();
@@ -77,8 +79,6 @@
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.modifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtPostePF = new System.Windows.Forms.TextBox();
-            this.txtPosteR = new System.Windows.Forms.TextBox();
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
@@ -124,6 +124,13 @@
             this.tbpPF.TabIndex = 0;
             this.tbpPF.Text = "Poste fixe";
             this.tbpPF.UseVisualStyleBackColor = true;
+            // 
+            // txtPostePF
+            // 
+            this.txtPostePF.Location = new System.Drawing.Point(137, 125);
+            this.txtPostePF.Name = "txtPostePF";
+            this.txtPostePF.Size = new System.Drawing.Size(183, 20);
+            this.txtPostePF.TabIndex = 13;
             // 
             // grbMontantPF
             // 
@@ -245,6 +252,7 @@
             this.txtMontantPP.Name = "txtMontantPP";
             this.txtMontantPP.Size = new System.Drawing.Size(72, 20);
             this.txtMontantPP.TabIndex = 14;
+            this.txtMontantPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress_1);
             // 
             // label1
             // 
@@ -371,6 +379,13 @@
             this.tabPage3.Text = "Revenu";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // txtPosteR
+            // 
+            this.txtPosteR.Location = new System.Drawing.Point(137, 124);
+            this.txtPosteR.Name = "txtPosteR";
+            this.txtPosteR.Size = new System.Drawing.Size(183, 20);
+            this.txtPosteR.TabIndex = 43;
+            // 
             // clbRevenu
             // 
             this.clbRevenu.FormattingEnabled = true;
@@ -406,6 +421,7 @@
             this.txtMontantRevenu.Name = "txtMontantRevenu";
             this.txtMontantRevenu.Size = new System.Drawing.Size(72, 20);
             this.txtMontantRevenu.TabIndex = 7;
+            this.txtMontantRevenu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress_1);
             // 
             // dtpRevenu
             // 
@@ -569,20 +585,6 @@
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
             this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
-            // 
-            // txtPostePF
-            // 
-            this.txtPostePF.Location = new System.Drawing.Point(137, 125);
-            this.txtPostePF.Name = "txtPostePF";
-            this.txtPostePF.Size = new System.Drawing.Size(183, 20);
-            this.txtPostePF.TabIndex = 13;
-            // 
-            // txtPosteR
-            // 
-            this.txtPosteR.Location = new System.Drawing.Point(137, 124);
-            this.txtPosteR.Name = "txtPosteR";
-            this.txtPosteR.Size = new System.Drawing.Size(183, 20);
-            this.txtPosteR.TabIndex = 43;
             // 
             // FrmBudgetPrevi
             // 

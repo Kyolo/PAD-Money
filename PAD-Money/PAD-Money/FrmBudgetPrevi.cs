@@ -85,6 +85,7 @@ namespace PAD_Money
         {
             BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text), dtpPF.Value.Day);
         }
+
         private void verifPF()
         {
 
@@ -312,7 +313,7 @@ namespace PAD_Money
                 if(r["codePoste"].ToString() == code)
                 {
                     res[0]++;
-                    res[1] += (int)r["montantEcheance"];
+                    res[1] += int.Parse(r["montantEcheance"].ToString());
                 }
             }
             return res;
@@ -335,14 +336,26 @@ namespace PAD_Money
         {
             if (e.RowIndex != dgvRecap.RowCount-1)
             {
-                DataRowView currentDataRowView = (DataRowView)dgvRecap.CurrentRow.DataBoundItem;
-                DataRow row = currentDataRowView.Row;
-                if (rdbPF.Checked || rdbR.Checked)
+                try
                 {
-                    dgvRecap.ContextMenuStrip = cms;
-                    cms.Show(Control.MousePosition);
+                    DataRowView currentDataRowView = (DataRowView)dgvRecap.CurrentRow.DataBoundItem;
+                    DataRow row = currentDataRowView.Row;
+                    if (rdbPF.Checked || rdbR.Checked)
+                    {
+                        dgvRecap.ContextMenuStrip = cms;
+                        cms.Show(Control.MousePosition);
+                    }
+                    else if (rdbPP.Checked)
+                    {
+                        frmEcheance frm = new frmEcheance(row, ds);
+                        frm.ShowDialog();
+                    }
+                    dr = row;
                 }
-                dr = row;
+                catch
+                {
+
+                }
             }           
         }
 
@@ -468,6 +481,31 @@ namespace PAD_Money
                             }
                     table.Rows.Add(row);
                 }                                  
+            }
+        }
+
+        private void txtMontantPP_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            bool virgule = false;
+            if (txtMontantPF.Text.Contains('.'))
+            {
+                virgule = true;
+            }
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '.' || e.KeyChar == ',' || char.IsControl(e.KeyChar))
+            {
+                if ((e.KeyChar == '.' || e.KeyChar == ',') && virgule)
+                {
+                    e.Handled = true;
+                }
+                if (e.KeyChar == ',' && !virgule)
+                {
+                    e.Handled = true;
+                    txtMontantPF.Text += '.';
+                }
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
     }
