@@ -232,7 +232,7 @@ namespace PAD_Money
             string prenom = txbPrenom1.Text;
             string nom = txbNom2.Text;
             string[] NP = new string[] { nom + " " + prenom };
-            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= '" + BDDUtil.getCodeFromNames(NP) + "'").CopyToDataTable();
+            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= '" + BDDUtil.getCodeFromNames(NP)[0] + "'").CopyToDataTable();
             if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
             {
                 BDDUtil.ajouterPersonne(nom, prenom);
@@ -287,6 +287,11 @@ namespace PAD_Money
             supprimerGens();
             ajouterPersonneModif();
             regeneAgain();
+        }
+
+        private void dataBinding()
+        {
+
         }
 
         private void TabModif_Click(object sender, EventArgs e)
