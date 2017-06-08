@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PAD_Money
@@ -33,6 +30,7 @@ namespace PAD_Money
         private static DataSet ds = null;
 
         public static void init(OleDbConnection connec, DataSet ds, Font ft){
+			//On assigne pour l'initialisation
             BDDUtil.connec = connec;
             BDDUtil.ds = ds;
 			BDDUtil.defaultFont = ft;
@@ -99,17 +97,17 @@ namespace PAD_Money
             if(connec == null || ds == null)
                 throw new InvalidOperationException("Classe BDDUtil incorrectement initialisée");
             
-            int resLoc = addlineLoc(table, data);
-            int resRem = addLineRem(table, data);
+            int resLoc = addlineLoc(table, data);//On ajoute la ligne en local
+            int resRem = addLineRem(table, data);//Et dans le fichier
 
             //On "combine" les deux résultats, afin d'avoir toute les message en un
             return resLoc | resRem;
         }
 
         private static int addlineLoc(String table, DataRow data){
-            DataTable tab = ds.Tables[table];
+            DataTable tab = ds.Tables[table];//On récupère la table
             try{
-                tab.Rows.Add(data);
+                tab.Rows.Add(data);//On ajoute la ligne
             } catch {
                 return LOCAL_ERROR;
             }
@@ -183,15 +181,15 @@ namespace PAD_Money
         //Methodes de suppression de lignes :
 
         public static int removeLine(String table, String kname1, object val1){
-            return removeLine(table, kname1, null, val1, null);
+            return removeLine(table, kname1, null, val1, null);//Juste une simplicité d'écriture
         }
 
         public static int removeLine(String table, String kname1, String kname2, object val1, object val2){
-            if(connec == null || ds == null)
+            if(connec == null || ds == null)//on vérifie que le dataset et la connection sont initialisés
                 throw new InvalidOperationException("Classe BDDUtil incorrectement initialisée");
             
-            int retLoc = removeLineLoc(table, kname1, kname2, val1, val2);
-            int remLoc = removeLineRem(table, kname1, kname2, val1, val2);
+            int retLoc = removeLineLoc(table, kname1, kname2, val1, val2);//Modification en local
+            int remLoc = removeLineRem(table, kname1, kname2, val1, val2);//Modification à distance
             return retLoc | remLoc;
         }
 
@@ -210,7 +208,7 @@ namespace PAD_Money
                                 rows.RemoveAt(i);
                             }
                             
-                        } else {//S'il n'y a qu'une seule condition, et qu'elel est vérifiée :
+                        } else {//S'il n'y a qu'une seule condition, et qu'elle est vérifiée :
                             rows.RemoveAt(i);
                         }
                     }
@@ -236,7 +234,7 @@ namespace PAD_Money
                 
                 StringBuilder builder = new StringBuilder();
                 builder
-                .Append("DELETE FROM [").Append(table).Append("] WHERE ")
+                .Append("DELETE FROM [").Append(table).Append("] WHERE ")//On prépare le debut de la commande
                 .Append(kname1);
                 
                 if(val1 == null){
@@ -257,7 +255,7 @@ namespace PAD_Money
 
                 //S'il y a une deuxième clé
                 if(kname2 != null){
-                    builder.Append(" AND ").Append(kname2);
+                    builder.Append(" AND ").Append(kname2);//On rajoute l'opérateur logique
                 
                     if(val2 == null){
                         //Si la valeur est nulle, on le met comme tel
@@ -280,7 +278,7 @@ namespace PAD_Money
 
                 int reqRes = comm.ExecuteNonQuery();
                 
-                if(reqRes < 0)
+                if(reqRes < 0)//S'il y a moins de 0 lignes modifiée, il y a une erreur, si c'est possible
                     resultat = REMOTE_SQL_ERROR;
 
             } catch (InvalidOperationException e) {
@@ -301,17 +299,20 @@ namespace PAD_Money
         }
 
         public static int modifyLine(String table, String keyname, object keyval, Dictionary<String, object> values){
-            int modLoc = modifyLineLoc(table, keyname, keyval, values);
-            return modLoc | modifyLineRem(table, keyname, keyval, values);
+			if (connec == null || ds == null)//on vérifie que le dataset et la connection sont initialisés
+				throw new InvalidOperationException("Classe BDDUtil incorrectement initialisée");
+
+			int modLoc = modifyLineLoc(table, keyname, keyval, values);//mofication locale
+            return modLoc | modifyLineRem(table, keyname, keyval, values);//mofication a distance, code légèrement un peu plus compact que les précédents semblables
         }
 
         private static int modifyLineLoc(String table, String keyname, object keyval, Dictionary<String, object> values){
-            DataRowCollection collec = ds.Tables[table].Rows;           
+            DataRowCollection collec = ds.Tables[table].Rows;//on récupère la collection    
             try{
-                foreach(DataRow row in collec){
-                    if(row[keyname].Equals(keyval)){
+                foreach(DataRow row in collec){//Pour chaques lignes
+                    if(row[keyname].Equals(keyval)){//Si la clé est bonne
                         foreach(KeyValuePair<String, object> kv in values){
-                            row[kv.Key]=kv.Value;
+                            row[kv.Key]=kv.Value;//on modifie tout ce qui a une clef dans le dictionnaire
                         }
                     }
                 }
@@ -435,10 +436,10 @@ namespace PAD_Money
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode, int jourDuMois){
-            int codePoste = maxCode("Poste","codePoste")+1;
+            int codePoste = maxCode("Poste","codePoste")+1;//récupération d'un identifiant
             
-            int retAddPoste = addLine("Poste", codePoste, libelle);
-            int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode, jourDuMois);
+            int retAddPoste = addLine("Poste", codePoste, libelle);//Ajout local
+            int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode, jourDuMois);//Ajout distance
 
             return retAddPoste | retAddPostePer;
         }
@@ -457,11 +458,12 @@ namespace PAD_Money
         }
 
         public static int supprimerTransaction(int codeTransaction){
-            int remBenef = removeLine("Beneficiaires", "codeTransaction", codeTransaction);
+            int remBenef = removeLine("Beneficiaires", "codeTransaction", codeTransaction);//On supprime d'abord les bénéficiaires pour ne pas briser les dépendances
             return remBenef | removeLine("Transaction", "codeTransaction", codeTransaction);
         }
 
         public static int supprimerPoste(int codePoste){
+			//On retire dans toutes les tables afin de n'avoir qu'une seule méthode pour tout les types poste
             int remEchea = removeLine("Echeances", "codePoste", codePoste);
             int remPonct = removeLine("PostePonctuel", "codePoste", codePoste);
             int remPerio = removeLine("PostePeriodique", "codePoste", codePoste);
@@ -472,17 +474,17 @@ namespace PAD_Money
         }
 
         public static int[] getCodeFromNames(String[] nomPrenom){
-            List<int> lg = new List<int>(nomPrenom.Length);
+            List<int> lg = new List<int>(nomPrenom.Length);//On prépare une liste
 
-            foreach(DataRow dr in ds.Tables["Personne"].Rows){
-                foreach(String nmpm in nomPrenom){
+            foreach(DataRow dr in ds.Tables["Personne"].Rows){//Pour chaques lignes dans personne
+                foreach(String nmpm in nomPrenom){//et chaques nomprenom
                     if((dr[1].ToString() + " " + dr[2].ToString()).Equals(nmpm)){
-                        lg.Add((int)dr[0]);
+                        lg.Add((int)dr[0]);//on vérifie si ça coincide, si oui on ajoute
                     }
                 }
             }
 
-			return lg.ToArray();
+			return lg.ToArray();//et on l'envoie sous forme de tableau
 
         }
 
