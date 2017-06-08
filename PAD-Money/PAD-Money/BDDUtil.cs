@@ -450,7 +450,10 @@ namespace PAD_Money
         }
 
         public static int ajouterPersonne(String nomPersonne, String pmPersonne){
-            return addLine("Personne", maxCode("Personne","codePersonne")+1,nomPersonne, pmPersonne);
+			int res = addLine("Personne", maxCode("Personne", "codePersonne") + 1, nomPersonne, pmPersonne, "0000000000");
+			MessageBox.Show(""+res+"\n");
+
+			return res;
         }
 
         public static int supprimerTransaction(int codeTransaction){
