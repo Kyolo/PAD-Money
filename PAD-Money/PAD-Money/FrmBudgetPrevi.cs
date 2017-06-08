@@ -85,6 +85,10 @@ namespace PAD_Money
         {
             BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text), dtpPF.Value.Day);
         }
+        private void verifPF()
+        {
+
+        }
 
         private void txtMontantPP_KeyPress(object sender, KeyPressEventArgs e)
         {           
@@ -265,7 +269,7 @@ namespace PAD_Money
                     DataRow r = res.NewRow();
                     r["Poste"] = row["codePoste"];
                     r["Description"] = getLibPoste(row["codePoste"].ToString());
-                    //r["Beneficiaire"] = getBeneficaire(int.Parse(row["codePersonne"].ToString()));
+                    r["Beneficiaire"] = getBeneficaire(int.Parse(row["codePersonne"].ToString()));
                     r["Montant"] = row["montant"];
                     res.Rows.Add(r);
                 }
@@ -363,7 +367,8 @@ namespace PAD_Money
             }
             else if(e.ClickedItem.Text == "Supprimer")
             {
-                BDDUtil.supprimerPoste((int)dr[0]);
+                MessageBox.Show(dr[0].ToString());
+                BDDUtil.supprimerPoste(int.Parse(dr[0].ToString()));
                 remplirDgv(currentTag);
             }
         }
@@ -372,7 +377,97 @@ namespace PAD_Money
         {
             if(((RadioButton)sender).Checked)
             {
+                DataTable table = new DataTable();
+                table.Columns.Add("Poste");
+                table.Columns.Add("Janvier");
+                table.Columns.Add("Fevrier");
+                table.Columns.Add("Mars");
+                table.Columns.Add("Avril");
+                table.Columns.Add("Mai");
+                table.Columns.Add("Juin");
+                table.Columns.Add("Juillet");
+                table.Columns.Add("Aout");
+                table.Columns.Add("Septembre");
+                table.Columns.Add("Octobre");
+                table.Columns.Add("Novembre");
+                table.Columns.Add("Decembre");
+                
+                dgvRecap.DataSource = table;
+                dgvRecap.Columns["Poste"].Frozen = true;
 
+                int numCurrentPoste;
+                int typePer;
+
+                DataTable t = new DataTable();
+                t.Columns.Add("codePoste");
+                t.Columns.Add("montant");
+                t.Columns.Add("typePer");
+
+
+                foreach(DataRow r in ds.Tables["PostePeriodique"].Rows)
+                {
+                    DataRow nrow = t.NewRow();
+                    nrow["codePoste"] = r["codePoste"];
+                    nrow["montant"] = -int.Parse(r["montant"].ToString());
+                    nrow["typePer"] = r["typePer"];
+                    t.Rows.Add(nrow);
+                }
+                foreach(DataRow r in ds.Tables["PosteRevenu"].Rows)
+                {
+                    DataRow nrow = t.NewRow();
+                    nrow["codePoste"] = r["codePoste"];
+                    nrow["montant"] = r["montant"];
+                    nrow["typePer"] = 2;
+                    t.Rows.Add(nrow);
+                }
+
+ 
+                    foreach (DataRow r1 in t.Rows)
+                    {
+                        DataRow row = table.NewRow();
+                        numCurrentPoste = int.Parse(r1["codePoste"].ToString());
+                        typePer = int.Parse(r1["typePer"].ToString());
+                            row["Poste"] = getLibPoste(r1["codePoste"].ToString());
+                            switch (typePer)
+                            {
+                                case 1:                                  
+                                    for(int i = 1; i < table.Columns.Count;i++)
+                                    {
+                                        row[i] = int.Parse(r1["montant"].ToString()) * 4;
+                                    }
+                                    break;
+                                case 2:
+                                    for (int i = 1; i < table.Columns.Count; i++)
+                                    {
+                                        row[i] = int.Parse(r1["montant"].ToString());
+                                    }
+                                    break;
+                                case 3:
+                                    for (int i = 1; i < table.Columns.Count; i+=2)
+                                    {
+                                        row[i] = int.Parse(r1["montant"].ToString());
+                                    }
+                                    break;
+                                case 4:
+                                    for (int i = 1; i < table.Columns.Count; i+=3)
+                                    {
+                                        row[i] = int.Parse(r1["montant"].ToString());
+                                    }
+                                    break;
+                                case 5:
+                                    for (int i = 1; i < table.Columns.Count; i+=6)
+                                    {
+                                        row[i] = int.Parse(r1["montant"].ToString());
+                                    }
+                                    break;
+                                case 6:
+                                    row[1] = int.Parse(r1["montant"].ToString());
+                                    break;
+                                default:
+                                    break;
+                            }
+                    table.Rows.Add(row);
+                }                                  
             }
         }
     }
