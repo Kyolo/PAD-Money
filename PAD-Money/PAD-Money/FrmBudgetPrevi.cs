@@ -83,14 +83,19 @@ namespace PAD_Money
 
         private void btnValiderPF_Click(object sender, EventArgs e)
         {
-
-            BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text),cbbPeriode.SelectedValue.ToString() , dtpPF.Value.Day);
-
-        }
-
-        private void verifPF()
-        {
-
+            if (txtPostePF.Text != string.Empty && txtMontantPF.Text != string.Empty)
+            {
+                BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text), int.Parse(cbbPeriode.SelectedValue.ToString()), dtpPF.Value.Day);
+                txtPostePF.Text = string.Empty;
+                txtMontantPF.Text = string.Empty;
+                epIntitulPP.SetError(txtMontantPF, string.Empty);
+                epIntitulPP.SetError(txtPostePF, string.Empty);
+            }
+            else
+            {
+                epIntitulPP.SetError(txtMontantPF, "Ces champs doivent etre remplis");
+                epIntitulPP.SetError(txtPostePF, "Ces champs doivent etre remplis");
+            }
         }
 
         private void txtMontantPP_KeyPress(object sender, KeyPressEventArgs e)
@@ -105,7 +110,7 @@ namespace PAD_Money
         {
             bool res = false;
             bool verif = false;
-            Control[] tab = {txtIntitul,txtPrelevPP,txtMontantPP};
+            Control[] tab = {txtIntitul,txtPrelevPP,txtMontantPP,txtCom};
             foreach(Control c in tab)
             {
                 if(((TextBox)c).Text == string.Empty)
@@ -159,7 +164,7 @@ namespace PAD_Money
 
         private void btnValiderPP_Click(object sender, EventArgs e)
         {
-            if (txtPrelevPP.Text != string.Empty && flpEcheance.Controls.Count == int.Parse(txtPrelevPP.Text))
+            if (txtPrelevPP.Text != string.Empty && flpEcheance.Controls.Count == int.Parse(txtPrelevPP.Text) && txtCom.Text != string.Empty && txtMontantPP.Text != string.Empty && txtIntitul.Text != string.Empty)
             {
                 BDDUtil.ajouterPostePonctuel(txtIntitul.Text, txtCom.Text, flpEcheance.Controls.Cast<PrelevementControl>().ToArray<PrelevementControl>());
                 txtIntitul.Text = string.Empty;
@@ -167,6 +172,10 @@ namespace PAD_Money
                 txtCom.Text = string.Empty;
                 txtPrelevPP.Text = string.Empty;
                 flpEcheance.Controls.Clear();
+            }
+            else
+            {
+                verifPP();
             }
         }
 
@@ -180,19 +189,29 @@ namespace PAD_Money
 
         private void btnValiderRevenu_Click(object sender, EventArgs e)
         {
-            string[] tab = new string[1];
-            int[] tab2;     
-            for(int i = 0; i < clbRevenu.Items.Count;i++)
+            if (txtPosteR.Text != string.Empty && txtMontantRevenu.Text != string.Empty)
             {
-                if (clbRevenu.GetItemChecked(i))
+                string[] tab = new string[1];
+                int[] tab2;
+                for (int i = 0; i < clbRevenu.Items.Count; i++)
                 {
-                    tab[0] = clbRevenu.Items[i].ToString();
-                    tab2 = BDDUtil.getCodeFromNames(tab);
-                    BDDUtil.ajouterPosteRevenu(txtPosteR.Text, float.Parse(txtMontantRevenu.Text), tab2[0],dtpRevenu.Value.Day);
+                    if (clbRevenu.GetItemChecked(i))
+                    {
+                        tab[0] = clbRevenu.Items[i].ToString();
+                        tab2 = BDDUtil.getCodeFromNames(tab);
+                        BDDUtil.ajouterPosteRevenu(txtPosteR.Text, float.Parse(txtMontantRevenu.Text), tab2[0], dtpRevenu.Value.Day);
+                    }
                 }
+                txtMontantRevenu.Text = string.Empty;
+                txtPosteR.Text = string.Empty;
+                epIntitulPP.SetError(txtMontantRevenu, string.Empty);
+                epIntitulPP.SetError(txtPosteR, string.Empty);
             }
-            txtMontantRevenu.Text = string.Empty;
-            txtPosteR.Text = string.Empty;
+            else
+            {
+                epIntitulPP.SetError(txtMontantRevenu, "Ces champs doivent etre remplis");
+                epIntitulPP.SetError(txtPosteR, "Ces champs doivent etre remplis");
+            }
         }
 
         private void rdbPF_CheckedChanged(object sender, EventArgs e)

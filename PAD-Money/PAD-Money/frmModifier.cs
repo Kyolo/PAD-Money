@@ -53,9 +53,19 @@ namespace PAD_Money
 
         private void afficherR()
         {
+            DataTable t = new DataTable();
+            t.Columns.Add("codePersonne");
+            t.Columns.Add("nomPersonne");
+            foreach(DataRow r in ds.Tables["Personne"].Rows)
+            {
+                DataRow nrow = t.NewRow();
+                nrow[0] = r["codePersonne"];
+                nrow[1] = r["nomPersonne"] + " " + r["pnPersonne"];
+                t.Rows.Add(nrow);
+            }
             lblPoste.Text = row[1].ToString();
 
-            cbbBP.DataSource = ds.Tables["Personne"];
+            cbbBP.DataSource = t;
             cbbBP.ValueMember = "codePersonne";
             cbbBP.DisplayMember = "nomPersonne";
 
