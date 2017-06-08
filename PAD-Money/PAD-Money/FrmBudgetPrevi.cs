@@ -23,23 +23,12 @@ namespace PAD_Money
             this.connec = connec;
             this.ds = ds;           
             InitializeComponent();
-            remplirCbbPoste(cbbPoste);
-            remplirCbbPoste(cbbRevenu);
             remplirCbbPeriode();
         }
 
         private void FrmBudgetPrevi_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void remplirCbbPoste(ComboBox cbb)
-        {
-            DataTable table = new DataTable();
-            table = ds.Tables["Poste"];
-            cbb.DataSource = table;
-            cbb.DisplayMember = "libPoste";
-            cbb.ValueMember = "codePoste";           
         }
 
         private void remplirCbbPeriode()
@@ -54,7 +43,7 @@ namespace PAD_Money
         private void remplirClbRevenu()
         {
             clbRevenu.Items.Clear();
-            DataTable table = new DataTable();
+            DataTable table = new DataTable();           
             table = ds.Tables["Personne"];
             foreach(DataRow row in table.Rows)
             {
@@ -94,12 +83,7 @@ namespace PAD_Money
 
         private void btnValiderPF_Click(object sender, EventArgs e)
         {
-            DataRow row = ds.Tables["PostePeriodique"].NewRow();
-            row["codePoste"] = cbbPoste.SelectedValue;
-            row["montant"] = txtMontantPF.Text;
-            row["typePer"] = cbbPeriode.SelectedValue;
-            row["jourDuMois"] = dtpPF.Value.Day;
-            BDDUtil.addLine("PostePeriodique", row);
+            BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text), dtpPF.Value.Day);
         }
 
         private void txtMontantPP_KeyPress(object sender, KeyPressEventArgs e)
@@ -208,15 +192,17 @@ namespace PAD_Money
         {
             string[] tab = new string[1];
             long[] tab2;     
-            for(int i = 0; i < clbRevenu.Items.Count;i++)
+            for(int i = 0; i < clbRevenu.Items.Count-1;i++)
             {
                 if (clbRevenu.GetItemChecked(i))
                 {
                     tab[0] = clbRevenu.Items[i].ToString();
                     tab2 = BDDUtil.getCodeFromNames(tab);
-                    BDDUtil.ajouterPosteRevenu(cbbRevenu.Text, float.Parse(txtMontantRevenu.Text), tab2[0],dtpRevenu.Value.Day);
+                    BDDUtil.ajouterPosteRevenu(txtPosteR.Text, float.Parse(txtMontantRevenu.Text), tab2[0],dtpRevenu.Value.Day);
                 }
             }
+            txtMontantRevenu.Text = string.Empty;
+            txtPosteR.Text = string.Empty;
         }
 
         private void rdbPF_CheckedChanged(object sender, EventArgs e)
@@ -279,7 +265,7 @@ namespace PAD_Money
                     DataRow r = res.NewRow();
                     r["Poste"] = row["codePoste"];
                     r["Description"] = getLibPoste(row["codePoste"].ToString());
-                    r["Beneficiaire"] = getBeneficaire(int.Parse(row["codePersonne"].ToString()));
+                    //r["Beneficiaire"] = getBeneficaire(int.Parse(row["codePersonne"].ToString()));
                     r["Montant"] = row["montant"];
                     res.Rows.Add(r);
                 }
@@ -335,7 +321,7 @@ namespace PAD_Money
             {
                 if(int.Parse(r["codePersonne"].ToString()) == codePers)
                 {
-                    res = r["nomPersonne"].ToString();// + " " + r["pnPersonne"];
+                    res = r["nomPersonne"] + " " + r["pnPersonne"];
                 }
             }
             return res;

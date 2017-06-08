@@ -36,12 +36,10 @@
             this.txtMontantPF = new System.Windows.Forms.TextBox();
             this.dtpPF = new System.Windows.Forms.DateTimePicker();
             this.btnValiderPF = new System.Windows.Forms.Button();
-            this.btnAutre = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblPostePF = new System.Windows.Forms.Label();
             this.cbbPeriode = new System.Windows.Forms.ComboBox();
-            this.cbbPoste = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtMontantPP = new System.Windows.Forms.TextBox();
@@ -64,11 +62,9 @@
             this.txtMontantRevenu = new System.Windows.Forms.TextBox();
             this.dtpRevenu = new System.Windows.Forms.DateTimePicker();
             this.btnValiderRevenu = new System.Windows.Forms.Button();
-            this.btnAutreRevenu = new System.Windows.Forms.Button();
             this.lblDateRevenu = new System.Windows.Forms.Label();
             this.lblBeneRevenu = new System.Windows.Forms.Label();
             this.lblPosteRevenu = new System.Windows.Forms.Label();
-            this.cbbRevenu = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.grbChoix = new System.Windows.Forms.GroupBox();
@@ -81,6 +77,8 @@
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.modifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtPostePF = new System.Windows.Forms.TextBox();
+            this.txtPosteR = new System.Windows.Forms.TextBox();
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
@@ -111,15 +109,14 @@
             // 
             // tbpPF
             // 
+            this.tbpPF.Controls.Add(this.txtPostePF);
             this.tbpPF.Controls.Add(this.grbMontantPF);
             this.tbpPF.Controls.Add(this.dtpPF);
             this.tbpPF.Controls.Add(this.btnValiderPF);
-            this.tbpPF.Controls.Add(this.btnAutre);
             this.tbpPF.Controls.Add(this.label3);
             this.tbpPF.Controls.Add(this.label2);
             this.tbpPF.Controls.Add(this.lblPostePF);
             this.tbpPF.Controls.Add(this.cbbPeriode);
-            this.tbpPF.Controls.Add(this.cbbPoste);
             this.tbpPF.Location = new System.Drawing.Point(4, 22);
             this.tbpPF.Name = "tbpPF";
             this.tbpPF.Padding = new System.Windows.Forms.Padding(3);
@@ -174,15 +171,6 @@
             this.btnValiderPF.UseVisualStyleBackColor = true;
             this.btnValiderPF.Click += new System.EventHandler(this.btnValiderPF_Click);
             // 
-            // btnAutre
-            // 
-            this.btnAutre.Location = new System.Drawing.Point(283, 123);
-            this.btnAutre.Name = "btnAutre";
-            this.btnAutre.Size = new System.Drawing.Size(87, 23);
-            this.btnAutre.TabIndex = 9;
-            this.btnAutre.Text = "Autre";
-            this.btnAutre.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -218,15 +206,6 @@
             this.cbbPeriode.Size = new System.Drawing.Size(140, 21);
             this.cbbPeriode.TabIndex = 1;
             this.cbbPeriode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbbPoste_KeyPress);
-            // 
-            // cbbPoste
-            // 
-            this.cbbPoste.FormattingEnabled = true;
-            this.cbbPoste.Location = new System.Drawing.Point(137, 125);
-            this.cbbPoste.Name = "cbbPoste";
-            this.cbbPoste.Size = new System.Drawing.Size(140, 21);
-            this.cbbPoste.TabIndex = 0;
-            this.cbbPoste.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbbPoste_KeyPress);
             // 
             // tabPage2
             // 
@@ -375,15 +354,14 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.txtPosteR);
             this.tabPage3.Controls.Add(this.clbRevenu);
             this.tabPage3.Controls.Add(this.grbRevenu);
             this.tabPage3.Controls.Add(this.dtpRevenu);
             this.tabPage3.Controls.Add(this.btnValiderRevenu);
-            this.tabPage3.Controls.Add(this.btnAutreRevenu);
             this.tabPage3.Controls.Add(this.lblDateRevenu);
             this.tabPage3.Controls.Add(this.lblBeneRevenu);
             this.tabPage3.Controls.Add(this.lblPosteRevenu);
-            this.tabPage3.Controls.Add(this.cbbRevenu);
             this.tabPage3.Controls.Add(this.button4);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -446,15 +424,6 @@
             this.btnValiderRevenu.UseVisualStyleBackColor = true;
             this.btnValiderRevenu.Click += new System.EventHandler(this.btnValiderRevenu_Click);
             // 
-            // btnAutreRevenu
-            // 
-            this.btnAutreRevenu.Location = new System.Drawing.Point(283, 122);
-            this.btnAutreRevenu.Name = "btnAutreRevenu";
-            this.btnAutreRevenu.Size = new System.Drawing.Size(87, 23);
-            this.btnAutreRevenu.TabIndex = 38;
-            this.btnAutreRevenu.Text = "Autre";
-            this.btnAutreRevenu.UseVisualStyleBackColor = true;
-            // 
             // lblDateRevenu
             // 
             this.lblDateRevenu.AutoSize = true;
@@ -481,14 +450,6 @@
             this.lblPosteRevenu.Size = new System.Drawing.Size(47, 13);
             this.lblPosteRevenu.TabIndex = 35;
             this.lblPosteRevenu.Text = "Poste :";
-            // 
-            // cbbRevenu
-            // 
-            this.cbbRevenu.FormattingEnabled = true;
-            this.cbbRevenu.Location = new System.Drawing.Point(137, 124);
-            this.cbbRevenu.Name = "cbbRevenu";
-            this.cbbRevenu.Size = new System.Drawing.Size(140, 21);
-            this.cbbRevenu.TabIndex = 33;
             // 
             // button4
             // 
@@ -609,6 +570,20 @@
             this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
             // 
+            // txtPostePF
+            // 
+            this.txtPostePF.Location = new System.Drawing.Point(137, 125);
+            this.txtPostePF.Name = "txtPostePF";
+            this.txtPostePF.Size = new System.Drawing.Size(183, 20);
+            this.txtPostePF.TabIndex = 13;
+            // 
+            // txtPosteR
+            // 
+            this.txtPosteR.Location = new System.Drawing.Point(137, 124);
+            this.txtPosteR.Name = "txtPosteR";
+            this.txtPosteR.Size = new System.Drawing.Size(183, 20);
+            this.txtPosteR.TabIndex = 43;
+            // 
             // FrmBudgetPrevi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -647,13 +622,11 @@
 
         private System.Windows.Forms.TabControl tabBudgetPrevi;
         private System.Windows.Forms.TabPage tbpPF;
-        private System.Windows.Forms.Button btnAutre;
         private System.Windows.Forms.TextBox txtMontantPF;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblPostePF;
         private System.Windows.Forms.ComboBox cbbPeriode;
-        private System.Windows.Forms.ComboBox cbbPoste;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox txtPrelevPP;
         private System.Windows.Forms.Label lblNbPrelevPP;
@@ -681,11 +654,9 @@
         private System.Windows.Forms.TextBox txtMontantRevenu;
         private System.Windows.Forms.DateTimePicker dtpRevenu;
         private System.Windows.Forms.Button btnValiderRevenu;
-        private System.Windows.Forms.Button btnAutreRevenu;
         private System.Windows.Forms.Label lblDateRevenu;
         private System.Windows.Forms.Label lblBeneRevenu;
         private System.Windows.Forms.Label lblPosteRevenu;
-        private System.Windows.Forms.ComboBox cbbRevenu;
         private System.Windows.Forms.CheckedListBox clbRevenu;
         private System.Windows.Forms.ContextMenuStrip cms;
         private System.Windows.Forms.ToolStripMenuItem modifierToolStripMenuItem;
@@ -697,5 +668,7 @@
         private System.Windows.Forms.RadioButton rdbPP;
         private System.Windows.Forms.RadioButton rdbR;
         private System.Windows.Forms.RadioButton rdbCal;
+        private System.Windows.Forms.TextBox txtPostePF;
+        private System.Windows.Forms.TextBox txtPosteR;
     }
 }

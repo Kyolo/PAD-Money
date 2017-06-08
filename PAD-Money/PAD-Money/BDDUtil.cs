@@ -106,7 +106,6 @@ namespace PAD_Money
 
         private static int addlineLoc(String table, DataRow data){
             DataTable tab = ds.Tables[table];
-
             try{
                 tab.Rows.Add(data);
             } catch {
@@ -304,9 +303,7 @@ namespace PAD_Money
                 foreach(DataRow row in collec){
                     if(row[keyname].Equals(keyval)){
                         foreach(KeyValuePair<String, object> kv in values){
-                            MessageBox.Show("1");
                             row[kv.Key]=kv.Value;
-                            MessageBox.Show("2");
                         }
                     }
                 }
@@ -439,7 +436,7 @@ namespace PAD_Money
 
         public static int ajouterPosteRevenu(String libelle, float montant, long personne,int date){
             long codePoste = maxCode("Poste","codePoste")+1;
-            
+
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPosteRev = addLine("PosteRevenu", codePoste, montant, personne,date);
 
