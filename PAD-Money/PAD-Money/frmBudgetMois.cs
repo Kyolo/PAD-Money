@@ -18,16 +18,25 @@ namespace PAD_Money
         DataTable transaction;
         public FrmBudgetMois(OleDbConnection connec, DataSet ds)
         {
+            //btnAjouter.ImageAlign = ContentAlignment.TopCenter;
+            /////////
             this.connec = connec;
             this.ds = ds;
             InitializeComponent();
-            generationdyna();
+            generationdyna1();
+            generationdyna2();
             type();
             codeTransa();
+            afficher_sup();
             transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
            
-            //Onglet Supprimer à changer de place plus tard
+           
 
+
+        }
+        //affiche les elements de l'onglet "supprimer"
+        private void afficher_sup()
+        {
             lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
             lblDescription2.Text = transaction.Rows[0]["description"].ToString();
             lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
@@ -36,13 +45,15 @@ namespace PAD_Money
             {
                 lblRorP.Text = "Recette";
             }
-            else lblRorP.Text = "Perçu";
-
-          
-
+            else lblRorP.Text = "Pas recette";
+            if (transaction.Rows[0]["percuON"].ToString() == "True")
+            {
+                lblPerca.Text = "Perçu";
+            }
+            lblPerca.Text = "Pas perçu";
         }
 
-        //ajoute pas grand chose pour le moment mais ça viendra
+        //ajoute une transaction dans la base de données
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             String description = txtDescription.Text;
@@ -50,6 +61,7 @@ namespace PAD_Money
             DateTime depense = dtpDepense.Value;
             String typeString = cbbType.Text;
             DataTable Type = ds.Tables["TypeTransaction"].Select("upper (libtype) = upper(" + typeString + ")").CopyToDataTable();
+            long[] listBenef= null;
             long codeTypeLong = (long)Type.Rows[0]["codeType"];
             bool recette = true;
             bool percu = true;
@@ -61,13 +73,17 @@ namespace PAD_Money
             {
                 recette = true;
             }
-            long[] listBenef;
             for (int i=0; i<flpPersonne.Controls.Count; i++)
             {
-                
+                if (((CheckBox)flpPersonne.Controls[i]).Checked == true)
+                {
+                    String[] res = new String[]{ flpPersonne.Controls[i].Text };
+                    listBenef = BDDUtil.getCodeFromNames(res);
+                }
+
             }
 
-            //BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong,   )
+            BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong, listBenef );
         }
 
 
@@ -94,8 +110,8 @@ namespace PAD_Money
         }
 
 
-        //Generation dynamique despnj de la famille
-        private void generationdyna()
+        //Generation dynamique des pnj de la famille dans "ajouter"
+        private void generationdyna1()
         {
             int x = 623;
             int y = 38;
@@ -109,6 +125,25 @@ namespace PAD_Money
                 nom.Size = new System.Drawing.Size(98, 21);
                 nom.Text =row["nomPersonne"].ToString() + " " + row["pnPersonne"].ToString();
                 flpPersonne.Controls.Add(nom);
+                y += 20;
+            }
+        }
+
+        //genere dynamiquement les personnes pour l'onglet "modifier"
+        private void generationdyna2()
+        {
+            int x = 623;
+            int y = 38;
+            DataTable personne = new DataTable();
+            personne = ds.Tables["Personne"];
+            foreach (DataRow row in personne.Rows)
+            {
+                CheckBox nom = new CheckBox();
+                nom.AutoSize = true;
+                nom.Location = new System.Drawing.Point(x, y);
+                nom.Size = new System.Drawing.Size(98, 21);
+                nom.Text = row["nomPersonne"].ToString() + " " + row["pnPersonne"].ToString();
+                flpListePersonneInModif.Controls.Add(nom);
                 y += 20;
             }
         }
@@ -131,14 +166,46 @@ namespace PAD_Money
             cbPercuModif.Checked = (bool)transaction.Rows[0]["PercuON"];
             cbRecuModif.Checked = (bool)transaction.Rows[0]["recetteON"];
         }
+
+        //ajoute un nouveau type via la table "ajouter"
+        private void btnAjouterType_Click(object sender, EventArgs e)
+        {
+            DataTable Type = ds.Tables["Transaction"].Select("upper (type) = upper(" + cbbType + ")").CopyToDataTable();
+            if (cbbType.Text != (string)Type.Rows[0]["type"])
+            {
+                string nvxType = cbbType.Text;
+                BDDUtil.ajouterTypeTransaction(nvxType);
+            }
+        }
+
+        //supprime ub transaction
+        private void btnSupp_Click(object sender, EventArgs e)
+        {
+
+            BDDUtil.supprimerTransaction(long.Parse(cbbTransactionExistantes.Text));
+        }
+
+        //Modifie une transaction
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        //Ajoute de nouveaux types via l'onglet "modifier"
+        private void btnAjouterInModif_Click(object sender, EventArgs e)
+        {
+            DataTable Type = ds.Tables["Transaction"].Select("upper (type) = upper(" + cbbType + ")").CopyToDataTable();
+            if (cbbType.Text != (string)Type.Rows[0]["type"])
+            {
+                string nvxType = cbbType.Text;
+                BDDUtil.ajouterTypeTransaction(nvxType);
+            }
+        }
+
+        //inutile aussi
+        private void TabModif_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
-/*
-private void remplitCbo_b(ComboBox cbo, String tableName, String colName, String champCache)
-{
-    cbo.DataSource = ds.Tables[tableName];
-    cbo.DisplayMember = colName;
-
-    cbo.ValueMember = champCache;
-}
-*/
