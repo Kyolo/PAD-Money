@@ -83,7 +83,7 @@ namespace PAD_Money
 
         private void btnValiderPF_Click(object sender, EventArgs e)
         {
-            BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text), dtpPF.Value.Day);
+            BDDUtil.ajouterPostePeriodique(txtPostePF.Text, float.Parse(txtMontantPF.Text),cbbPeriode.SelectedValue.ToString() , dtpPF.Value.Day);
         }
 
         private void verifPF()

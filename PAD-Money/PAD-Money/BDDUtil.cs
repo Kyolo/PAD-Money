@@ -430,15 +430,15 @@ namespace PAD_Money
             return retAddPoste | retAddPostePonct | retval;
         }
 
-        public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode){
-            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("libPer = '"+codePeriode+"'")[0]["codePer"]);
+        public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode, int jourDuMois){
+            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("libPer = '"+codePeriode+"'")[0]["codePer"], jourDuMois);
         }
 
-        public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode){
+        public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode, int jourDuMois){
             int codePoste = maxCode("Poste","codePoste")+1;
             
             int retAddPoste = addLine("Poste", codePoste, libelle);
-            int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode);
+            int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode, jourDuMois);
 
             return retAddPoste | retAddPostePer;
         }
