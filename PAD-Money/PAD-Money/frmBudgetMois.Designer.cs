@@ -530,6 +530,7 @@
             this.cbbTransactionExistantes.Name = "cbbTransactionExistantes";
             this.cbbTransactionExistantes.Size = new System.Drawing.Size(157, 21);
             this.cbbTransactionExistantes.TabIndex = 0;
+            this.cbbTransactionExistantes.SelectedIndexChanged += new System.EventHandler(this.cbbTransactionExistantes_SelectedIndexChanged);
             // 
             // TabModif
             // 
