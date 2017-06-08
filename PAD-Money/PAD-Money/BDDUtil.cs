@@ -58,10 +58,10 @@ namespace PAD_Money
             return d;
         }
 
-        private static long maxCode(String table, String keyname){
+        private static int maxCode(String table, String keyname){
             //On renvoie la valeur maximale de la table, pour pouvoir affecter une clef primaire non utilisée
             DataTable tab = ds.Tables[table];
-            long max = 0;
+            int max = 0;
             foreach(DataRow r in tab.Rows){
                 if((int)r[keyname] > max){
                     max = (int)r.ItemArray[0];
@@ -369,17 +369,17 @@ namespace PAD_Money
 
         //Methode utilitaires de gestion d'ajout :
 
-        public static int ajouterTransaction(DateTime dateTransac, String description, float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
+        public static int ajouterTransaction(DateTime dateTransac, String description, float montant, bool recette, bool percu, int codeType, int[] codeBeneficiaires){
             return ajouterTransaction(maxCode("Transaction","codeTransaction")+1, dateTransac,description, montant, recette, percu, codeType, codeBeneficiaires );
         }
 
-        public static int ajouterTransaction(long codeTransaction, DateTime dateTransac, String description,
-         float montant, bool recette, bool percu, long codeType, long[] codeBeneficiaires){
+        public static int ajouterTransaction(int codeTransaction, DateTime dateTransac, String description,
+         float montant, bool recette, bool percu, int codeType, int[] codeBeneficiaires){
             //On ajoute la ligne de la transaction
             int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
             
             int retAddBenef = 0;
-            foreach(long codeBenef in codeBeneficiaires){//On ajoute les bénéficiares
+            foreach(int codeBenef in codeBeneficiaires){//On ajoute les bénéficiares
                 retAddBenef |= addLine("Beneficiaires", codeTransaction, codeBenef);
             }
             //Si on a une erreur, on marque tout comme erreur pour les bénéficiaires
@@ -399,7 +399,7 @@ namespace PAD_Money
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
             //int codePoste = ds.Tables["Poste"].Rows.Count + 1;
-            long codePoste = maxCode("Poste","codePoste")+1;
+            int codePoste = maxCode("Poste","codePoste")+1;
             //On ajoute le poste
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPostePonct = addLine("PostePonctuel", codePoste, commentaire);
@@ -422,11 +422,11 @@ namespace PAD_Money
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode){
-            return ajouterPostePeriodique(libelle, montant, (long)ds.Tables["Periodicite"].Select("[libPer] = '"+codePeriode+"'")[0][0]);
+            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("[libPer] = '"+codePeriode+"'")[0][0]);
         }
 
-        public static int ajouterPostePeriodique(String libelle, float montant, long codePeriode){
-            long codePoste = maxCode("Poste","codePoste")+1;
+        public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode){
+            int codePoste = maxCode("Poste","codePoste")+1;
             
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode);
@@ -434,8 +434,8 @@ namespace PAD_Money
             return retAddPoste | retAddPostePer;
         }
 
-        public static int ajouterPosteRevenu(String libelle, float montant, long personne,int date){
-            long codePoste = maxCode("Poste","codePoste")+1;
+        public static int ajouterPosteRevenu(String libelle, float montant, int personne,int date){
+            int codePoste = maxCode("Poste","codePoste")+1;
 
             int retAddPoste = addLine("Poste", codePoste, libelle);
             int retAddPosteRev = addLine("PosteRevenu", codePoste, montant, personne,date);
@@ -447,12 +447,12 @@ namespace PAD_Money
             return addLine("Personne", maxCode("Personne","codePersonne")+1,nomPersonne, pmPersonne);
         }
 
-        public static int supprimerTransaction(long codeTransaction){
+        public static int supprimerTransaction(int codeTransaction){
             int remBenef = removeLine("Beneficiaires", "codeTransaction", codeTransaction);
             return remBenef | removeLine("Transaction", "codeTransaction", codeTransaction);
         }
 
-        public static int supprimerPoste(long codePoste){
+        public static int supprimerPoste(int codePoste){
             int remEchea = removeLine("Echeances", "codePoste", codePoste);
             int remPonct = removeLine("PostePonctuel", "codePoste", codePoste);
             int remPerio = removeLine("PostePeriodique", "codePoste", codePoste);
@@ -462,8 +462,8 @@ namespace PAD_Money
             return remEchea | remPonct | remPerio | remReven | remPoste;
         }
 
-        public static long[] getCodeFromNames(String[] nomPrenom){
-            List<long> lg = new List<long>(nomPrenom.Length);
+        public static int[] getCodeFromNames(String[] nomPrenom){
+            List<int> lg = new List<int>(nomPrenom.Length);
 
             foreach(DataRow dr in ds.Tables["Personne"].Rows){
                 foreach(String nmpm in nomPrenom){
