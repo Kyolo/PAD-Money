@@ -16,7 +16,7 @@ namespace PAD_Money
         private OleDbConnection connec;
         DataSet ds;
         DataTable transaction;
-
+       
 
         public FrmBudgetMois(OleDbConnection connec, DataSet ds)
         {
@@ -40,23 +40,27 @@ namespace PAD_Money
         //affiche les elements de l'onglet "supprimer"
         private void afficher_sup()
         {
-            string res = transaction.Rows[0]["type"].ToString();
-            DataTable TypeFin = ds.Tables["TypeTransaction"].Select("codeType = '" + res + "'").CopyToDataTable();
-            lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
-            lblDescription2.Text = transaction.Rows[0]["description"].ToString();
-            lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
+            if (cbbTransactionExistantes.Text != string.Empty)
+            {
+                
+                int res = int.Parse(cbbTransactionExistantes.SelectedValue.ToString());
+                DataTable TypeFin = ds.Tables["TypeTransaction"].Select("codeType = '" + res + "'").CopyToDataTable();
+                lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
+                lblDescription2.Text = transaction.Rows[0]["description"].ToString();
+                lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
 
-            lblType2.Text = TypeFin.Rows[0]["libType"].ToString();
-            if (transaction.Rows[0]["recetteON"].ToString() == "True")
-            {
-                lblRorP.Text = "Recette";
+                lblType2.Text = TypeFin.Rows[0]["libType"].ToString();
+                if (transaction.Rows[0]["recetteON"].ToString() == "True")
+                {
+                    lblRorP.Text = "Recette";
+                }
+                else lblRorP.Text = "Pas recette";
+                if (transaction.Rows[0]["percuON"].ToString() == "True")
+                {
+                    lblPerca.Text = "Perçu";
+                }
+                lblPerca.Text = "Pas perçu";
             }
-            else lblRorP.Text = "Pas recette";
-            if (transaction.Rows[0]["percuON"].ToString() == "True")
-            {
-                lblPerca.Text = "Perçu";
-            }
-            lblPerca.Text = "Pas perçu";
         }
 
         //ajoute une transaction dans la base de données
@@ -232,7 +236,7 @@ namespace PAD_Money
             string prenom = txbPrenom1.Text;
             string nom = txbNom2.Text;
             string[] NP = new string[] { nom + " " + prenom };
-            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= '" + BDDUtil.getCodeFromNames(NP) + "'").CopyToDataTable();
+            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= '" + BDDUtil.getCodeFromNames(NP)[0] + "'").CopyToDataTable();
             if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
             {
                 BDDUtil.ajouterPersonne(nom, prenom);
@@ -248,13 +252,38 @@ namespace PAD_Money
 
             if (dtpFinPer.Value >= dtpDebPer.Value)
             {
-                while ((DateTime)transaction.Rows[0]["dateTransaction"] < dtpFinPer.Value) ;
-                {
-                    if ((DateTime)transaction.Rows[0]["dateTransaction"] > dtpDebPer.Value) ;
+                //while ((DateTime)transaction.Rows[0]["dateTransaction"] < dtpFinPer.Value) ;
+                
+                    if ((DateTime)transaction.Rows[0]["dateTransaction"] > dtpDebPer.Value && (DateTime)transaction.Rows[0]["dateTransaction"] < dtpFinPer.Value) 
                     {
+                    //On prend les deux tables de bases
+                    DataTable tabTrans = ds.Tables["Transaction"];
+                    DataTable tabType = ds.Tables["TypeTransaction"];
 
+                    DataTable togive = tabTrans.Copy();
+                    //on rajoute une nouvelle colonne
+                    togive.Columns.Add(new DataColumn("libType", tabType.Columns[1].DataType));
+
+                    foreach (DataRow nrow in togive.Rows)
+                    {
+                        //On donne le nom du type
+                        foreach (DataRow oldrow in tabType.Rows)
+                        {
+                            if (nrow["type"].Equals(oldrow["codeType"]))
+                            {
+                                nrow["libType"] = oldrow["libType"];
+                            }
+                        }
                     }
+
+                    //On retire la colonne du codeType
+                    togive.Columns.Remove(togive.Columns["type"]);
+                    DateTime start = dtpDebPer.Value;
+                    DateTime stop = dtpFinPer.Value;
+                    Printer rappor = Printer.createReport(start, stop, togive.Select("#" + start.Day + "/" + start.Month + "/" + start.Year + "# < dateTransaction AND dateTransaction < #" + stop.Day + "/" + stop.Month + "/" + stop.Year + "#"), new Font(new FontFamily("Consolas"), 10));
+                    rappor.showPreview();
                 }
+                
 
             }
         }
@@ -289,6 +318,11 @@ namespace PAD_Money
             regeneAgain();
         }
 
+        private void dataBinding()
+        {
+
+        }
+
         private void TabModif_Click(object sender, EventArgs e)
         {
 
@@ -297,6 +331,11 @@ namespace PAD_Money
         private void fileSystemWatcher1_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
 
+        }
+
+        private void cbbTransactionExistantes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            afficher_sup();
         }
     }
 }
