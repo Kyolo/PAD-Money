@@ -88,8 +88,8 @@ namespace PAD_Money
                 }
 
             }
-
             BDDUtil.ajouterTransaction(depense, description, montant, recette, percu, codeTypeLong, listBenef);
+          //  BDDUtil.ajouterTransaction(;
         }
 
 
@@ -170,7 +170,11 @@ namespace PAD_Money
             DataTable transactionFin = ds.Tables["TypeTransaction"].Select("codeType = " + res).CopyToDataTable();
             txbDescriptionModif.Text = (transaction.Rows[0]["description"]).ToString();
             txbMontantModif.Text = transaction.Rows[0]["montant"].ToString();
-            cbbTypeModif.Text = transactionFin.Rows[0]["libType"].ToString();
+            DataTable type = new DataTable();
+            type = ds.Tables["TypeTransaction"];
+            cbbTypeModif.DataSource = type;
+            cbbTypeModif.DisplayMember = "libType";
+            cbbTypeModif.ValueMember = "codeType";
             cbPercuModif.Checked = (bool)transaction.Rows[0]["PercuON"];
             cbRecuModif.Checked = (bool)transaction.Rows[0]["recetteON"];
         }
@@ -178,8 +182,8 @@ namespace PAD_Money
         //ajoute un nouveau type via la table "ajouter"
         private void btnAjouterType_Click(object sender, EventArgs e)
         {
-            DataTable Type = ds.Tables["Transaction"].Select("UCASE (type) = UCASE(" + cbbType + ")").CopyToDataTable();
-            if (cbbType.Text != (string)Type.Rows[0]["type"])
+            DataTable Type = ds.Tables["Transaction"];
+            if (cbbType.Text != Type.Rows[0]["type"].ToString())
             {
                 string nvxType = cbbType.Text;
                 BDDUtil.ajouterTypeTransaction(nvxType);
@@ -202,21 +206,33 @@ namespace PAD_Money
         //Ajoute de nouveaux types via l'onglet "modifier"
         private void btnAjouterInModif_Click(object sender, EventArgs e)
         {
-            DataTable Type = ds.Tables["Transaction"].Select("UCASE (type) = UCASE(" + cbbType + ")").CopyToDataTable();
-            if (cbbType.Text != (string)Type.Rows[0]["type"])
+            DataTable Type = ds.Tables["Transaction"];
+            if (cbbType.Text != Type.Rows[0]["type"].ToString())
             {
-                string nvxType = cbbType.Text;
+                string nvxType = cbbTypeModif.Text;
                 BDDUtil.ajouterTypeTransaction(nvxType);
             }
         }
 
         //ajoute des gens à la liste des gens
-        private void ajouterPersonne()
+        private void ajouterPersonneGlob()
         {
             string prenom = txbPrenom.Text;
             string nom = txbNom.Text;
             string[] NP = new string[] { nom + " " + prenom };
-            DataTable Personne = ds.Tables["Personne"].Select("UCASE (codePersonne) = UCASE(" + BDDUtil.getCodeFromNames(NP) + ")").CopyToDataTable();
+            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= "+ BDDUtil.getCodeFromNames(NP)).CopyToDataTable();
+            if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
+            {
+                BDDUtil.ajouterPersonne(nom, prenom);
+            }
+        }
+
+        private void ajouterPersonneModif()
+        {
+            string prenom = txbPrenom1.Text;
+            string nom = txbNom2.Text;
+            string[] NP = new string[] { nom + " " + prenom };
+            DataTable Personne = ds.Tables["Personne"].Select("codePersonne= " + BDDUtil.getCodeFromNames(NP)).CopyToDataTable();
             if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
             {
                 BDDUtil.ajouterPersonne(nom, prenom);
@@ -227,18 +243,17 @@ namespace PAD_Money
         private void btnPDF_Click(object sender, EventArgs e)
         {
             transaction = ds.Tables["Transaction"].Select("codeTransaction = " + cbbTransactionExistantes.SelectedValue).CopyToDataTable();
+          //  DataRow[] tabTransaction = new DataRow()[transaction.Rows.Count];
+
+
             if (dtpFinPer.Value >= dtpDebPer.Value)
             {
-                DateTime date = new DateTime(2000, 1, 1);
-                int i = 0;
-                while (date <= dtpFinPer.Value || i < transaction.Rows.Count)
+                while ((DateTime)transaction.Rows[0]["dateTransaction"]<dtpFinPer.Value);
                 {
-                    date = (DateTime)transaction.Rows[0]["dateTransaction"];
-                    if (date <= dtpDebPer.Value)
+                    if ((DateTime)transaction.Rows[0]["dateTransaction"] > dtpDebPer.Value) ;
                     {
 
                     }
-                    i++;
                 }
 
             }
@@ -246,13 +261,13 @@ namespace PAD_Money
         //ajoute un personne via l'onglet ajouter"
         private void btnAjouterPers_Click(object sender, EventArgs e)
         {
-            ajouterPersonne();
+            ajouterPersonneGlob();
         }
 
         //ajoute une personne via l'onglet "modifier"
         private void btnAjouterPersonneInModif_Click(object sender, EventArgs e)
         {
-            ajouterPersonne();
+            ajouterPersonneGlob();
         }
 
         private void TabModif_Click(object sender, EventArgs e)

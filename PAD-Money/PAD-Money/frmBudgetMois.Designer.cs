@@ -62,6 +62,8 @@
             this.btnSupp = new System.Windows.Forms.Button();
             this.cbbTransactionExistantes = new System.Windows.Forms.ComboBox();
             this.TabModif = new System.Windows.Forms.TabPage();
+            this.txbPrenom = new System.Windows.Forms.TextBox();
+            this.txbNom = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbPercuModif = new System.Windows.Forms.CheckBox();
             this.cbRecuModif = new System.Windows.Forms.CheckBox();
@@ -86,8 +88,8 @@
             this.dtpFinPer = new System.Windows.Forms.DateTimePicker();
             this.dtpDebPer = new System.Windows.Forms.DateTimePicker();
             this.btnPDF = new System.Windows.Forms.Button();
-            this.txbNom = new System.Windows.Forms.TextBox();
-            this.txbPrenom = new System.Windows.Forms.TextBox();
+            this.txbPrenom1 = new System.Windows.Forms.TextBox();
+            this.txbNom2 = new System.Windows.Forms.TextBox();
             this.TabBudgetMois.SuspendLayout();
             this.TabTransac.SuspendLayout();
             this.tabSuppression.SuspendLayout();
@@ -125,7 +127,9 @@
             // 
             this.TabTransac.BackColor = System.Drawing.Color.DimGray;
             this.TabTransac.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.TabTransac.Controls.Add(this.txbNom2);
             this.TabTransac.Controls.Add(this.btnAjouterType);
+            this.TabTransac.Controls.Add(this.txbPrenom1);
             this.TabTransac.Controls.Add(this.flpPersonne);
             this.TabTransac.Controls.Add(this.lblType);
             this.TabTransac.Controls.Add(this.dtpDepense);
@@ -521,6 +525,20 @@
             this.TabModif.Text = "Modification d\'une transaction";
             this.TabModif.Click += new System.EventHandler(this.TabModif_Click);
             // 
+            // txbPrenom
+            // 
+            this.txbPrenom.Location = new System.Drawing.Point(691, 269);
+            this.txbPrenom.Name = "txbPrenom";
+            this.txbPrenom.Size = new System.Drawing.Size(145, 22);
+            this.txbPrenom.TabIndex = 36;
+            // 
+            // txbNom
+            // 
+            this.txbNom.Location = new System.Drawing.Point(691, 236);
+            this.txbNom.Name = "txbNom";
+            this.txbNom.Size = new System.Drawing.Size(145, 22);
+            this.txbNom.TabIndex = 35;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -777,23 +795,23 @@
             this.btnPDF.Name = "btnPDF";
             this.btnPDF.Size = new System.Drawing.Size(225, 76);
             this.btnPDF.TabIndex = 0;
-            this.btnPDF.Text = "Créer le PFD";
+            this.btnPDF.Text = "Créer le PDF";
             this.btnPDF.UseVisualStyleBackColor = true;
             this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
             // 
-            // txbNom
+            // txbPrenom1
             // 
-            this.txbNom.Location = new System.Drawing.Point(691, 236);
-            this.txbNom.Name = "txbNom";
-            this.txbNom.Size = new System.Drawing.Size(145, 22);
-            this.txbNom.TabIndex = 35;
+            this.txbPrenom1.Location = new System.Drawing.Point(744, 226);
+            this.txbPrenom1.Name = "txbPrenom1";
+            this.txbPrenom1.Size = new System.Drawing.Size(100, 21);
+            this.txbPrenom1.TabIndex = 1;
             // 
-            // txbPrenom
+            // txbNom2
             // 
-            this.txbPrenom.Location = new System.Drawing.Point(691, 269);
-            this.txbPrenom.Name = "txbPrenom";
-            this.txbPrenom.Size = new System.Drawing.Size(145, 22);
-            this.txbPrenom.TabIndex = 36;
+            this.txbNom2.Location = new System.Drawing.Point(744, 266);
+            this.txbNom2.Name = "txbNom2";
+            this.txbNom2.Size = new System.Drawing.Size(100, 21);
+            this.txbNom2.TabIndex = 2;
             // 
             // FrmBudgetMois
             // 
@@ -879,5 +897,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txbPrenom;
         private System.Windows.Forms.TextBox txbNom;
+        private System.Windows.Forms.TextBox txbNom2;
+        private System.Windows.Forms.TextBox txbPrenom1;
     }
 }
