@@ -63,12 +63,11 @@ namespace PAD_Money
             DataTable tab = ds.Tables[table];
             int max = 0;
             foreach(DataRow r in tab.Rows){
-                if((int)r[keyname] > max){
-                    max = (int)r.ItemArray[0];
+                if(((int)r[keyname]) > max){
+                    max = (int)r[0];
                 }
             }
-
-            return max;
+           return max;
         }
 
         public static int addLine(String table, params object[] data){
@@ -401,7 +400,7 @@ namespace PAD_Money
         }
 
         public static int ajouterTypeTransaction(String libelle){
-            return addLine("TypeTransaction",maxCode("Transaction","codeTransaction")+1, libelle);
+            return addLine("TypeTransaction",maxCode("TypeTransaction","codeType")+1, libelle);
         }
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
