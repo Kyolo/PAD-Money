@@ -191,7 +191,7 @@ namespace PAD_Money
         private void btnValiderRevenu_Click(object sender, EventArgs e)
         {
             string[] tab = new string[1];
-            long[] tab2;     
+            int[] tab2;     
             for(int i = 0; i < clbRevenu.Items.Count-1;i++)
             {
                 if (clbRevenu.GetItemChecked(i))
@@ -363,7 +363,7 @@ namespace PAD_Money
             }
             else if(e.ClickedItem.Text == "Supprimer")
             {
-                BDDUtil.supprimerPoste((long)dr[0]);
+                BDDUtil.supprimerPoste((int)dr[0]);
                 remplirDgv(currentTag);
             }
         }
