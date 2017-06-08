@@ -74,6 +74,7 @@
     <Compile Include="PrelevementCtrl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

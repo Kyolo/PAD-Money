@@ -122,14 +122,14 @@ namespace PAD_Money
         }
 
 
-        public static Printer createReport(String mois, DataRow[] transactions, Font ft){
+        public static Printer createReport(DateTime start, DateTime stop, DataRow[] transactions, Font ft){
             
             float depenses = 0, recettes = 0, aPercevoir = 0, sommeTotale = 0;
             int nbtransac;
             
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Récapitulatif du mois : ").Append(mois)
+            builder.Append("Récapitulatif du ").Append(start).Append(" au ").Append(stop.ToString())
             .Append("\n\n_____________________________________________\n\n")
             .Append("Dépenses : \n\n\n")//En-tête du tableau
             .Append("┌─────────────┬───────────────────────────┬────────────┬────────────┬────────────┬─────────────────┐\n")
