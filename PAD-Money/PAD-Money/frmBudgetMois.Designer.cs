@@ -45,7 +45,15 @@
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.cbbType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabSuppression = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblPerca = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblRorP = new System.Windows.Forms.Label();
             this.lblType2 = new System.Windows.Forms.Label();
             this.lblMontant2 = new System.Windows.Forms.Label();
@@ -54,6 +62,7 @@
             this.btnSupp = new System.Windows.Forms.Button();
             this.cbbTransactionExistantes = new System.Windows.Forms.ComboBox();
             this.TabModif = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.cbPercuModif = new System.Windows.Forms.CheckBox();
             this.cbRecuModif = new System.Windows.Forms.CheckBox();
             this.cbbChoixtransacModif = new System.Windows.Forms.ComboBox();
@@ -69,23 +78,14 @@
             this.lblDesc = new System.Windows.Forms.Label();
             this.lblDatedep = new System.Windows.Forms.Label();
             this.cbbTypeModif = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.TabRecapitulatif = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblFinPer = new System.Windows.Forms.Label();
             this.lblDebPer = new System.Windows.Forms.Label();
             this.dtpFinPer = new System.Windows.Forms.DateTimePicker();
             this.dtpDebPer = new System.Windows.Forms.DateTimePicker();
             this.btnPDF = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblPerca = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.TabBudgetMois.SuspendLayout();
             this.TabTransac.SuspendLayout();
             this.tabSuppression.SuspendLayout();
@@ -107,7 +107,6 @@
             this.TabBudgetMois.SelectedIndex = 0;
             this.TabBudgetMois.Size = new System.Drawing.Size(1577, 632);
             this.TabBudgetMois.TabIndex = 0;
-            this.TabBudgetMois.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabAjout_Selecting);
             // 
             // tabPage1
             // 
@@ -235,6 +234,7 @@
             this.btnAjouterPers.TabIndex = 8;
             this.btnAjouterPers.Text = "Ajouter une personne";
             this.btnAjouterPers.UseVisualStyleBackColor = true;
+            this.btnAjouterPers.Click += new System.EventHandler(this.btnAjouterPers_Click);
             // 
             // cbPercu
             // 
@@ -308,6 +308,17 @@
             this.cbbType.Size = new System.Drawing.Size(270, 31);
             this.cbbType.TabIndex = 1;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.label1.Location = new System.Drawing.Point(422, 289);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(540, 250);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "€ $ £";
+            // 
             // tabSuppression
             // 
             this.tabSuppression.BackColor = System.Drawing.Color.DimGray;
@@ -332,6 +343,77 @@
             this.tabSuppression.Size = new System.Drawing.Size(1569, 600);
             this.tabSuppression.TabIndex = 2;
             this.tabSuppression.Text = "Suppression d\'une transaction";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Modern No. 20", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(32, 73);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(140, 25);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "Transaction :";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(30, 152);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 29);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Date :";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(30, 203);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(151, 29);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Description :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(30, 256);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(118, 29);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Montant :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(30, 310);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 29);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Type :";
+            // 
+            // lblPerca
+            // 
+            this.lblPerca.AutoSize = true;
+            this.lblPerca.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPerca.Location = new System.Drawing.Point(30, 362);
+            this.lblPerca.Name = "lblPerca";
+            this.lblPerca.Size = new System.Drawing.Size(79, 29);
+            this.lblPerca.TabIndex = 18;
+            this.lblPerca.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FloralWhite;
+            this.label2.Location = new System.Drawing.Point(438, 280);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(540, 250);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "€ $ £";
             // 
             // lblRorP
             // 
@@ -382,7 +464,6 @@
             this.lblDate2.Size = new System.Drawing.Size(79, 29);
             this.lblDate2.TabIndex = 2;
             this.lblDate2.Text = "label1";
-            this.lblDate2.Click += new System.EventHandler(this.lblDate2_Click);
             // 
             // btnSupp
             // 
@@ -431,7 +512,16 @@
             this.TabModif.Size = new System.Drawing.Size(1569, 600);
             this.TabModif.TabIndex = 3;
             this.TabModif.Text = "Modification d\'une transaction";
-            this.TabModif.Click += new System.EventHandler(this.TabModif_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(22, 40);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(116, 22);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Transaction :";
             // 
             // cbPercuModif
             // 
@@ -591,6 +681,17 @@
             this.cbbTypeModif.Size = new System.Drawing.Size(270, 31);
             this.cbbTypeModif.TabIndex = 16;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FloralWhite;
+            this.label3.Location = new System.Drawing.Point(435, 280);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(540, 250);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "€ $ £";
+            // 
             // TabRecapitulatif
             // 
             this.TabRecapitulatif.BackColor = System.Drawing.Color.DimGray;
@@ -607,6 +708,17 @@
             this.TabRecapitulatif.Size = new System.Drawing.Size(1569, 600);
             this.TabRecapitulatif.TabIndex = 4;
             this.TabRecapitulatif.Text = "Récapitulatif";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FloralWhite;
+            this.label5.Location = new System.Drawing.Point(430, 280);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(540, 250);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "€ $ £";
             // 
             // lblFinPer
             // 
@@ -651,120 +763,7 @@
             this.btnPDF.TabIndex = 0;
             this.btnPDF.Text = "Créer le PFD";
             this.btnPDF.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(422, 289);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(540, 250);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "€ $ £";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label2.Location = new System.Drawing.Point(438, 280);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(540, 250);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "€ $ £";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label3.Location = new System.Drawing.Point(435, 280);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(540, 250);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "€ $ £";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(22, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 22);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Transaction :";
-            // 
-            // lblPerca
-            // 
-            this.lblPerca.AutoSize = true;
-            this.lblPerca.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPerca.Location = new System.Drawing.Point(30, 362);
-            this.lblPerca.Name = "lblPerca";
-            this.lblPerca.Size = new System.Drawing.Size(79, 29);
-            this.lblPerca.TabIndex = 18;
-            this.lblPerca.Text = "label1";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(30, 310);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 29);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Type :";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(30, 256);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(118, 29);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Montant :";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(30, 203);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(151, 29);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Description :";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(30, 152);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 29);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Date :";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label5.Location = new System.Drawing.Point(430, 280);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(540, 250);
-            this.label5.TabIndex = 34;
-            this.label5.Text = "€ $ £";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Modern No. 20", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(32, 73);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(133, 25);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "Transaction :";
+            this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
             // 
             // FrmBudgetMois
             // 

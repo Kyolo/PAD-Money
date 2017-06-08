@@ -150,10 +150,10 @@ namespace PAD_Money
 
 
         //inutile, je supprimerai plus tard
-        private void TabAjout_Selecting(object sender, TabControlCancelEventArgs e){}
+       // private void TabAjout_Selecting(object sender, TabControlCancelEventArgs e){}
 
         //inutile, je supprimerai plus tard
-        private void lblDate2_Click(object sender, EventArgs e) {}
+       // private void lblDate2_Click(object sender, EventArgs e) {}
 
 
         //Onglet "modifier", recuperation des données de la table
@@ -178,7 +178,7 @@ namespace PAD_Money
             }
         }
 
-        //supprime ub transaction
+        //supprime une transaction
         private void btnSupp_Click(object sender, EventArgs e)
         {
 
@@ -188,7 +188,7 @@ namespace PAD_Money
         //Modifie une transaction
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            
+           // BDDUtil.modifyLine("Transaction", )
         }
 
         //Ajoute de nouveaux types via l'onglet "modifier"
@@ -202,10 +202,15 @@ namespace PAD_Money
             }
         }
 
-        //inutile aussi
-        private void TabModif_Click(object sender, EventArgs e)
+
+        private void btnPDF_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAjouterPers_Click(object sender, EventArgs e)
+        {
+            //BDDUtil.ajouterPersonne()
         }
     }
 }
