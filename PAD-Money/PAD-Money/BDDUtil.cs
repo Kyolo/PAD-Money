@@ -24,15 +24,18 @@ namespace PAD_Money
 
         private BDDUtil(){}//Classe utilitaire : on ne veut pas qu'elle puisse être instanciée
 
+		public static Font defaultFont;
+
         //L'objet connection permettant d'acceder à la bdd
         private static OleDbConnection connec = null;
 
         //La bdd locale
         private static DataSet ds = null;
 
-        public static void init(OleDbConnection connec, DataSet ds){
+        public static void init(OleDbConnection connec, DataSet ds, Font ft){
             BDDUtil.connec = connec;
             BDDUtil.ds = ds;
+			BDDUtil.defaultFont = ft;
         }
 
         private static String objectToStringRep(object val){
@@ -45,7 +48,7 @@ namespace PAD_Money
             } else if(val.GetType().Equals(typeof(DateTime))){
                 //La date parce qu'il faut rajouter des # avant et après
                 DateTime time = (DateTime)val;
-                d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
+                d = "#"+time.Day+"/"+time.Month+"/"+time.Year+"#";
             } else if(val.GetType().Equals(typeof(String))){
                 //Les chaines de caractères car elles doivent êtres entre '
                 d = "'"+val.ToString()+"'";
@@ -242,7 +245,7 @@ namespace PAD_Money
                 } else if(val1.GetType().Equals(typeof(DateTime))){
                     //La date parce qu'il faut rajouter des # avant et après
                     DateTime time = (DateTime)val1;
-                    builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                    builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year + "#");
                 } else if(val1.GetType().Equals(typeof(String))){
                     //Les chaines de caractères car elles doivent êtres entre '
                     builder.Append(" = '"+val1.ToString()+"'");
@@ -262,7 +265,7 @@ namespace PAD_Money
                     } else if(val2.GetType().Equals(typeof(DateTime))){
                         //La date parce qu'il faut rajouter des # avant et après
                         DateTime time = (DateTime)val1;
-                        builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                        builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year + "#");
                     } else if(val2.GetType().Equals(typeof(String))){
                         //Les chaines de caractères car elles doivent êtres entre '
                         builder.Append(" = '"+val2.ToString()+"'");
@@ -383,7 +386,7 @@ namespace PAD_Money
          float montant, bool recette, bool percu, int codeType, int[] codeBeneficiaires){
             //On ajoute la ligne de la transaction
             int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
-            
+				
             int retAddBenef = 0;
             foreach(int codeBenef in codeBeneficiaires){//On ajoute les bénéficiares
                 retAddBenef |= addLine("Beneficiaires", codeTransaction, codeBenef);
@@ -428,7 +431,7 @@ namespace PAD_Money
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode){
-            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("[libPer] = '"+codePeriode+"'")[0][0]);
+            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("libPer = '"+codePeriode+"'")[0]["codePer"]);
         }
 
         public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode){
@@ -479,7 +482,7 @@ namespace PAD_Money
                 }
             }
 
-            return lg.ToArray();
+			return lg.ToArray();
 
         }
 
