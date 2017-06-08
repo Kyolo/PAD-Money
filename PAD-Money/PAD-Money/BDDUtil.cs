@@ -163,8 +163,9 @@ namespace PAD_Money
                 //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
                 //Donc on renvoie le message d'ereur approrié
                 resultat = REMOTE_CONN_ERROR;
-            } catch (OleDbException) {
-
+                Console.WriteLine("invalidopeexcep");
+            } catch (OleDbException e) {
+                Console.WriteLine(e.GetType().ToString() + "\n" + e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
