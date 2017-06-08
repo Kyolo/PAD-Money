@@ -61,8 +61,8 @@ namespace PAD_Money
             DateTime depense = dtpDepense.Value;
             String typeString = cbbType.Text;
             DataTable Type = ds.Tables["TypeTransaction"].Select("upper (libtype) = upper(" + typeString + ")").CopyToDataTable();
-            long[] listBenef= null;
-            long codeTypeLong = (long)Type.Rows[0]["codeType"];
+            int[] listBenef= null;
+            int codeTypeLong = (int)Type.Rows[0]["codeType"];
             bool recette = true;
             bool percu = true;
             if (cbPercu.Checked==true)
@@ -182,7 +182,7 @@ namespace PAD_Money
         private void btnSupp_Click(object sender, EventArgs e)
         {
 
-            BDDUtil.supprimerTransaction(long.Parse(cbbTransactionExistantes.Text));
+            BDDUtil.supprimerTransaction(int.Parse(cbbTransactionExistantes.Text));
         }
 
         //Modifie une transaction

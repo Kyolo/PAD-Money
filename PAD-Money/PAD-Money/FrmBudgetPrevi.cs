@@ -336,7 +336,7 @@ namespace PAD_Money
                 if (rdbPF.Checked || rdbR.Checked)
                 {
                     dgvRecap.ContextMenuStrip = cms;
-                    cms.Show(dgvRecap.PointToClient(Cursor.Position));
+                    cms.Show(Control.MousePosition);
                 }
                 dr = row;
             }           
