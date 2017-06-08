@@ -108,8 +108,10 @@ namespace PAD_Money
             DataTable tab = ds.Tables[table];//On récupère la table
             try{
                 tab.Rows.Add(data);//On ajoute la ligne
-            } catch {
-                return LOCAL_ERROR;
+            } catch(Exception e) {
+				MessageBox.Show(e.GetType() + "\n" + e.Message);
+
+				return LOCAL_ERROR;
             }
 
             return LOCAL_SUCCES;
@@ -385,22 +387,16 @@ namespace PAD_Money
 
         public static int ajouterTransaction(int codeTransaction, DateTime dateTransac, String description,
          float montant, bool recette, bool percu, int codeType, int[] codeBeneficiaires){
-            //On ajoute la ligne de la transaction
-            int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
-				
-            int retAddBenef = 0;
+			//On ajoute la ligne de la transaction
+			MessageBox.Show(ds.Tables["Transaction"].Rows[0]["recetteON"].GetType().ToString());
+            int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu, codeType);
+
+			int retAddBenef = 0;
             foreach(int codeBenef in codeBeneficiaires){//On ajoute les bénéficiares
                 retAddBenef |= addLine("Beneficiaires", codeTransaction, codeBenef);
             }
-            //Si on a une erreur, on marque tout comme erreur pour les bénéficiaires
-            if((retAddBenef & LOCAL_ERROR) == LOCAL_ERROR ){
-                retval |= LOCAL_ERROR;
-            }
-            if((retAddBenef & REMOTE_ERROR) == REMOTE_ERROR) {
-                retval |= REMOTE_ERROR;
-            }
 
-            return retval;
+			return retval;
         }
 
         public static int ajouterTypeTransaction(String libelle){
