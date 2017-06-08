@@ -149,10 +149,10 @@ namespace PAD_Money
                 } else {
                     aPercevoir += (float)row["montant"];
                 }
-
+				DateTime dt = (DateTime)row["dateTransaction"];
                 //séparateur + ligne d'information
                 builder.Append("├─────────────┼───────────────────────────┼────────────┼────────────┼────────────┼─────────────────┤\n")
-                .Append(String.Format("│ {0,2}/{1,2}/{3,4}  │ {4,25} │ {5,10} │ {6,10} │ {7,10} │ {8,15} │\n", row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]));
+                .Append(String.Format("│ {0,2}/{1,2}/{2,4}  │ {3,25} │ {4,10} │ {5,10} │ {6,10} │ {7,15} │\n", dt.Day, dt.Month, dt.Year, row["description"], row["montant"], row["recetteON"], row["percuON"], row["libType"]));
 
             }
 
