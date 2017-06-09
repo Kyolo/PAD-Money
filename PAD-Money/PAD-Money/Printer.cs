@@ -42,7 +42,7 @@ namespace PAD_Money
             try
             {
                 //On crée le flux pour lire le texte
-                streamToPrint = new StreamReader(new MemoryStream(Encoding.ASCII.GetBytes(textToDisplay)));
+                streamToPrint = new StreamReader(new MemoryStream(Encoding.ASCII.GetBytes(textToDisplay)), Encoding.UTF8);
                 //On crée le document 
                 doc = new PrintDocument();
                 //On lui passe la methode qui créera le document à proprement parlé
