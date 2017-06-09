@@ -65,6 +65,12 @@
     <Compile Include="FrmBudgetPrevi.Designer.cs">
       <DependentUpon>FrmBudgetPrevi.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEcheance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEcheance.Designer.cs">
+      <DependentUpon>frmEcheance.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmModifier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,7 @@
     <Compile Include="PrelevementCtrl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -84,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBudgetPrevi.resx">
       <DependentUpon>FrmBudgetPrevi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEcheance.resx">
+      <DependentUpon>frmEcheance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifier.resx">
       <DependentUpon>frmModifier.cs</DependentUpon>

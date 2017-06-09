@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PAD_Money
@@ -24,15 +21,19 @@ namespace PAD_Money
 
         private BDDUtil(){}//Classe utilitaire : on ne veut pas qu'elle puisse être instanciée
 
+		public static Font defaultFont;
+
         //L'objet connection permettant d'acceder à la bdd
         private static OleDbConnection connec = null;
 
         //La bdd locale
         private static DataSet ds = null;
 
-        public static void init(OleDbConnection connec, DataSet ds){
+        public static void init(OleDbConnection connec, DataSet ds, Font ft){
+			//On assigne pour l'initialisation
             BDDUtil.connec = connec;
             BDDUtil.ds = ds;
+			BDDUtil.defaultFont = ft;
         }
 
         private static String objectToStringRep(object val){
@@ -45,7 +46,7 @@ namespace PAD_Money
             } else if(val.GetType().Equals(typeof(DateTime))){
                 //La date parce qu'il faut rajouter des # avant et après
                 DateTime time = (DateTime)val;
-                d = "#"+time.Day+"/"+time.Month+"/"+time.Year;
+                d = "#"+time.Day+"/"+time.Month+"/"+time.Year+"#";
             } else if(val.GetType().Equals(typeof(String))){
                 //Les chaines de caractères car elles doivent êtres entre '
                 d = "'"+val.ToString()+"'";
@@ -63,12 +64,11 @@ namespace PAD_Money
             DataTable tab = ds.Tables[table];
             int max = 0;
             foreach(DataRow r in tab.Rows){
-                if((int)r[keyname] > max){
-                    max = (int)r.ItemArray[0];
+                if(((int)r[keyname]) > max){
+                    max = (int)r[0];
                 }
             }
-
-            return max;
+           return max;
         }
 
         public static int addLine(String table, params object[] data){
@@ -97,19 +97,21 @@ namespace PAD_Money
             if(connec == null || ds == null)
                 throw new InvalidOperationException("Classe BDDUtil incorrectement initialisée");
             
-            int resLoc = addlineLoc(table, data);
-            int resRem = addLineRem(table, data);
+            int resLoc = addlineLoc(table, data);//On ajoute la ligne en local
+            int resRem = addLineRem(table, data);//Et dans le fichier
 
             //On "combine" les deux résultats, afin d'avoir toute les message en un
             return resLoc | resRem;
         }
 
         private static int addlineLoc(String table, DataRow data){
-            DataTable tab = ds.Tables[table];
+            DataTable tab = ds.Tables[table];//On récupère la table
             try{
-                tab.Rows.Add(data);
-            } catch {
-                return LOCAL_ERROR;
+                tab.Rows.Add(data);//On ajoute la ligne
+            } catch(Exception e) {
+				MessageBox.Show(e.GetType() + "\n" + e.Message);
+
+				return LOCAL_ERROR;
             }
 
             return LOCAL_SUCCES;
@@ -159,13 +161,15 @@ namespace PAD_Money
                     resultat = REMOTE_SQL_ERROR;
             
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-                Console.WriteLine("invalidopeexcep");
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+                MessageBox.Show(table + " : " +"invalidopeexcep");
             } catch (OleDbException e) {
-                Console.WriteLine(e.GetType().ToString() + "\n" + e.Message);
+                MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -179,15 +183,15 @@ namespace PAD_Money
         //Methodes de suppression de lignes :
 
         public static int removeLine(String table, String kname1, object val1){
-            return removeLine(table, kname1, null, val1, null);
+            return removeLine(table, kname1, null, val1, null);//Juste une simplicité d'écriture
         }
 
         public static int removeLine(String table, String kname1, String kname2, object val1, object val2){
-            if(connec == null || ds == null)
+            if(connec == null || ds == null)//on vérifie que le dataset et la connection sont initialisés
                 throw new InvalidOperationException("Classe BDDUtil incorrectement initialisée");
             
-            int retLoc = removeLineLoc(table, kname1, kname2, val1, val2);
-            int remLoc = removeLineRem(table, kname1, kname2, val1, val2);
+            int retLoc = removeLineLoc(table, kname1, kname2, val1, val2);//Modification en local
+            int remLoc = removeLineRem(table, kname1, kname2, val1, val2);//Modification à distance
             return retLoc | remLoc;
         }
 
@@ -206,7 +210,7 @@ namespace PAD_Money
                                 rows.RemoveAt(i);
                             }
                             
-                        } else {//S'il n'y a qu'une seule condition, et qu'elel est vérifiée :
+                        } else {//S'il n'y a qu'une seule condition, et qu'elle est vérifiée :
                             rows.RemoveAt(i);
                         }
                     }
@@ -232,7 +236,7 @@ namespace PAD_Money
                 
                 StringBuilder builder = new StringBuilder();
                 builder
-                .Append("DELETE FROM [").Append(table).Append("] WHERE ")
+                .Append("DELETE FROM [").Append(table).Append("] WHERE ")//On prépare le debut de la commande
                 .Append(kname1);
                 
                 if(val1 == null){
@@ -241,7 +245,7 @@ namespace PAD_Money
                 } else if(val1.GetType().Equals(typeof(DateTime))){
                     //La date parce qu'il faut rajouter des # avant et après
                     DateTime time = (DateTime)val1;
-                    builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                    builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year + "#");
                 } else if(val1.GetType().Equals(typeof(String))){
                     //Les chaines de caractères car elles doivent êtres entre '
                     builder.Append(" = '"+val1.ToString()+"'");
@@ -253,7 +257,7 @@ namespace PAD_Money
 
                 //S'il y a une deuxième clé
                 if(kname2 != null){
-                    builder.Append(" AND ").Append(kname2);
+                    builder.Append(" AND ").Append(kname2);//On rajoute l'opérateur logique
                 
                     if(val2 == null){
                         //Si la valeur est nulle, on le met comme tel
@@ -261,7 +265,7 @@ namespace PAD_Money
                     } else if(val2.GetType().Equals(typeof(DateTime))){
                         //La date parce qu'il faut rajouter des # avant et après
                         DateTime time = (DateTime)val1;
-                        builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year);
+                        builder.Append(" = #"+time.Day+"/"+time.Month+"/"+time.Year + "#");
                     } else if(val2.GetType().Equals(typeof(String))){
                         //Les chaines de caractères car elles doivent êtres entre '
                         builder.Append(" = '"+val2.ToString()+"'");
@@ -276,14 +280,17 @@ namespace PAD_Money
 
                 int reqRes = comm.ExecuteNonQuery();
                 
-                if(reqRes < 0)
+                if(reqRes < 0)//S'il y a moins de 0 lignes modifiée, il y a une erreur, si c'est possible
                     resultat = REMOTE_SQL_ERROR;
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-            } catch (OleDbException) {
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException e) {
+				MessageBox.Show(table + " : " +e.GetType()+"\n"+e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -294,17 +301,20 @@ namespace PAD_Money
         }
 
         public static int modifyLine(String table, String keyname, object keyval, Dictionary<String, object> values){
-            int modLoc = modifyLineLoc(table, keyname, keyval, values);
-            return modLoc | modifyLineRem(table, keyname, keyval, values);
+			if (connec == null || ds == null)//on vérifie que le dataset et la connection sont initialisés
+				throw new InvalidOperationException("Classe BDDUtil incorrectement initialisée");
+
+			int modLoc = modifyLineLoc(table, keyname, keyval, values);//mofication locale
+            return modLoc | modifyLineRem(table, keyname, keyval, values);//mofication a distance, code légèrement un peu plus compact que les précédents semblables
         }
 
         private static int modifyLineLoc(String table, String keyname, object keyval, Dictionary<String, object> values){
-            DataRowCollection collec = ds.Tables[table].Rows;           
+            DataRowCollection collec = ds.Tables[table].Rows;//on récupère la collection    
             try{
-                foreach(DataRow row in collec){
-                    if(row[keyname].Equals(keyval)){
+                foreach(DataRow row in collec){//Pour chaques lignes
+                    if(row[keyname].Equals(keyval)){//Si la clé est bonne
                         foreach(KeyValuePair<String, object> kv in values){
-                            row[kv.Key]=kv.Value;
+                            row[kv.Key]=kv.Value;//on modifie tout ce qui a une clef dans le dictionnaire
                         }
                     }
                 }
@@ -351,12 +361,13 @@ namespace PAD_Money
                     resultat = REMOTE_SQL_ERROR;
             
 
-            } catch (InvalidOperationException) {
-                //Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
-                //Donc on renvoie le message d'ereur approrié
-                resultat = REMOTE_CONN_ERROR;
-            } catch (OleDbException) {
-
+            } catch (InvalidOperationException e) {
+				MessageBox.Show(table + " : " +e.GetType().ToString() + "\n" + e.Message);
+				//Une InvalidOperationExcepeiton arrive quand il y a une erreur de connection à la base de donnée
+				//Donc on renvoie le message d'ereur approrié
+				resultat = REMOTE_CONN_ERROR;
+            } catch (OleDbException e) {
+				MessageBox.Show(table + " : " +e.GetType()+"\n"+e.Message);
                 resultat = REMOTE_SQL_ERROR;
             } finally {
                 if(connec.State == ConnectionState.Open)
@@ -376,26 +387,20 @@ namespace PAD_Money
 
         public static int ajouterTransaction(int codeTransaction, DateTime dateTransac, String description,
          float montant, bool recette, bool percu, int codeType, int[] codeBeneficiaires){
-            //On ajoute la ligne de la transaction
-            int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu);
-            
-            int retAddBenef = 0;
+			//On ajoute la ligne de la transaction
+			MessageBox.Show(ds.Tables["Transaction"].Rows[0]["recetteON"].GetType().ToString());
+            int retval = addLine("Transaction",codeTransaction, dateTransac, description, montant, recette, percu, codeType);
+
+			int retAddBenef = 0;
             foreach(int codeBenef in codeBeneficiaires){//On ajoute les bénéficiares
                 retAddBenef |= addLine("Beneficiaires", codeTransaction, codeBenef);
             }
-            //Si on a une erreur, on marque tout comme erreur pour les bénéficiaires
-            if((retAddBenef & LOCAL_ERROR) == LOCAL_ERROR ){
-                retval |= LOCAL_ERROR;
-            }
-            if((retAddBenef & REMOTE_ERROR) == REMOTE_ERROR) {
-                retval |= REMOTE_ERROR;
-            }
 
-            return retval;
+			return retval;
         }
 
         public static int ajouterTypeTransaction(String libelle){
-            return addLine("TypeTransaction",maxCode("Transaction","codeTransaction")+1, libelle);
+            return addLine("TypeTransaction",maxCode("TypeTransaction","codeType")+1, libelle);
         }
 
         public static int ajouterPostePonctuel(String libelle, String commentaire, PrelevementControl[] echeances){
@@ -422,15 +427,15 @@ namespace PAD_Money
             return retAddPoste | retAddPostePonct | retval;
         }
 
-        public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode){
-            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("[libPer] = '"+codePeriode+"'")[0][0]);
+        public static int ajouterPostePeriodique(String libelle, float montant, String codePeriode, int jourDuMois){
+            return ajouterPostePeriodique(libelle, montant, (int)ds.Tables["Periodicite"].Select("libPer = '"+codePeriode+"'")[0]["codePer"], jourDuMois);
         }
 
-        public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode){
-            int codePoste = maxCode("Poste","codePoste")+1;
+        public static int ajouterPostePeriodique(String libelle, float montant, int codePeriode, int jourDuMois){
+            int codePoste = maxCode("Poste","codePoste")+1;//récupération d'un identifiant
             
-            int retAddPoste = addLine("Poste", codePoste, libelle);
-            int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode);
+            int retAddPoste = addLine("Poste", codePoste, libelle);//Ajout local
+            int retAddPostePer = addLine("PostePeriodique", codePoste, montant, codePeriode, jourDuMois);//Ajout distance
 
             return retAddPoste | retAddPostePer;
         }
@@ -445,15 +450,19 @@ namespace PAD_Money
         }
 
         public static int ajouterPersonne(String nomPersonne, String pmPersonne){
-            return addLine("Personne", maxCode("Personne","codePersonne")+1,nomPersonne, pmPersonne);
+			int res = addLine("Personne", maxCode("Personne", "codePersonne") + 1, nomPersonne, pmPersonne, "0000000000");
+			MessageBox.Show(""+res+"\n");
+
+			return res;
         }
 
         public static int supprimerTransaction(int codeTransaction){
-            int remBenef = removeLine("Beneficiaires", "codeTransaction", codeTransaction);
+            int remBenef = removeLine("Beneficiaires", "codeTransaction", codeTransaction);//On supprime d'abord les bénéficiaires pour ne pas briser les dépendances
             return remBenef | removeLine("Transaction", "codeTransaction", codeTransaction);
         }
 
         public static int supprimerPoste(int codePoste){
+			//On retire dans toutes les tables afin de n'avoir qu'une seule méthode pour tout les types poste
             int remEchea = removeLine("Echeances", "codePoste", codePoste);
             int remPonct = removeLine("PostePonctuel", "codePoste", codePoste);
             int remPerio = removeLine("PostePeriodique", "codePoste", codePoste);
@@ -464,17 +473,17 @@ namespace PAD_Money
         }
 
         public static int[] getCodeFromNames(String[] nomPrenom){
-            List<int> lg = new List<int>(nomPrenom.Length);
+            List<int> lg = new List<int>(nomPrenom.Length);//On prépare une liste
 
-            foreach(DataRow dr in ds.Tables["Personne"].Rows){
-                foreach(String nmpm in nomPrenom){
+            foreach(DataRow dr in ds.Tables["Personne"].Rows){//Pour chaques lignes dans personne
+                foreach(String nmpm in nomPrenom){//et chaques nomprenom
                     if((dr[1].ToString() + " " + dr[2].ToString()).Equals(nmpm)){
-                        lg.Add((int)dr[0]);
+                        lg.Add((int)dr[0]);//on vérifie si ça coincide, si oui on ajoute
                     }
                 }
             }
 
-            return lg.ToArray();
+			return lg.ToArray();//et on l'envoie sous forme de tableau
 
         }
 

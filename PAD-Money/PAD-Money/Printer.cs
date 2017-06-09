@@ -45,8 +45,8 @@ namespace PAD_Money
                 streamToPrint = new StreamReader(new MemoryStream(Encoding.ASCII.GetBytes(textToDisplay)), Encoding.UTF8);
                 //On crée le document 
                 doc = new PrintDocument();
-                //On lui passe la methode qui créera le document à proprement parlé
-                doc.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+				//On lui passe la methode qui créera le document à proprement parlé
+				doc.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
 
             }
             catch
@@ -72,16 +72,16 @@ namespace PAD_Money
             float linesPerPage = 0;
             float yPos = 0;
             int count = 0;
-            float leftMargin = ev.MarginBounds.Left;
+            float leftMargin = ev.MarginBounds.Left * 0.4f;
             float rightMargin = ev.MarginBounds.Right;
-            float topMargin = ev.MarginBounds.Top;
+            float topMargin = ev.MarginBounds.Top * 0.4f;
             string line = null;
 
             // Calculate the number of lines per page.
             linesPerPage = ev.MarginBounds.Height /
                printFont.GetHeight(ev.Graphics);
 
-            float charsPerLine = (rightMargin - leftMargin) / (printFont.GetHeight(ev.Graphics)*0.65f);
+            float charsPerLine = 1.50f * (rightMargin - leftMargin) / (printFont.GetHeight(ev.Graphics)*0.65f);
 
             // Print each line of the file.
             while (count < linesPerPage &&
@@ -149,10 +149,10 @@ namespace PAD_Money
                 } else {
                     aPercevoir += (float)row["montant"];
                 }
-
+				DateTime dt = (DateTime)row["dateTransaction"];
                 //séparateur + ligne d'information
                 builder.Append("├─────────────┼───────────────────────────┼────────────┼────────────┼────────────┼─────────────────┤\n")
-                .Append(String.Format("│ {0,2}/{1,2}/{3,4}  │ {4,25} │ {5,10} │ {6,10} │ {7,10} │ {8,15} │\n", row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]));
+                .Append(String.Format("│ {0,2}/{1,2}/{2,4}  │ {3,25} │ {4,10} │ {5,10} │ {6,10} │ {7,15} │\n", dt.Day, dt.Month, dt.Year, row["description"], row["montant"], row["recetteON"], row["percuON"], row["libType"]));
 
             }
 

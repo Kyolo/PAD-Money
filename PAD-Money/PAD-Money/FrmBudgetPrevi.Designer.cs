@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabBudgetPrevi = new System.Windows.Forms.TabControl();
             this.tbpPF = new System.Windows.Forms.TabPage();
+            this.txtPostePF = new System.Windows.Forms.TextBox();
             this.grbMontantPF = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtMontantPF = new System.Windows.Forms.TextBox();
@@ -56,6 +57,7 @@
             this.lblDescripPP = new System.Windows.Forms.Label();
             this.lblIntitulePP = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtPosteR = new System.Windows.Forms.TextBox();
             this.clbRevenu = new System.Windows.Forms.CheckedListBox();
             this.grbRevenu = new System.Windows.Forms.GroupBox();
             this.lblMontantRevenu = new System.Windows.Forms.Label();
@@ -77,8 +79,6 @@
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.modifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtPostePF = new System.Windows.Forms.TextBox();
-            this.txtPosteR = new System.Windows.Forms.TextBox();
             this.tabBudgetPrevi.SuspendLayout();
             this.tbpPF.SuspendLayout();
             this.grbMontantPF.SuspendLayout();
@@ -100,15 +100,16 @@
             this.tabBudgetPrevi.Controls.Add(this.tabPage2);
             this.tabBudgetPrevi.Controls.Add(this.tabPage3);
             this.tabBudgetPrevi.Controls.Add(this.tabPage1);
-            this.tabBudgetPrevi.Location = new System.Drawing.Point(14, 12);
+            this.tabBudgetPrevi.Location = new System.Drawing.Point(3, -1);
             this.tabBudgetPrevi.Name = "tabBudgetPrevi";
             this.tabBudgetPrevi.SelectedIndex = 0;
-            this.tabBudgetPrevi.Size = new System.Drawing.Size(758, 417);
+            this.tabBudgetPrevi.Size = new System.Drawing.Size(788, 430);
             this.tabBudgetPrevi.TabIndex = 1;
             this.tabBudgetPrevi.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabBudgetPrevi_Selected);
             // 
             // tbpPF
             // 
+            this.tbpPF.BackColor = System.Drawing.Color.DimGray;
             this.tbpPF.Controls.Add(this.txtPostePF);
             this.tbpPF.Controls.Add(this.grbMontantPF);
             this.tbpPF.Controls.Add(this.dtpPF);
@@ -120,16 +121,24 @@
             this.tbpPF.Location = new System.Drawing.Point(4, 22);
             this.tbpPF.Name = "tbpPF";
             this.tbpPF.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpPF.Size = new System.Drawing.Size(750, 391);
+            this.tbpPF.Size = new System.Drawing.Size(780, 404);
             this.tbpPF.TabIndex = 0;
             this.tbpPF.Text = "Poste fixe";
-            this.tbpPF.UseVisualStyleBackColor = true;
+            // 
+            // txtPostePF
+            // 
+            this.txtPostePF.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPostePF.Location = new System.Drawing.Point(124, 100);
+            this.txtPostePF.Name = "txtPostePF";
+            this.txtPostePF.Size = new System.Drawing.Size(183, 26);
+            this.txtPostePF.TabIndex = 13;
             // 
             // grbMontantPF
             // 
             this.grbMontantPF.Controls.Add(this.label4);
             this.grbMontantPF.Controls.Add(this.txtMontantPF);
-            this.grbMontantPF.Location = new System.Drawing.Point(87, 265);
+            this.grbMontantPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbMontantPF.Location = new System.Drawing.Point(87, 214);
             this.grbMontantPF.Name = "grbMontantPF";
             this.grbMontantPF.Size = new System.Drawing.Size(233, 100);
             this.grbMontantPF.TabIndex = 12;
@@ -148,21 +157,24 @@
             // 
             // txtMontantPF
             // 
-            this.txtMontantPF.Location = new System.Drawing.Point(37, 48);
+            this.txtMontantPF.BackColor = System.Drawing.Color.DarkGray;
+            this.txtMontantPF.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtMontantPF.Location = new System.Drawing.Point(37, 47);
             this.txtMontantPF.Name = "txtMontantPF";
-            this.txtMontantPF.Size = new System.Drawing.Size(72, 20);
+            this.txtMontantPF.Size = new System.Drawing.Size(72, 26);
             this.txtMontantPF.TabIndex = 7;
             this.txtMontantPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPF_KeyPress);
             // 
             // dtpPF
             // 
-            this.dtpPF.Location = new System.Drawing.Point(488, 122);
+            this.dtpPF.Location = new System.Drawing.Point(511, 108);
             this.dtpPF.Name = "dtpPF";
             this.dtpPF.Size = new System.Drawing.Size(233, 20);
             this.dtpPF.TabIndex = 11;
             // 
             // btnValiderPF
             // 
+            this.btnValiderPF.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnValiderPF.Location = new System.Drawing.Point(624, 355);
             this.btnValiderPF.Name = "btnValiderPF";
             this.btnValiderPF.Size = new System.Drawing.Size(120, 30);
@@ -174,41 +186,46 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(396, 128);
+            this.label3.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(367, 108);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 13);
+            this.label3.Size = new System.Drawing.Size(115, 18);
             this.label3.TabIndex = 4;
             this.label3.Text = "Jour du mois :";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(407, 172);
+            this.label2.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(367, 173);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.Size = new System.Drawing.Size(99, 18);
             this.label2.TabIndex = 3;
             this.label2.Text = "Périodicité :";
             // 
             // lblPostePF
             // 
             this.lblPostePF.AutoSize = true;
-            this.lblPostePF.Location = new System.Drawing.Point(84, 128);
+            this.lblPostePF.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPostePF.Location = new System.Drawing.Point(51, 99);
             this.lblPostePF.Name = "lblPostePF";
-            this.lblPostePF.Size = new System.Drawing.Size(47, 13);
+            this.lblPostePF.Size = new System.Drawing.Size(58, 18);
             this.lblPostePF.TabIndex = 2;
             this.lblPostePF.Text = "Poste :";
             // 
             // cbbPeriode
             // 
+            this.cbbPeriode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbPeriode.FormattingEnabled = true;
-            this.cbbPeriode.Location = new System.Drawing.Point(488, 169);
+            this.cbbPeriode.Location = new System.Drawing.Point(511, 167);
             this.cbbPeriode.Name = "cbbPeriode";
-            this.cbbPeriode.Size = new System.Drawing.Size(140, 21);
+            this.cbbPeriode.Size = new System.Drawing.Size(140, 24);
             this.cbbPeriode.TabIndex = 1;
             this.cbbPeriode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbbPoste_KeyPress);
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.DimGray;
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.btnValiderPP);
             this.tabPage2.Controls.Add(this.btnCalculPP);
@@ -223,16 +240,16 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(750, 391);
+            this.tabPage2.Size = new System.Drawing.Size(780, 404);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Poste ponctuel";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtMontantPP);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(87, 265);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(87, 214);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(233, 100);
             this.groupBox1.TabIndex = 27;
@@ -241,10 +258,12 @@
             // 
             // txtMontantPP
             // 
+            this.txtMontantPP.BackColor = System.Drawing.Color.DarkGray;
             this.txtMontantPP.Location = new System.Drawing.Point(37, 48);
             this.txtMontantPP.Name = "txtMontantPP";
-            this.txtMontantPP.Size = new System.Drawing.Size(72, 20);
+            this.txtMontantPP.Size = new System.Drawing.Size(72, 26);
             this.txtMontantPP.TabIndex = 14;
+            this.txtMontantPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress_1);
             // 
             // label1
             // 
@@ -258,7 +277,8 @@
             // 
             // btnValiderPP
             // 
-            this.btnValiderPP.Location = new System.Drawing.Point(624, 355);
+            this.btnValiderPP.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnValiderPP.Location = new System.Drawing.Point(624, 368);
             this.btnValiderPP.Name = "btnValiderPP";
             this.btnValiderPP.Size = new System.Drawing.Size(120, 30);
             this.btnValiderPP.TabIndex = 26;
@@ -268,9 +288,10 @@
             // 
             // btnCalculPP
             // 
-            this.btnCalculPP.Location = new System.Drawing.Point(87, 214);
+            this.btnCalculPP.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalculPP.Location = new System.Drawing.Point(87, 320);
             this.btnCalculPP.Name = "btnCalculPP";
-            this.btnCalculPP.Size = new System.Drawing.Size(147, 23);
+            this.btnCalculPP.Size = new System.Drawing.Size(166, 29);
             this.btnCalculPP.TabIndex = 25;
             this.btnCalculPP.Text = "Calculer les échéances";
             this.btnCalculPP.UseVisualStyleBackColor = true;
@@ -278,9 +299,11 @@
             // 
             // txtIntitul
             // 
-            this.txtIntitul.Location = new System.Drawing.Point(240, 26);
+            this.txtIntitul.BackColor = System.Drawing.Color.DarkGray;
+            this.txtIntitul.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIntitul.Location = new System.Drawing.Point(240, 24);
             this.txtIntitul.Name = "txtIntitul";
-            this.txtIntitul.Size = new System.Drawing.Size(183, 20);
+            this.txtIntitul.Size = new System.Drawing.Size(183, 22);
             this.txtIntitul.TabIndex = 24;
             // 
             // button3
@@ -294,24 +317,28 @@
             // 
             // txtPrelevPP
             // 
-            this.txtPrelevPP.Location = new System.Drawing.Point(240, 100);
+            this.txtPrelevPP.BackColor = System.Drawing.Color.DarkGray;
+            this.txtPrelevPP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrelevPP.Location = new System.Drawing.Point(356, 97);
             this.txtPrelevPP.Name = "txtPrelevPP";
-            this.txtPrelevPP.Size = new System.Drawing.Size(60, 20);
+            this.txtPrelevPP.Size = new System.Drawing.Size(67, 22);
             this.txtPrelevPP.TabIndex = 22;
             this.txtPrelevPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress);
             // 
             // lblNbPrelevPP
             // 
             this.lblNbPrelevPP.AutoSize = true;
-            this.lblNbPrelevPP.Location = new System.Drawing.Point(84, 103);
+            this.lblNbPrelevPP.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNbPrelevPP.Location = new System.Drawing.Point(63, 101);
             this.lblNbPrelevPP.Name = "lblNbPrelevPP";
-            this.lblNbPrelevPP.Size = new System.Drawing.Size(149, 13);
+            this.lblNbPrelevPP.Size = new System.Drawing.Size(190, 18);
             this.lblNbPrelevPP.TabIndex = 21;
             this.lblNbPrelevPP.Text = "Nombre de prélèvement :";
             // 
             // grbEcheance
             // 
             this.grbEcheance.Controls.Add(this.flpEcheance);
+            this.grbEcheance.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbEcheance.Location = new System.Drawing.Point(445, 26);
             this.grbEcheance.Name = "grbEcheance";
             this.grbEcheance.Size = new System.Drawing.Size(299, 323);
@@ -329,31 +356,36 @@
             // 
             // txtCom
             // 
-            this.txtCom.Location = new System.Drawing.Point(240, 65);
+            this.txtCom.BackColor = System.Drawing.Color.DarkGray;
+            this.txtCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCom.Location = new System.Drawing.Point(240, 63);
             this.txtCom.Name = "txtCom";
-            this.txtCom.Size = new System.Drawing.Size(183, 20);
+            this.txtCom.Size = new System.Drawing.Size(183, 22);
             this.txtCom.TabIndex = 17;
             // 
             // lblDescripPP
             // 
             this.lblDescripPP.AutoSize = true;
-            this.lblDescripPP.Location = new System.Drawing.Point(84, 68);
+            this.lblDescripPP.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripPP.Location = new System.Drawing.Point(63, 67);
             this.lblDescripPP.Name = "lblDescripPP";
-            this.lblDescripPP.Size = new System.Drawing.Size(79, 13);
+            this.lblDescripPP.Size = new System.Drawing.Size(105, 18);
             this.lblDescripPP.TabIndex = 15;
             this.lblDescripPP.Text = "Description :";
             // 
             // lblIntitulePP
             // 
             this.lblIntitulePP.AutoSize = true;
-            this.lblIntitulePP.Location = new System.Drawing.Point(84, 29);
+            this.lblIntitulePP.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIntitulePP.Location = new System.Drawing.Point(63, 28);
             this.lblIntitulePP.Name = "lblIntitulePP";
-            this.lblIntitulePP.Size = new System.Drawing.Size(107, 13);
+            this.lblIntitulePP.Size = new System.Drawing.Size(144, 18);
             this.lblIntitulePP.TabIndex = 12;
             this.lblIntitulePP.Text = "Intitulé du poste :";
             // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.Color.DimGray;
             this.tabPage3.Controls.Add(this.txtPosteR);
             this.tabPage3.Controls.Add(this.clbRevenu);
             this.tabPage3.Controls.Add(this.grbRevenu);
@@ -366,13 +398,21 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(750, 391);
+            this.tabPage3.Size = new System.Drawing.Size(780, 404);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Revenu";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // txtPosteR
+            // 
+            this.txtPosteR.BackColor = System.Drawing.Color.DarkGray;
+            this.txtPosteR.Location = new System.Drawing.Point(120, 119);
+            this.txtPosteR.Name = "txtPosteR";
+            this.txtPosteR.Size = new System.Drawing.Size(183, 20);
+            this.txtPosteR.TabIndex = 43;
             // 
             // clbRevenu
             // 
+            this.clbRevenu.BackColor = System.Drawing.Color.DarkGray;
             this.clbRevenu.FormattingEnabled = true;
             this.clbRevenu.Location = new System.Drawing.Point(488, 171);
             this.clbRevenu.Name = "clbRevenu";
@@ -383,7 +423,8 @@
             // 
             this.grbRevenu.Controls.Add(this.lblMontantRevenu);
             this.grbRevenu.Controls.Add(this.txtMontantRevenu);
-            this.grbRevenu.Location = new System.Drawing.Point(87, 264);
+            this.grbRevenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbRevenu.Location = new System.Drawing.Point(87, 214);
             this.grbRevenu.Name = "grbRevenu";
             this.grbRevenu.Size = new System.Drawing.Size(233, 100);
             this.grbRevenu.TabIndex = 41;
@@ -402,21 +443,24 @@
             // 
             // txtMontantRevenu
             // 
+            this.txtMontantRevenu.BackColor = System.Drawing.Color.DarkGray;
             this.txtMontantRevenu.Location = new System.Drawing.Point(37, 48);
             this.txtMontantRevenu.Name = "txtMontantRevenu";
-            this.txtMontantRevenu.Size = new System.Drawing.Size(72, 20);
+            this.txtMontantRevenu.Size = new System.Drawing.Size(72, 22);
             this.txtMontantRevenu.TabIndex = 7;
+            this.txtMontantRevenu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontantPP_KeyPress_1);
             // 
             // dtpRevenu
             // 
-            this.dtpRevenu.Location = new System.Drawing.Point(488, 121);
+            this.dtpRevenu.Location = new System.Drawing.Point(488, 119);
             this.dtpRevenu.Name = "dtpRevenu";
             this.dtpRevenu.Size = new System.Drawing.Size(233, 20);
             this.dtpRevenu.TabIndex = 40;
             // 
             // btnValiderRevenu
             // 
-            this.btnValiderRevenu.Location = new System.Drawing.Point(624, 354);
+            this.btnValiderRevenu.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnValiderRevenu.Location = new System.Drawing.Point(624, 355);
             this.btnValiderRevenu.Name = "btnValiderRevenu";
             this.btnValiderRevenu.Size = new System.Drawing.Size(120, 30);
             this.btnValiderRevenu.TabIndex = 39;
@@ -427,27 +471,30 @@
             // lblDateRevenu
             // 
             this.lblDateRevenu.AutoSize = true;
-            this.lblDateRevenu.Location = new System.Drawing.Point(396, 127);
+            this.lblDateRevenu.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateRevenu.Location = new System.Drawing.Point(358, 121);
             this.lblDateRevenu.Name = "lblDateRevenu";
-            this.lblDateRevenu.Size = new System.Drawing.Size(86, 13);
+            this.lblDateRevenu.Size = new System.Drawing.Size(115, 18);
             this.lblDateRevenu.TabIndex = 37;
             this.lblDateRevenu.Text = "Jour du mois :";
             // 
             // lblBeneRevenu
             // 
             this.lblBeneRevenu.AutoSize = true;
-            this.lblBeneRevenu.Location = new System.Drawing.Point(400, 171);
+            this.lblBeneRevenu.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBeneRevenu.Location = new System.Drawing.Point(358, 171);
             this.lblBeneRevenu.Name = "lblBeneRevenu";
-            this.lblBeneRevenu.Size = new System.Drawing.Size(82, 13);
+            this.lblBeneRevenu.Size = new System.Drawing.Size(109, 18);
             this.lblBeneRevenu.TabIndex = 36;
             this.lblBeneRevenu.Text = "Bénéficiaire :";
             // 
             // lblPosteRevenu
             // 
             this.lblPosteRevenu.AutoSize = true;
-            this.lblPosteRevenu.Location = new System.Drawing.Point(84, 127);
+            this.lblPosteRevenu.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosteRevenu.Location = new System.Drawing.Point(56, 121);
             this.lblPosteRevenu.Name = "lblPosteRevenu";
-            this.lblPosteRevenu.Size = new System.Drawing.Size(47, 13);
+            this.lblPosteRevenu.Size = new System.Drawing.Size(58, 18);
             this.lblPosteRevenu.TabIndex = 35;
             this.lblPosteRevenu.Text = "Poste :";
             // 
@@ -462,18 +509,19 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.DimGray;
             this.tabPage1.Controls.Add(this.grbChoix);
             this.tabPage1.Controls.Add(this.dgvRecap);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(750, 391);
+            this.tabPage1.Size = new System.Drawing.Size(780, 404);
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "Vue d\'ensemble";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // grbChoix
             // 
+            this.grbChoix.BackColor = System.Drawing.Color.DimGray;
             this.grbChoix.Controls.Add(this.rdbPF);
             this.grbChoix.Controls.Add(this.rdbPP);
             this.grbChoix.Controls.Add(this.rdbR);
@@ -488,9 +536,10 @@
             // rdbPF
             // 
             this.rdbPF.AutoSize = true;
+            this.rdbPF.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbPF.Location = new System.Drawing.Point(6, 31);
             this.rdbPF.Name = "rdbPF";
-            this.rdbPF.Size = new System.Drawing.Size(86, 17);
+            this.rdbPF.Size = new System.Drawing.Size(105, 22);
             this.rdbPF.TabIndex = 0;
             this.rdbPF.TabStop = true;
             this.rdbPF.Tag = "PostePeriodique";
@@ -501,9 +550,10 @@
             // rdbPP
             // 
             this.rdbPP.AutoSize = true;
+            this.rdbPP.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbPP.Location = new System.Drawing.Point(149, 31);
             this.rdbPP.Name = "rdbPP";
-            this.rdbPP.Size = new System.Drawing.Size(115, 17);
+            this.rdbPP.Size = new System.Drawing.Size(138, 22);
             this.rdbPP.TabIndex = 1;
             this.rdbPP.TabStop = true;
             this.rdbPP.Tag = "PostePonctuel";
@@ -514,22 +564,25 @@
             // rdbR
             // 
             this.rdbR.AutoSize = true;
+            this.rdbR.BackColor = System.Drawing.Color.DimGray;
+            this.rdbR.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbR.Location = new System.Drawing.Point(340, 31);
             this.rdbR.Name = "rdbR";
-            this.rdbR.Size = new System.Drawing.Size(70, 17);
+            this.rdbR.Size = new System.Drawing.Size(81, 22);
             this.rdbR.TabIndex = 2;
             this.rdbR.TabStop = true;
             this.rdbR.Tag = "PosteRevenu";
             this.rdbR.Text = "revenus";
-            this.rdbR.UseVisualStyleBackColor = true;
+            this.rdbR.UseVisualStyleBackColor = false;
             this.rdbR.CheckedChanged += new System.EventHandler(this.rdbPF_CheckedChanged);
             // 
             // rdbCal
             // 
             this.rdbCal.AutoSize = true;
+            this.rdbCal.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbCal.Location = new System.Drawing.Point(472, 31);
             this.rdbCal.Name = "rdbCal";
-            this.rdbCal.Size = new System.Drawing.Size(154, 17);
+            this.rdbCal.Size = new System.Drawing.Size(200, 22);
             this.rdbCal.TabIndex = 3;
             this.rdbCal.TabStop = true;
             this.rdbCal.Text = "Calendrier previsionnel";
@@ -570,24 +623,11 @@
             this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
             // 
-            // txtPostePF
-            // 
-            this.txtPostePF.Location = new System.Drawing.Point(137, 125);
-            this.txtPostePF.Name = "txtPostePF";
-            this.txtPostePF.Size = new System.Drawing.Size(183, 20);
-            this.txtPostePF.TabIndex = 13;
-            // 
-            // txtPosteR
-            // 
-            this.txtPosteR.Location = new System.Drawing.Point(137, 124);
-            this.txtPosteR.Name = "txtPosteR";
-            this.txtPosteR.Size = new System.Drawing.Size(183, 20);
-            this.txtPosteR.TabIndex = 43;
-            // 
             // FrmBudgetPrevi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(784, 441);
             this.Controls.Add(this.tabBudgetPrevi);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
