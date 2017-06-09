@@ -127,6 +127,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tabPage1.Controls.Add(this.lblMontant1v1);
             this.tabPage1.Controls.Add(this.lblType1v1);
             this.tabPage1.Controls.Add(this.lblDescrtion1v1);
@@ -145,41 +146,44 @@
             this.tabPage1.Size = new System.Drawing.Size(1175, 485);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Affichage 1 à 1";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // lblMontant1v1
             // 
             this.lblMontant1v1.AutoSize = true;
-            this.lblMontant1v1.Location = new System.Drawing.Point(543, 69);
+            this.lblMontant1v1.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMontant1v1.Location = new System.Drawing.Point(502, 69);
             this.lblMontant1v1.Name = "lblMontant1v1";
-            this.lblMontant1v1.Size = new System.Drawing.Size(41, 13);
+            this.lblMontant1v1.Size = new System.Drawing.Size(53, 18);
             this.lblMontant1v1.TabIndex = 10;
             this.lblMontant1v1.Text = "label14";
             // 
             // lblType1v1
             // 
             this.lblType1v1.AutoSize = true;
-            this.lblType1v1.Location = new System.Drawing.Point(31, 55);
+            this.lblType1v1.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType1v1.Location = new System.Drawing.Point(31, 69);
             this.lblType1v1.Name = "lblType1v1";
-            this.lblType1v1.Size = new System.Drawing.Size(41, 13);
+            this.lblType1v1.Size = new System.Drawing.Size(53, 18);
             this.lblType1v1.TabIndex = 9;
             this.lblType1v1.Text = "label13";
             // 
             // lblDescrtion1v1
             // 
             this.lblDescrtion1v1.AutoSize = true;
+            this.lblDescrtion1v1.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescrtion1v1.Location = new System.Drawing.Point(31, 98);
             this.lblDescrtion1v1.Name = "lblDescrtion1v1";
-            this.lblDescrtion1v1.Size = new System.Drawing.Size(41, 13);
+            this.lblDescrtion1v1.Size = new System.Drawing.Size(53, 18);
             this.lblDescrtion1v1.TabIndex = 8;
             this.lblDescrtion1v1.Text = "label12";
             // 
             // lblNumPage
             // 
             this.lblNumPage.AutoSize = true;
-            this.lblNumPage.Location = new System.Drawing.Point(31, 24);
+            this.lblNumPage.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumPage.Location = new System.Drawing.Point(31, 38);
             this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(41, 13);
+            this.lblNumPage.Size = new System.Drawing.Size(53, 18);
             this.lblNumPage.TabIndex = 7;
             this.lblNumPage.Text = "label11";
             // 
@@ -193,9 +197,10 @@
             // cbPercu1v1
             // 
             this.cbPercu1v1.AutoSize = true;
+            this.cbPercu1v1.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbPercu1v1.Location = new System.Drawing.Point(617, 133);
             this.cbPercu1v1.Name = "cbPercu1v1";
-            this.cbPercu1v1.Size = new System.Drawing.Size(54, 17);
+            this.cbPercu1v1.Size = new System.Drawing.Size(63, 22);
             this.cbPercu1v1.TabIndex = 5;
             this.cbPercu1v1.Text = "Perçu";
             this.cbPercu1v1.UseVisualStyleBackColor = true;
@@ -203,16 +208,17 @@
             // cbRecette1v1
             // 
             this.cbRecette1v1.AutoSize = true;
+            this.cbRecette1v1.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbRecette1v1.Location = new System.Drawing.Point(617, 98);
             this.cbRecette1v1.Name = "cbRecette1v1";
-            this.cbRecette1v1.Size = new System.Drawing.Size(64, 17);
+            this.cbRecette1v1.Size = new System.Drawing.Size(72, 22);
             this.cbRecette1v1.TabIndex = 4;
             this.cbRecette1v1.Text = "Recette";
             this.cbRecette1v1.UseVisualStyleBackColor = true;
             // 
             // btnDernier
             // 
-            this.btnDernier.Location = new System.Drawing.Point(365, 409);
+            this.btnDernier.Location = new System.Drawing.Point(539, 409);
             this.btnDernier.Name = "btnDernier";
             this.btnDernier.Size = new System.Drawing.Size(75, 23);
             this.btnDernier.TabIndex = 3;
@@ -223,7 +229,7 @@
             // 
             // btnSuivant
             // 
-            this.btnSuivant.Location = new System.Drawing.Point(256, 409);
+            this.btnSuivant.Location = new System.Drawing.Point(380, 409);
             this.btnSuivant.Name = "btnSuivant";
             this.btnSuivant.Size = new System.Drawing.Size(75, 23);
             this.btnSuivant.TabIndex = 2;
@@ -234,7 +240,7 @@
             // 
             // btnPrecedent
             // 
-            this.btnPrecedent.Location = new System.Drawing.Point(154, 409);
+            this.btnPrecedent.Location = new System.Drawing.Point(234, 409);
             this.btnPrecedent.Name = "btnPrecedent";
             this.btnPrecedent.Size = new System.Drawing.Size(75, 23);
             this.btnPrecedent.TabIndex = 1;
@@ -245,7 +251,7 @@
             // 
             // btnFirst
             // 
-            this.btnFirst.Location = new System.Drawing.Point(51, 409);
+            this.btnFirst.Location = new System.Drawing.Point(90, 409);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(75, 23);
             this.btnFirst.TabIndex = 0;
@@ -292,10 +298,12 @@
             // 
             // txbNom2
             // 
-            this.txbNom2.Location = new System.Drawing.Point(558, 216);
+            this.txbNom2.BackColor = System.Drawing.Color.DarkGray;
+            this.txbNom2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbNom2.Location = new System.Drawing.Point(551, 216);
             this.txbNom2.Margin = new System.Windows.Forms.Padding(2);
             this.txbNom2.Name = "txbNom2";
-            this.txbNom2.Size = new System.Drawing.Size(76, 19);
+            this.txbNom2.Size = new System.Drawing.Size(102, 20);
             this.txbNom2.TabIndex = 2;
             // 
             // btnAjouterType
@@ -311,10 +319,12 @@
             // 
             // txbPrenom1
             // 
-            this.txbPrenom1.Location = new System.Drawing.Point(558, 184);
+            this.txbPrenom1.BackColor = System.Drawing.Color.Silver;
+            this.txbPrenom1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbPrenom1.Location = new System.Drawing.Point(551, 184);
             this.txbPrenom1.Margin = new System.Windows.Forms.Padding(2);
             this.txbPrenom1.Name = "txbPrenom1";
-            this.txbPrenom1.Size = new System.Drawing.Size(76, 19);
+            this.txbPrenom1.Size = new System.Drawing.Size(102, 20);
             this.txbPrenom1.TabIndex = 1;
             // 
             // flpPersonne
@@ -680,6 +690,7 @@
             // 
             // txbPrenom
             // 
+            this.txbPrenom.BackColor = System.Drawing.Color.DarkGray;
             this.txbPrenom.Location = new System.Drawing.Point(518, 219);
             this.txbPrenom.Margin = new System.Windows.Forms.Padding(2);
             this.txbPrenom.Name = "txbPrenom";
@@ -688,6 +699,7 @@
             // 
             // txbNom
             // 
+            this.txbNom.BackColor = System.Drawing.Color.DarkGray;
             this.txbNom.Location = new System.Drawing.Point(518, 192);
             this.txbNom.Margin = new System.Windows.Forms.Padding(2);
             this.txbNom.Name = "txbNom";

@@ -37,23 +37,26 @@
             // lblPoste
             // 
             this.lblPoste.AutoSize = true;
+            this.lblPoste.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPoste.Location = new System.Drawing.Point(38, 26);
             this.lblPoste.Name = "lblPoste";
-            this.lblPoste.Size = new System.Drawing.Size(35, 13);
+            this.lblPoste.Size = new System.Drawing.Size(46, 18);
             this.lblPoste.TabIndex = 0;
             this.lblPoste.Text = "label1";
             // 
             // lblAchat
             // 
             this.lblAchat.AutoSize = true;
+            this.lblAchat.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAchat.Location = new System.Drawing.Point(38, 65);
             this.lblAchat.Name = "lblAchat";
-            this.lblAchat.Size = new System.Drawing.Size(35, 13);
+            this.lblAchat.Size = new System.Drawing.Size(46, 18);
             this.lblAchat.TabIndex = 1;
             this.lblAchat.Text = "label2";
             // 
             // flpEcheance
             // 
+            this.flpEcheance.BackColor = System.Drawing.SystemColors.ControlDark;
             this.flpEcheance.Location = new System.Drawing.Point(12, 110);
             this.flpEcheance.Name = "flpEcheance";
             this.flpEcheance.Size = new System.Drawing.Size(260, 105);
@@ -61,6 +64,7 @@
             // 
             // btnOk
             // 
+            this.btnOk.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOk.Location = new System.Drawing.Point(197, 226);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
@@ -73,6 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.flpEcheance);

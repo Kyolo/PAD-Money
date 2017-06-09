@@ -38,6 +38,7 @@
             // 
             // btnValider
             // 
+            this.btnValider.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnValider.Location = new System.Drawing.Point(197, 39);
             this.btnValider.Name = "btnValider";
             this.btnValider.Size = new System.Drawing.Size(75, 23);
@@ -48,6 +49,7 @@
             // 
             // btnAnnuler
             // 
+            this.btnAnnuler.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnnuler.Location = new System.Drawing.Point(278, 39);
             this.btnAnnuler.Name = "btnAnnuler";
             this.btnAnnuler.Size = new System.Drawing.Size(75, 23);
@@ -59,14 +61,16 @@
             // lblCode
             // 
             this.lblCode.AutoSize = true;
+            this.lblCode.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCode.Location = new System.Drawing.Point(12, 15);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(42, 13);
+            this.lblCode.Size = new System.Drawing.Size(56, 18);
             this.lblCode.TabIndex = 2;
             this.lblCode.Text = "lblCode";
             // 
             // cbbBP
             // 
+            this.cbbBP.BackColor = System.Drawing.Color.DarkGray;
             this.cbbBP.FormattingEnabled = true;
             this.cbbBP.Location = new System.Drawing.Point(172, 12);
             this.cbbBP.Name = "cbbBP";
@@ -75,6 +79,7 @@
             // 
             // txtMontant
             // 
+            this.txtMontant.BackColor = System.Drawing.Color.DarkGray;
             this.txtMontant.Location = new System.Drawing.Point(278, 12);
             this.txtMontant.Name = "txtMontant";
             this.txtMontant.Size = new System.Drawing.Size(59, 20);
@@ -83,9 +88,10 @@
             // lblPoste
             // 
             this.lblPoste.AutoSize = true;
-            this.lblPoste.Location = new System.Drawing.Point(60, 15);
+            this.lblPoste.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPoste.Location = new System.Drawing.Point(12, 42);
             this.lblPoste.Name = "lblPoste";
-            this.lblPoste.Size = new System.Drawing.Size(35, 13);
+            this.lblPoste.Size = new System.Drawing.Size(46, 18);
             this.lblPoste.TabIndex = 6;
             this.lblPoste.Text = "label1";
             // 
@@ -93,6 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(359, 69);
             this.Controls.Add(this.lblPoste);
             this.Controls.Add(this.txtMontant);
