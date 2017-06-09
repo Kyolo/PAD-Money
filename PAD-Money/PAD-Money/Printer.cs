@@ -42,7 +42,7 @@ namespace PAD_Money
             try
             {
                 //On crée le flux pour lire le texte
-                streamToPrint = new StreamReader(new MemoryStream(Encoding.ASCII.GetBytes(textToDisplay)), Encoding.UTF8);
+                streamToPrint = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(textToDisplay)));
                 //On crée le document 
                 doc = new PrintDocument();
 				//On lui passe la methode qui créera le document à proprement parlé
@@ -72,7 +72,7 @@ namespace PAD_Money
             float linesPerPage = 0;
             float yPos = 0;
             int count = 0;
-            float leftMargin = ev.MarginBounds.Left * 0.4f;
+            float leftMargin = ev.MarginBounds.Left * 0.3f;
             float rightMargin = ev.MarginBounds.Right;
             float topMargin = ev.MarginBounds.Top * 0.4f;
             string line = null;
