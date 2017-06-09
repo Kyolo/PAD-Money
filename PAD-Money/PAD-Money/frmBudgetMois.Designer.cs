@@ -30,6 +30,18 @@
         {
             this.TabBudgetMois = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblMontant1v1 = new System.Windows.Forms.Label();
+            this.lblType1v1 = new System.Windows.Forms.Label();
+            this.lblDescrtion1v1 = new System.Windows.Forms.Label();
+            this.lblNumPage = new System.Windows.Forms.Label();
+            this.dtp1v1 = new System.Windows.Forms.DateTimePicker();
+            this.cbPercu1v1 = new System.Windows.Forms.CheckBox();
+            this.cbRecette1v1 = new System.Windows.Forms.CheckBox();
+            this.btnDernier = new System.Windows.Forms.Button();
+            this.btnSuivant = new System.Windows.Forms.Button();
+            this.btnPrecedent = new System.Windows.Forms.Button();
+            this.btnFirst = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.TabTransac = new System.Windows.Forms.TabPage();
             this.txbNom2 = new System.Windows.Forms.TextBox();
             this.btnAjouterType = new System.Windows.Forms.Button();
@@ -84,30 +96,19 @@
             this.cbbTypeModif = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TabRecapitulatif = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
             this.lblFinPer = new System.Windows.Forms.Label();
             this.lblDebPer = new System.Windows.Forms.Label();
             this.dtpFinPer = new System.Windows.Forms.DateTimePicker();
             this.dtpDebPer = new System.Windows.Forms.DateTimePicker();
             this.btnPDF = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnFirst = new System.Windows.Forms.Button();
-            this.btnPrecedent = new System.Windows.Forms.Button();
-            this.btnSuivant = new System.Windows.Forms.Button();
-            this.btnDernier = new System.Windows.Forms.Button();
-            this.cbRecette1v1 = new System.Windows.Forms.CheckBox();
-            this.cbPercu1v1 = new System.Windows.Forms.CheckBox();
-            this.dtp1v1 = new System.Windows.Forms.DateTimePicker();
-            this.lblNumPage = new System.Windows.Forms.Label();
-            this.lblDescrtion1v1 = new System.Windows.Forms.Label();
-            this.lblType1v1 = new System.Windows.Forms.Label();
-            this.lblMontant1v1 = new System.Windows.Forms.Label();
+            this.dgvFinal = new System.Windows.Forms.DataGridView();
             this.TabBudgetMois.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.TabTransac.SuspendLayout();
             this.tabSuppression.SuspendLayout();
             this.TabModif.SuspendLayout();
             this.TabRecapitulatif.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinal)).BeginInit();
             this.SuspendLayout();
             // 
             // TabBudgetMois
@@ -140,11 +141,125 @@
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1175, 485);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Affichage 1 à 1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lblMontant1v1
+            // 
+            this.lblMontant1v1.AutoSize = true;
+            this.lblMontant1v1.Location = new System.Drawing.Point(543, 69);
+            this.lblMontant1v1.Name = "lblMontant1v1";
+            this.lblMontant1v1.Size = new System.Drawing.Size(41, 13);
+            this.lblMontant1v1.TabIndex = 10;
+            this.lblMontant1v1.Text = "label14";
+            // 
+            // lblType1v1
+            // 
+            this.lblType1v1.AutoSize = true;
+            this.lblType1v1.Location = new System.Drawing.Point(31, 55);
+            this.lblType1v1.Name = "lblType1v1";
+            this.lblType1v1.Size = new System.Drawing.Size(41, 13);
+            this.lblType1v1.TabIndex = 9;
+            this.lblType1v1.Text = "label13";
+            // 
+            // lblDescrtion1v1
+            // 
+            this.lblDescrtion1v1.AutoSize = true;
+            this.lblDescrtion1v1.Location = new System.Drawing.Point(31, 98);
+            this.lblDescrtion1v1.Name = "lblDescrtion1v1";
+            this.lblDescrtion1v1.Size = new System.Drawing.Size(41, 13);
+            this.lblDescrtion1v1.TabIndex = 8;
+            this.lblDescrtion1v1.Text = "label12";
+            // 
+            // lblNumPage
+            // 
+            this.lblNumPage.AutoSize = true;
+            this.lblNumPage.Location = new System.Drawing.Point(31, 24);
+            this.lblNumPage.Name = "lblNumPage";
+            this.lblNumPage.Size = new System.Drawing.Size(41, 13);
+            this.lblNumPage.TabIndex = 7;
+            this.lblNumPage.Text = "label11";
+            // 
+            // dtp1v1
+            // 
+            this.dtp1v1.Location = new System.Drawing.Point(592, 24);
+            this.dtp1v1.Name = "dtp1v1";
+            this.dtp1v1.Size = new System.Drawing.Size(200, 20);
+            this.dtp1v1.TabIndex = 6;
+            // 
+            // cbPercu1v1
+            // 
+            this.cbPercu1v1.AutoSize = true;
+            this.cbPercu1v1.Location = new System.Drawing.Point(617, 133);
+            this.cbPercu1v1.Name = "cbPercu1v1";
+            this.cbPercu1v1.Size = new System.Drawing.Size(54, 17);
+            this.cbPercu1v1.TabIndex = 5;
+            this.cbPercu1v1.Text = "Perçu";
+            this.cbPercu1v1.UseVisualStyleBackColor = true;
+            // 
+            // cbRecette1v1
+            // 
+            this.cbRecette1v1.AutoSize = true;
+            this.cbRecette1v1.Location = new System.Drawing.Point(617, 98);
+            this.cbRecette1v1.Name = "cbRecette1v1";
+            this.cbRecette1v1.Size = new System.Drawing.Size(64, 17);
+            this.cbRecette1v1.TabIndex = 4;
+            this.cbRecette1v1.Text = "Recette";
+            this.cbRecette1v1.UseVisualStyleBackColor = true;
+            // 
+            // btnDernier
+            // 
+            this.btnDernier.Location = new System.Drawing.Point(365, 409);
+            this.btnDernier.Name = "btnDernier";
+            this.btnDernier.Size = new System.Drawing.Size(75, 23);
+            this.btnDernier.TabIndex = 3;
+            this.btnDernier.Tag = "4";
+            this.btnDernier.Text = ">>";
+            this.btnDernier.UseVisualStyleBackColor = true;
+            this.btnDernier.Click += new System.EventHandler(this.btnFirst_Click);
+            // 
+            // btnSuivant
+            // 
+            this.btnSuivant.Location = new System.Drawing.Point(256, 409);
+            this.btnSuivant.Name = "btnSuivant";
+            this.btnSuivant.Size = new System.Drawing.Size(75, 23);
+            this.btnSuivant.TabIndex = 2;
+            this.btnSuivant.Tag = "3";
+            this.btnSuivant.Text = ">";
+            this.btnSuivant.UseVisualStyleBackColor = true;
+            this.btnSuivant.Click += new System.EventHandler(this.btnFirst_Click);
+            // 
+            // btnPrecedent
+            // 
+            this.btnPrecedent.Location = new System.Drawing.Point(154, 409);
+            this.btnPrecedent.Name = "btnPrecedent";
+            this.btnPrecedent.Size = new System.Drawing.Size(75, 23);
+            this.btnPrecedent.TabIndex = 1;
+            this.btnPrecedent.Tag = "2";
+            this.btnPrecedent.Text = "<";
+            this.btnPrecedent.UseVisualStyleBackColor = true;
+            this.btnPrecedent.Click += new System.EventHandler(this.btnFirst_Click);
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.Location = new System.Drawing.Point(51, 409);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(75, 23);
+            this.btnFirst.TabIndex = 0;
+            this.btnFirst.Tag = "1";
+            this.btnFirst.Text = "<<";
+            this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(25, 170);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(756, 233);
+            this.flowLayoutPanel1.TabIndex = 0;
             // 
             // TabTransac
             // 
@@ -170,7 +285,7 @@
             this.TabTransac.Font = new System.Drawing.Font("Modern No. 20", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TabTransac.Location = new System.Drawing.Point(4, 25);
             this.TabTransac.Name = "TabTransac";
-            this.TabTransac.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabTransac.Padding = new System.Windows.Forms.Padding(3);
             this.TabTransac.Size = new System.Drawing.Size(1175, 485);
             this.TabTransac.TabIndex = 1;
             this.TabTransac.Text = "Ajout d\'une transaction";
@@ -178,7 +293,7 @@
             // txbNom2
             // 
             this.txbNom2.Location = new System.Drawing.Point(558, 216);
-            this.txbNom2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbNom2.Margin = new System.Windows.Forms.Padding(2);
             this.txbNom2.Name = "txbNom2";
             this.txbNom2.Size = new System.Drawing.Size(76, 19);
             this.txbNom2.TabIndex = 2;
@@ -197,7 +312,7 @@
             // txbPrenom1
             // 
             this.txbPrenom1.Location = new System.Drawing.Point(558, 184);
-            this.txbPrenom1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbPrenom1.Margin = new System.Windows.Forms.Padding(2);
             this.txbPrenom1.Name = "txbPrenom1";
             this.txbPrenom1.Size = new System.Drawing.Size(76, 19);
             this.txbPrenom1.TabIndex = 1;
@@ -207,7 +322,7 @@
             this.flpPersonne.AutoScroll = true;
             this.flpPersonne.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.flpPersonne.Location = new System.Drawing.Point(533, 37);
-            this.flpPersonne.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flpPersonne.Margin = new System.Windows.Forms.Padding(2);
             this.flpPersonne.Name = "flpPersonne";
             this.flpPersonne.Size = new System.Drawing.Size(172, 142);
             this.flpPersonne.TabIndex = 14;
@@ -239,6 +354,7 @@
             this.txtMontant.Name = "txtMontant";
             this.txtMontant.Size = new System.Drawing.Size(204, 23);
             this.txtMontant.TabIndex = 11;
+            this.txtMontant.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontant_KeyPress);
             // 
             // txtDescription
             // 
@@ -371,7 +487,7 @@
             this.tabSuppression.Controls.Add(this.cbbTransactionExistantes);
             this.tabSuppression.Location = new System.Drawing.Point(4, 25);
             this.tabSuppression.Name = "tabSuppression";
-            this.tabSuppression.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabSuppression.Padding = new System.Windows.Forms.Padding(3);
             this.tabSuppression.Size = new System.Drawing.Size(1175, 485);
             this.tabSuppression.TabIndex = 2;
             this.tabSuppression.Text = "Suppression d\'une transaction";
@@ -513,7 +629,7 @@
             // 
             this.btnSupp.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSupp.Location = new System.Drawing.Point(404, 106);
-            this.btnSupp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSupp.Margin = new System.Windows.Forms.Padding(2);
             this.btnSupp.Name = "btnSupp";
             this.btnSupp.Size = new System.Drawing.Size(128, 57);
             this.btnSupp.TabIndex = 1;
@@ -526,11 +642,11 @@
             this.cbbTransactionExistantes.BackColor = System.Drawing.Color.DarkGray;
             this.cbbTransactionExistantes.FormattingEnabled = true;
             this.cbbTransactionExistantes.Location = new System.Drawing.Point(172, 59);
-            this.cbbTransactionExistantes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbTransactionExistantes.Margin = new System.Windows.Forms.Padding(2);
             this.cbbTransactionExistantes.Name = "cbbTransactionExistantes";
             this.cbbTransactionExistantes.Size = new System.Drawing.Size(157, 21);
             this.cbbTransactionExistantes.TabIndex = 0;
-            this.cbbTransactionExistantes.SelectedIndexChanged += new System.EventHandler(this.cbbTransactionExistantes_SelectedIndexChanged);
+            this.cbbTransactionExistantes.SelectionChangeCommitted += new System.EventHandler(this.cbbTransactionExistantes_SelectedIndexChanged);
             // 
             // TabModif
             // 
@@ -556,7 +672,7 @@
             this.TabModif.Controls.Add(this.label3);
             this.TabModif.Location = new System.Drawing.Point(4, 25);
             this.TabModif.Name = "TabModif";
-            this.TabModif.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabModif.Padding = new System.Windows.Forms.Padding(3);
             this.TabModif.Size = new System.Drawing.Size(1175, 485);
             this.TabModif.TabIndex = 3;
             this.TabModif.Text = "Modification d\'une transaction";
@@ -565,7 +681,7 @@
             // txbPrenom
             // 
             this.txbPrenom.Location = new System.Drawing.Point(518, 219);
-            this.txbPrenom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbPrenom.Margin = new System.Windows.Forms.Padding(2);
             this.txbPrenom.Name = "txbPrenom";
             this.txbPrenom.Size = new System.Drawing.Size(110, 20);
             this.txbPrenom.TabIndex = 36;
@@ -573,7 +689,7 @@
             // txbNom
             // 
             this.txbNom.Location = new System.Drawing.Point(518, 192);
-            this.txbNom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbNom.Margin = new System.Windows.Forms.Padding(2);
             this.txbNom.Name = "txbNom";
             this.txbNom.Size = new System.Drawing.Size(110, 20);
             this.txbNom.TabIndex = 35;
@@ -594,7 +710,7 @@
             this.cbPercuModif.AutoSize = true;
             this.cbPercuModif.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbPercuModif.Location = new System.Drawing.Point(130, 255);
-            this.cbPercuModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbPercuModif.Margin = new System.Windows.Forms.Padding(2);
             this.cbPercuModif.Name = "cbPercuModif";
             this.cbPercuModif.Size = new System.Drawing.Size(63, 22);
             this.cbPercuModif.TabIndex = 32;
@@ -606,7 +722,7 @@
             this.cbRecuModif.AutoSize = true;
             this.cbRecuModif.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbRecuModif.Location = new System.Drawing.Point(22, 255);
-            this.cbRecuModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbRecuModif.Margin = new System.Windows.Forms.Padding(2);
             this.cbRecuModif.Name = "cbRecuModif";
             this.cbRecuModif.Size = new System.Drawing.Size(58, 22);
             this.cbRecuModif.TabIndex = 31;
@@ -618,17 +734,17 @@
             this.cbbChoixtransacModif.BackColor = System.Drawing.Color.DarkGray;
             this.cbbChoixtransacModif.FormattingEnabled = true;
             this.cbbChoixtransacModif.Location = new System.Drawing.Point(172, 31);
-            this.cbbChoixtransacModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbChoixtransacModif.Margin = new System.Windows.Forms.Padding(2);
             this.cbbChoixtransacModif.Name = "cbbChoixtransacModif";
             this.cbbChoixtransacModif.Size = new System.Drawing.Size(137, 21);
             this.cbbChoixtransacModif.TabIndex = 30;
-            this.cbbChoixtransacModif.SelectedValueChanged += new System.EventHandler(this.cbbChoixtransacModif_SelectedValueChanged);
+            this.cbbChoixtransacModif.SelectionChangeCommitted += new System.EventHandler(this.cbbChoixtransacModif_SelectedValueChanged);
             // 
             // btnAjouterInModif
             // 
             this.btnAjouterInModif.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAjouterInModif.Location = new System.Drawing.Point(390, 188);
-            this.btnAjouterInModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAjouterInModif.Margin = new System.Windows.Forms.Padding(2);
             this.btnAjouterInModif.Name = "btnAjouterInModif";
             this.btnAjouterInModif.Size = new System.Drawing.Size(61, 26);
             this.btnAjouterInModif.TabIndex = 29;
@@ -641,7 +757,7 @@
             this.flpListePersonneInModif.AutoScroll = true;
             this.flpListePersonneInModif.BackColor = System.Drawing.Color.DarkGray;
             this.flpListePersonneInModif.Location = new System.Drawing.Point(518, 39);
-            this.flpListePersonneInModif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flpListePersonneInModif.Margin = new System.Windows.Forms.Padding(2);
             this.flpListePersonneInModif.Name = "flpListePersonneInModif";
             this.flpListePersonneInModif.Size = new System.Drawing.Size(172, 136);
             this.flpListePersonneInModif.TabIndex = 28;
@@ -671,6 +787,7 @@
             this.txbMontantModif.Name = "txbMontantModif";
             this.txbMontantModif.Size = new System.Drawing.Size(204, 23);
             this.txbMontantModif.TabIndex = 25;
+            this.txbMontantModif.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontant_KeyPress);
             // 
             // txbDescriptionModif
             // 
@@ -701,6 +818,7 @@
             this.btnAjouterPersonneInModif.TabIndex = 22;
             this.btnAjouterPersonneInModif.Text = "Ajouter une personne";
             this.btnAjouterPersonneInModif.UseVisualStyleBackColor = true;
+            this.btnAjouterPersonneInModif.Click += new System.EventHandler(this.btnAjouterPersonneInModif_Click_1);
             // 
             // lblMont
             // 
@@ -757,7 +875,7 @@
             // TabRecapitulatif
             // 
             this.TabRecapitulatif.BackColor = System.Drawing.Color.DimGray;
-            this.TabRecapitulatif.Controls.Add(this.label5);
+            this.TabRecapitulatif.Controls.Add(this.dgvFinal);
             this.TabRecapitulatif.Controls.Add(this.lblFinPer);
             this.TabRecapitulatif.Controls.Add(this.lblDebPer);
             this.TabRecapitulatif.Controls.Add(this.dtpFinPer);
@@ -765,28 +883,16 @@
             this.TabRecapitulatif.Controls.Add(this.btnPDF);
             this.TabRecapitulatif.Location = new System.Drawing.Point(4, 25);
             this.TabRecapitulatif.Name = "TabRecapitulatif";
-            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabRecapitulatif.Padding = new System.Windows.Forms.Padding(3);
             this.TabRecapitulatif.Size = new System.Drawing.Size(1175, 485);
             this.TabRecapitulatif.TabIndex = 4;
             this.TabRecapitulatif.Text = "Récapitulatif";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Trebuchet MS", 120F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label5.Location = new System.Drawing.Point(322, 228);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(432, 200);
-            this.label5.TabIndex = 34;
-            this.label5.Text = "€ $ £";
             // 
             // lblFinPer
             // 
             this.lblFinPer.AutoSize = true;
             this.lblFinPer.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinPer.Location = new System.Drawing.Point(38, 167);
+            this.lblFinPer.Location = new System.Drawing.Point(240, 409);
             this.lblFinPer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFinPer.Name = "lblFinPer";
             this.lblFinPer.Size = new System.Drawing.Size(167, 18);
@@ -797,7 +903,7 @@
             // 
             this.lblDebPer.AutoSize = true;
             this.lblDebPer.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDebPer.Location = new System.Drawing.Point(38, 80);
+            this.lblDebPer.Location = new System.Drawing.Point(240, 370);
             this.lblDebPer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDebPer.Name = "lblDebPer";
             this.lblDebPer.Size = new System.Drawing.Size(182, 18);
@@ -806,16 +912,16 @@
             // 
             // dtpFinPer
             // 
-            this.dtpFinPer.Location = new System.Drawing.Point(243, 167);
-            this.dtpFinPer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFinPer.Location = new System.Drawing.Point(447, 409);
+            this.dtpFinPer.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFinPer.Name = "dtpFinPer";
             this.dtpFinPer.Size = new System.Drawing.Size(151, 20);
             this.dtpFinPer.TabIndex = 3;
             // 
             // dtpDebPer
             // 
-            this.dtpDebPer.Location = new System.Drawing.Point(243, 80);
-            this.dtpDebPer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpDebPer.Location = new System.Drawing.Point(447, 370);
+            this.dtpDebPer.Margin = new System.Windows.Forms.Padding(2);
             this.dtpDebPer.Name = "dtpDebPer";
             this.dtpDebPer.Size = new System.Drawing.Size(151, 20);
             this.dtpDebPer.TabIndex = 2;
@@ -823,8 +929,8 @@
             // btnPDF
             // 
             this.btnPDF.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPDF.Location = new System.Drawing.Point(41, 246);
-            this.btnPDF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPDF.Location = new System.Drawing.Point(28, 365);
+            this.btnPDF.Margin = new System.Windows.Forms.Padding(2);
             this.btnPDF.Name = "btnPDF";
             this.btnPDF.Size = new System.Drawing.Size(169, 62);
             this.btnPDF.TabIndex = 0;
@@ -832,111 +938,13 @@
             this.btnPDF.UseVisualStyleBackColor = true;
             this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
             // 
-            // flowLayoutPanel1
+            // dgvFinal
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(25, 170);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(756, 233);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // btnFirst
-            // 
-            this.btnFirst.Location = new System.Drawing.Point(51, 409);
-            this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(75, 23);
-            this.btnFirst.TabIndex = 0;
-            this.btnFirst.Text = "<<";
-            this.btnFirst.UseVisualStyleBackColor = true;
-            // 
-            // btnPrecedent
-            // 
-            this.btnPrecedent.Location = new System.Drawing.Point(154, 409);
-            this.btnPrecedent.Name = "btnPrecedent";
-            this.btnPrecedent.Size = new System.Drawing.Size(75, 23);
-            this.btnPrecedent.TabIndex = 1;
-            this.btnPrecedent.Text = "<";
-            this.btnPrecedent.UseVisualStyleBackColor = true;
-            // 
-            // btnSuivant
-            // 
-            this.btnSuivant.Location = new System.Drawing.Point(256, 409);
-            this.btnSuivant.Name = "btnSuivant";
-            this.btnSuivant.Size = new System.Drawing.Size(75, 23);
-            this.btnSuivant.TabIndex = 2;
-            this.btnSuivant.Text = ">";
-            this.btnSuivant.UseVisualStyleBackColor = true;
-            // 
-            // btnDernier
-            // 
-            this.btnDernier.Location = new System.Drawing.Point(365, 409);
-            this.btnDernier.Name = "btnDernier";
-            this.btnDernier.Size = new System.Drawing.Size(75, 23);
-            this.btnDernier.TabIndex = 3;
-            this.btnDernier.Text = ">>";
-            this.btnDernier.UseVisualStyleBackColor = true;
-            // 
-            // cbRecette1v1
-            // 
-            this.cbRecette1v1.AutoSize = true;
-            this.cbRecette1v1.Location = new System.Drawing.Point(617, 98);
-            this.cbRecette1v1.Name = "cbRecette1v1";
-            this.cbRecette1v1.Size = new System.Drawing.Size(64, 17);
-            this.cbRecette1v1.TabIndex = 4;
-            this.cbRecette1v1.Text = "Recette";
-            this.cbRecette1v1.UseVisualStyleBackColor = true;
-            // 
-            // cbPercu1v1
-            // 
-            this.cbPercu1v1.AutoSize = true;
-            this.cbPercu1v1.Location = new System.Drawing.Point(617, 133);
-            this.cbPercu1v1.Name = "cbPercu1v1";
-            this.cbPercu1v1.Size = new System.Drawing.Size(54, 17);
-            this.cbPercu1v1.TabIndex = 5;
-            this.cbPercu1v1.Text = "Perçu";
-            this.cbPercu1v1.UseVisualStyleBackColor = true;
-            // 
-            // dtp1v1
-            // 
-            this.dtp1v1.Location = new System.Drawing.Point(592, 24);
-            this.dtp1v1.Name = "dtp1v1";
-            this.dtp1v1.Size = new System.Drawing.Size(200, 20);
-            this.dtp1v1.TabIndex = 6;
-            // 
-            // lblNumPage
-            // 
-            this.lblNumPage.AutoSize = true;
-            this.lblNumPage.Location = new System.Drawing.Point(31, 24);
-            this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(41, 13);
-            this.lblNumPage.TabIndex = 7;
-            this.lblNumPage.Text = "label11";
-            // 
-            // lblDescrtion1v1
-            // 
-            this.lblDescrtion1v1.AutoSize = true;
-            this.lblDescrtion1v1.Location = new System.Drawing.Point(31, 98);
-            this.lblDescrtion1v1.Name = "lblDescrtion1v1";
-            this.lblDescrtion1v1.Size = new System.Drawing.Size(41, 13);
-            this.lblDescrtion1v1.TabIndex = 8;
-            this.lblDescrtion1v1.Text = "label12";
-            // 
-            // lblType1v1
-            // 
-            this.lblType1v1.AutoSize = true;
-            this.lblType1v1.Location = new System.Drawing.Point(31, 55);
-            this.lblType1v1.Name = "lblType1v1";
-            this.lblType1v1.Size = new System.Drawing.Size(41, 13);
-            this.lblType1v1.TabIndex = 9;
-            this.lblType1v1.Text = "label13";
-            // 
-            // lblMontant1v1
-            // 
-            this.lblMontant1v1.AutoSize = true;
-            this.lblMontant1v1.Location = new System.Drawing.Point(543, 69);
-            this.lblMontant1v1.Name = "lblMontant1v1";
-            this.lblMontant1v1.Size = new System.Drawing.Size(41, 13);
-            this.lblMontant1v1.TabIndex = 10;
-            this.lblMontant1v1.Text = "label14";
+            this.dgvFinal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFinal.Location = new System.Drawing.Point(10, 18);
+            this.dgvFinal.Name = "dgvFinal";
+            this.dgvFinal.Size = new System.Drawing.Size(782, 304);
+            this.dgvFinal.TabIndex = 6;
             // 
             // FrmBudgetMois
             // 
@@ -944,9 +952,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 462);
             this.Controls.Add(this.TabBudgetMois);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmBudgetMois";
             this.Text = "frmBudgetMois";
+            this.Load += new System.EventHandler(this.FrmBudgetMois_Load);
             this.TabBudgetMois.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -958,6 +967,7 @@
             this.TabModif.PerformLayout();
             this.TabRecapitulatif.ResumeLayout(false);
             this.TabRecapitulatif.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinal)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1020,7 +1030,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblPerca;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txbPrenom;
         private System.Windows.Forms.TextBox txbNom;
@@ -1038,5 +1047,6 @@
         private System.Windows.Forms.DateTimePicker dtp1v1;
         private System.Windows.Forms.CheckBox cbPercu1v1;
         private System.Windows.Forms.CheckBox cbRecette1v1;
+        private System.Windows.Forms.DataGridView dgvFinal;
     }
 }

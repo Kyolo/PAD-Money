@@ -16,7 +16,7 @@ namespace PAD_Money
         private OleDbConnection connec;
         DataSet ds;
         DataTable transaction;
-       
+        BindingSource bs1 = new BindingSource();
 
         public FrmBudgetMois(OleDbConnection connec, DataSet ds)
         {
@@ -29,38 +29,94 @@ namespace PAD_Money
             generationdyna2();
             type();
             codeTransa();
-            afficher_sup();
+
             transaction = ds.Tables["Transaction"].Select("codeTransaction = '" + cbbTransactionExistantes.SelectedValue + "'").CopyToDataTable();
+            initSup();
 
 
 
 
+            remplir();
         }
 
         //affiche les elements de l'onglet "supprimer"
-        private void afficher_sup()
-        {
-            if (cbbTransactionExistantes.Text != string.Empty)
-            {
-                
-                int res = int.Parse(cbbTransactionExistantes.SelectedValue.ToString());
-                DataTable TypeFin = ds.Tables["TypeTransaction"].Select("codeType = '" + res + "'").CopyToDataTable();
-                lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
-                lblDescription2.Text = transaction.Rows[0]["description"].ToString();
-                lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
 
-                lblType2.Text = TypeFin.Rows[0]["libType"].ToString();
-                if (transaction.Rows[0]["recetteON"].ToString() == "True")
-                {
-                    lblRorP.Text = "Recette";
-                }
-                else lblRorP.Text = "Pas recette";
-                if (transaction.Rows[0]["percuON"].ToString() == "True")
-                {
-                    lblPerca.Text = "Perçu";
-                }
+        private void initSup()
+        {
+
+            lblDate2.Text = transaction.Rows[0]["dateTransaction"].ToString();
+            lblDescription2.Text = transaction.Rows[0]["description"].ToString();
+            lblMontant2.Text = transaction.Rows[0]["montant"].ToString();
+
+            lblType2.Text = getLibTransac(int.Parse(transaction.Rows[0]["codeTransaction"].ToString()));
+            if (transaction.Rows[0]["recetteON"].ToString() == "True")
+            {
+                lblRorP.Text = "Recette";
+            }
+            else lblRorP.Text = "Pas recette";
+            if (transaction.Rows[0]["percuON"].ToString() == "True")
+            {
+                lblPerca.Text = "Perçu";
+            }
+            else
+            {
                 lblPerca.Text = "Pas perçu";
             }
+            cbbTransactionExistantes.SelectedIndex = 0;
+        }
+        private void afficher_sup()
+        {
+            /*if (cbbTransactionExistantes.Text != string.Empty)
+            {
+
+                string res = transaction.Rows[0]["codeTransaction"].ToString();
+                DataTable TypeFin = ds.Tables["TypeTransaction"].Select("codeType = '" + res + "'").CopyToDataTable();
+                
+            }*/
+            int code = int.Parse(cbbTransactionExistantes.SelectedValue.ToString());
+            foreach (DataRow row in ds.Tables["Transaction"].Rows)
+            {
+                if (code == int.Parse(row["codeTransaction"].ToString()))
+                {
+                    lblDate2.Text = row["dateTransaction"].ToString();
+                    lblDescription2.Text = row["description"].ToString();
+                    lblMontant2.Text = row["montant"].ToString();
+                    lblType2.Text = getLibTransac(int.Parse(row["type"].ToString()));
+
+                    if (row["recetteON"].ToString() == "True")
+                    {
+                        lblRorP.Text = "Recette";
+                    }
+
+                    else
+                    {
+                        lblRorP.Text = "Pas recette";
+                    }
+
+                    if (row["percuON"].ToString() == "True")
+                    {
+                        lblPerca.Text = "Perçu";
+                    }
+
+                    else
+                    {
+                        lblPerca.Text = "Pas perçu";
+                    }
+                }
+            }
+        }
+
+        private string getLibTransac(int code)
+        {
+            string res = string.Empty;
+            foreach (DataRow row in ds.Tables["TypeTransaction"].Rows)
+            {
+                if (code == int.Parse(row["codeType"].ToString()))
+                {
+                    res = row["libType"].ToString();
+                }
+            }
+            return res;
         }
 
         //ajoute une transaction dans la base de données
@@ -73,8 +129,8 @@ namespace PAD_Money
             DataTable Type = ds.Tables["TypeTransaction"].Select("libtype ='" + typeString + "'").CopyToDataTable();
             int[] listBenef = null;
             int codeTypeLong = (int)Type.Rows[0]["codeType"];
-            bool recette = true;
-            bool percu = true;
+            bool recette = false;
+            bool percu = false;
             if (cbPercu.Checked == true)
             {
                 percu = true;
@@ -181,6 +237,8 @@ namespace PAD_Money
             cbbTypeModif.ValueMember = "codeType";
             cbPercuModif.Checked = (bool)transaction.Rows[0]["PercuON"];
             cbRecuModif.Checked = (bool)transaction.Rows[0]["recetteON"];
+
+
         }
 
         //ajoute un nouveau type via la table "ajouter"
@@ -204,7 +262,14 @@ namespace PAD_Money
         //Modifie une transaction
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            // BDDUtil.modifyLine("Transaction", )
+            Dictionary<String, object> dico = new Dictionary<String, object>();
+            dico.Add("dateTransaction", dtmDateModif.Value.Date);
+            dico.Add("description", txbDescriptionModif.Text);
+            dico.Add("montant", float.Parse(txbMontantModif.Text));
+            dico.Add("RecetteOn", cbRecuModif.Checked);
+            dico.Add("PercuOn", cbPercuModif.Checked);
+            dico.Add("type", int.Parse(cbbTypeModif.SelectedValue.ToString()));
+            BDDUtil.modifyLine("Transaction", "codeTransaction", int.Parse(cbbChoixtransacModif.SelectedValue.ToString()), dico);
         }
 
         //Ajoute de nouveaux types via l'onglet "modifier"
@@ -221,8 +286,8 @@ namespace PAD_Money
         //ajoute des gens à la liste des gens
         private void ajouterPersonneGlob()
         {
-            string prenom = txbPrenom.Text;
-            string nom = txbNom.Text;
+            string prenom = txbPrenom1.Text;
+            string nom = txbNom2.Text;
             string[] NP = new string[] { nom + " " + prenom };
             DataTable Personne = ds.Tables["Personne"];
             if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
@@ -233,8 +298,8 @@ namespace PAD_Money
 
         private void ajouterPersonneModif()
         {
-            string prenom = txbPrenom1.Text;
-            string nom = txbNom2.Text;
+            string prenom = txbPrenom.Text;
+            string nom = txbNom.Text;
             string[] NP = new string[] { nom + " " + prenom };
             DataTable Personne = ds.Tables["Personne"].Select("codePersonne= '" + BDDUtil.getCodeFromNames(NP)[0] + "'").CopyToDataTable();
             if (BDDUtil.getCodeFromNames(NP) != Personne.Rows[0]["codePersonne"])
@@ -253,9 +318,9 @@ namespace PAD_Money
             if (dtpFinPer.Value >= dtpDebPer.Value)
             {
                 //while ((DateTime)transaction.Rows[0]["dateTransaction"] < dtpFinPer.Value) ;
-                
-                    if ((DateTime)transaction.Rows[0]["dateTransaction"] > dtpDebPer.Value && (DateTime)transaction.Rows[0]["dateTransaction"] < dtpFinPer.Value) 
-                    {
+
+                if ((DateTime)transaction.Rows[0]["dateTransaction"] > dtpDebPer.Value && (DateTime)transaction.Rows[0]["dateTransaction"] < dtpFinPer.Value)
+                {
                     //On prend les deux tables de bases
                     DataTable tabTrans = ds.Tables["Transaction"];
                     DataTable tabType = ds.Tables["TypeTransaction"];
@@ -283,7 +348,7 @@ namespace PAD_Money
                     Printer rappor = Printer.createReport(start, stop, togive.Select("#" + start.Day + "/" + start.Month + "/" + start.Year + "# < dateTransaction AND dateTransaction < #" + stop.Day + "/" + stop.Month + "/" + stop.Year + "#"), new Font(new FontFamily("Consolas"), 10));
                     rappor.showPreview();
                 }
-                
+
 
             }
         }
@@ -336,6 +401,163 @@ namespace PAD_Money
         private void cbbTransactionExistantes_SelectedIndexChanged(object sender, EventArgs e)
         {
             afficher_sup();
+        }
+
+        private void btnAjouterPersonneInModif_Click_1(object sender, EventArgs e)
+        {
+            supprimerGens();
+            ajouterPersonneModif();
+            regeneAgain();
+        }
+
+        private void remplir()
+        {
+            DataTable modele = new DataTable();
+            modele.Columns.Add("codeTransaction");
+            modele.Columns.Add("dateTransaction");
+            modele.Columns.Add("description");
+            modele.Columns.Add("montant");
+            modele.Columns.Add("recetteON");
+            modele.Columns.Add("percuON");
+            modele.Columns.Add("type");
+            modele.Columns.Add("libType");
+            foreach(DataRow fin in ds.Tables["Transaction"].Rows)
+            {
+                DataRow onycroit = modele.NewRow();
+                onycroit["codeTransaction"] = fin["codeTransaction"];
+                onycroit["dateTransaction"] = fin["dateTransaction"];
+                onycroit["description"] = fin["description"];
+                onycroit["montant"] = fin["montant"];
+
+                if ((bool)fin["recetteON"] == true)
+                {
+                    onycroit["recetteON"] = "oui";
+                }
+                else onycroit["recetteON"] = "non";
+
+                if ((bool)fin["percuON"] == true)
+                {
+                    onycroit["percuON"] = "oui";
+                }
+                else onycroit["percuON"] = "non";
+
+                onycroit["type"] = fin["type"];
+                foreach (DataRow r in ds.Tables["TypeTransaction"].Rows)
+                {
+                    if (int.Parse(fin["type"].ToString())== int.Parse(r["codeType"].ToString()))
+                    {
+                        onycroit["libType"] = r["libType"];
+                    }
+                }
+                modele.Rows.Add(onycroit);
+            }
+            dgvFinal.DataSource = modele;
+        }
+
+        //data binding
+        private void FrmBudgetMois_Load(object sender, EventArgs e)
+        {
+            DataSet dset = new DataSet();
+            dset = ds;
+            dset.Relations.Add("fk_transaction_dt", dset.Tables["TypeTransaction"].Columns["codeType"], dset.Tables["Transaction"].Columns["Type"]);
+            BindingSource bs2 = new BindingSource();
+            bs1.DataSource = dset;
+            bs1.DataMember = "TypeTransaction";
+            bs2.DataSource = bs1;
+            bs2.DataMember = "fk_transaction_dt";
+            lblDescrtion1v1.DataBindings.Add(new Binding("Text", bs2, "description", true));
+            lblMontant1v1.DataBindings.Add(new Binding("Text", bs2, "montant", true));
+            lblType1v1.DataBindings.Add(new Binding("Text", bs1, "libType", true));
+            cbPercu1v1.DataBindings.Add(new Binding("Checked", bs2, "percuON", true));
+            cbRecette1v1.DataBindings.Add(new Binding("Checked", bs2, "recetteON", true));
+            dtp1v1.DataBindings.Add(new Binding("Value", bs2, "dateTransaction", true));
+
+            dset = ds;
+            dset.Relations.Add("fk_Personne_dt", dset.Tables["Personne"].Columns["codePersonne"], dset.Tables["Beneficiaires"].Columns["codePersonne"]);
+           //fonctionnel si beneficiaire non null, à priori
+            /*dset.Relations.Add("fk_Benef_dt", dset.Tables["Beneficiaires"].Columns["codeTransaction"], dset.Tables["Transaction"].Columns["codeTransaction"]);
+            BindingSource bs3 = new BindingSource();
+            BindingSource bs4 = new BindingSource();
+            BindingSource bs5 = new BindingSource();
+            bs3.DataSource = dset;
+            bs3.DataMember = "Personne";
+            bs4.DataSource = bs3;
+            bs4.DataMember = "fk_Personne_dt";
+            bs5.DataSource = bs4;
+            bs5.DataMember = "fk_Benef_dt";
+
+            int x = 50;
+            int y = 50;
+            DataTable personne = new DataTable();
+            personne = ds.Tables["Personne"];
+            foreach (DataRow row in personne.Rows)
+            {
+                CheckBox nom = new CheckBox();
+                nom.AutoSize = true;
+                nom.Location = new System.Drawing.Point(x, y);
+                nom.Size = new System.Drawing.Size(98, 21);
+                nom.DataBindings.Add(new Binding("Text", bs5, "pnPersonne", true));
+                flowLayoutPanel1.Controls.Add(nom);
+                y += 20;
+
+            }*/
+        }
+        private int val = 0;
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            int btn = int.Parse(((Button)sender).Tag.ToString());
+            switch (btn)
+            {
+                case 1:
+                    val = 1;
+                    break;
+                case 2:
+                    val--;
+                        if(val<1)
+                    {
+                        val = 1;
+                    }
+                    break;
+                case 3:
+                    val++;
+                    if(val>ds.Tables["Transaction"].Rows.Count)
+                    {
+                        val = ds.Tables["Transaction"].Rows.Count;
+                    }
+                    break;
+                case 4:
+                    val = ds.Tables["Transaction"].Rows.Count;
+                    break;
+                default:
+                    break;
+            }
+            lblNumPage.Text = val.ToString();
+        }
+
+        private void txtMontant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool virgule = false;
+            if (((TextBox)sender).Text.Contains('.'))
+            {
+                virgule = true;
+            }
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '.' || e.KeyChar == ',' || char.IsControl(e.KeyChar))
+            {
+                if ((e.KeyChar == '.' || e.KeyChar == ',') && virgule)
+                {
+                    e.Handled = true;
+                }
+                if (e.KeyChar == ',' && !virgule)
+                {
+                    e.Handled = true;
+                    ((TextBox)sender).Text += '.';
+                }
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }
